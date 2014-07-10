@@ -1,0 +1,4 @@
+Created by Nikolaos Koukis
+Powered by Qt and PySide
+Systems Biology and Bioengineering Lab
+National Technical University of Athens, 2014

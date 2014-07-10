@@ -1,0 +1,83 @@
+<p><h3>*** COMMUNICATION WITH PUMP ***</h3></p>
+
+<p>The commands below consist the main way for communicating with the pump.<br />
+They can be given directly by the user from the Editor Tab.<br />
+The user can also issue common python commands for his own according to his own<br />
+needs.</p>
+
+<p><b>***pump.send_Command(self, command, bits_on_return = 0)***<b><br />
+command -> python string<br />
+bits_on_return -> integer [default value = 0]<br />
+Sending Commands to the pump.<br />
+Consult the manual for a detailed list of the pump commands for the RS-485 Protocol<br />
+Using this syntax you refer to the already configured pump address<br />
+and you should issue neither the Run character [R] or the terminating character [\r]</p>
+
+<p>Examples:<br />
+pump.send_Command('A3000', 10) -> move the plunger to abs position 3000, read back 10 bytes<br />
+pump.send_Command('T') -> Terminate Plunger move in progress</p>
+
+<p><b>***pump.connect_new(self, port_name)***</b><br />
+Connect to the given serial port address<br />
+Make sure that the given port address isn't already in use</p>
+
+<p>Examples:<br />
+pump.connect_new('/dev/tty.-SerialPort1-1') -> Configuring connection on Mac</p>
+
+<p><b>*** pump.initialize_pump(self, output = 'right') ***</b><br />
+Initialize the default output valve.<br />
+The default output value, unless indicated differently is the right valve</p>
+
+<p>Examples:<br />
+pump.initialize_pump() -> Initializing the pump with default output valve (right)<br />
+pump.initialize_pump(output = 'left') -> Initializing the pump with output valve set to left</p>
+
+<p><b>*** pump.valve_command(self, position) ***</b><br />
+Set the Valve to certain position<br />
+---positions:<br />
+Input_Valve: 'I'<br />
+Output_Valve: 'O'<br />
+Bypass_Valvei: 'B'</p>
+
+<p>Examples:<br />
+pump.valve_command('B') -> Set the valve to Bypass</p>
+
+<p><b>*** pump.property_set(self, a_property, value) ***</b><br />
+The user can specifically set a property of the pump to a specific value<br />
+---properties:<br />
+Property_Str, [Pump_Command, (Setting_Limits)]}<br />
+{&quot;speed&quot;: ['S', 1, 40],\<br />
+&quot;backlash&quot;: ['K', 0, 31],\<br />
+&quot;slope&quot;: ['L', 1, 20],\<br />
+&quot;start_velocity&quot;: ['v', 50, 1000],\<br />
+&quot;top_velocity&quot;: ['V', 5, 5800],\<br />
+&quot;cutoff_velocity&quot;: ['c', 50, 2700],\<br />
+&quot;cutoff_velocity_steps&quot;: ['C', 0, 25],\<br />
+}</p>
+
+<p>Examples:<br />
+pump.property_set(&quot;speed&quot;, 10) -> Set the plunger speed to 10<br />
+pump.property_set(&quot;backlash&quot;, 15) -> set the backlash steps to 15</p>
+
+<p><b>***pump.volume_command(self, direction = 'P', vol = '0' [in microlt], special = None) ***</b><br />
+Volume Pushing / Drawing mechanism.</p>
+
+<p>direction = python_string<br />
+vol = python_string [!]<br />
+The user can issue a special action as well.<br />
+---options: <br />
+special = 'push_all'<br />
+special = 'pull_all'</p>
+
+<p>Examples:<br />
+pump.volume_command(direction = 'D', vol = '5') -> Dispense 5 microlitres <br />
+pump.volume_command(special = 'push_all') -> Dispense fluid volume</p>
+
+<p><b>*** pump.ser.write(string_to_pump) ***</b><br />
+This command should be used when a direct serial command has to be sent to the pump.<br />
+Syntax:<br />
+pump.ser.write(address + command + run_char + termination_char)</p>
+
+<p>Examples:<br />
+pump.ser.write('/2ZR\r') -> Initialize the pump with the address 1<br />
+</p>
