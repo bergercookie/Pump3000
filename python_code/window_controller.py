@@ -73,7 +73,6 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
         self.setWindowTitle(self.__appname__)
 
         # Initialize a pump instance
-        # TODO
         # You define how to start the pump
         self.pump = pump_model.Pump(3, 'serial')
 
@@ -97,11 +96,10 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
         self.revertQtimer.start()
 
         # Initialize the port configuration
-        #TODO enable it when it comes to the real pump
-        #self.newDev()
+        self.newDev()
 
         # Set up a timer for periodical refresh of the pump parameters
-        # TODO
+        #TODO Turn on the refresh_status
         self.refresh_status = False
         self.refreshQtimer = QTimer(self)
         self.refreshQtimer.setInterval(60000)

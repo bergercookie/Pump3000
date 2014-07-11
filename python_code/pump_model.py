@@ -78,8 +78,7 @@ class Pump():
         print "THREAD STARTED"
 
 
-        #self.connect_new(port_name = 'loop://')
-        self.connect_new(port_name = '/dev/tty.usbserial-FTDWBH0Y')
+        self.connect_new(port_name = 'loop://')
 
     # New serial connection
     def connect_new(self, port_name):
@@ -95,8 +94,8 @@ class Pump():
         except serial.SerialException:
             self.ser = serial.serial_for_url('loop://',\
                     timeout = self.timeout_time)
-            return "WARNING: You are running on a testing algorithm\
-                    No communication with pump is configured so far"
+        except:
+            print sys.exc_info()[0]
 
         finally:
             self.initialize_pump()
@@ -106,8 +105,11 @@ class Pump():
     def initialize_pump(self, output = 'right'):
         """Initialize (the newly) configured pump"""
 
-        if not self.ser.isOpen():
+        try:
             self.ser.open()
+            print "Opened the ser port successfully"
+        except:
+            pass
 
         # These commands should be sent when the pump first gets set
         if output == 'right':

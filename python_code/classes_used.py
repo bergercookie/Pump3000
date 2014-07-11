@@ -220,7 +220,7 @@ class NewDevDialog(QDialog, device_configuration.Ui_Dialog):
             self.window.command_label.setText(text)
             self.accept()
         except:
-            text = "Parameters weren't set correctly!"
+            text = "Parameters weren't set correctly!\n{}".format(sys.exc_info()[0])
             self.window.command_label.setText(text)
 
 class SyringePickDialog(QDialog, syringe_pick.Ui_Dialog):
@@ -246,6 +246,8 @@ class SyringePickDialog(QDialog, syringe_pick.Ui_Dialog):
         self.pump.syringe_size = syringe
         text = "Syringe size is set to {size}".format(size = self.pump.syringe_size)
         self.window.command_label.setText(text)
+
+        self.pump.update_values()
 
 class AboutDialog(QDialog, about_dialog.Ui_Form):
 
