@@ -208,7 +208,6 @@ class NewDevDialog(QDialog, device_configuration.Ui_Dialog):
         """Passes the selected item into the connect_new method of the pump."""
 
         try:
-            print "Kalimera"
             port = self.listWidget.currentItem().text()
             address = '/%s' %self.address_box.currentText()
             self.pump.addr = address
@@ -220,7 +219,7 @@ class NewDevDialog(QDialog, device_configuration.Ui_Dialog):
             self.window.command_label.setText(text)
             self.accept()
         except:
-            text = "Parameters weren't set correctly!\n{}".format(sys.exc_info()[0])
+            text = "Parameters weren't set correctly!\n{}".format(sys.exc_info())
             self.window.command_label.setText(text)
 
 class SyringePickDialog(QDialog, syringe_pick.Ui_Dialog):
