@@ -9,7 +9,10 @@ the way the user interacts with it (GUI, CLI, etc).
 
 """
 
+# Imports 
+
 from __future__ import division
+__import__('serial.urlhandler.protocol_loop') # Special import, needed for py2exe
 import serial
 import threading
 import sys
@@ -36,7 +39,6 @@ class Pump():
 
 
         # sending mechanism
-        # TODO Change it when a script is given
         self.exc_mode = 'interactive'
         self.questions_out = Queue.Queue(-1)
         self.answers_ret = Queue.Queue(-1)
@@ -92,8 +94,8 @@ class Pump():
                     bytesize = 8,\
                     timeout = self.timeout_time)
         except serial.SerialException:
-            self.ser = serial.serial_for_url('loop://',\
-                    timeout = self.timeout_time)
+            self.ser = sys.modules['serial.urlhandler.protocol_loop'].Serial('loop://',\
+                timeout = self.timeout_time)
         except:
             print sys.exc_info()[0]
 
@@ -107,7 +109,7 @@ class Pump():
 
         try:
             self.ser.open()
-            print "Opened the ser port successfully"
+            print "Opened the Serial port {} successfully".format(self.ser.port)
         except:
             pass
 
@@ -118,7 +120,6 @@ class Pump():
             commands = ['Y', 'S10']
         for command in commands:
             self.send_Command(command, 10)
-        print "FIRST 2 SENT_COMMAND SEEEENT!"
 
         # Actions after every initialization
         self.history = [ ]
@@ -274,8 +275,6 @@ class Pump():
         Finally returns the answer to the calling function
         """
 
-        # TODO Change the fucking description
-
         full_command = self.addr + command + self.term
         try:
             self.answers_lock.acquire()
@@ -308,7 +307,7 @@ class delivery_thread(threading.Thread):
 
     When initialized, the instance of the class inherits the pump instance as
     well as the send & return queues.
-    On the run method,
+
     """
 
     def __init__(self, pump):

@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Documentation for **Cavro XP3000 GUI**
+Documentation for Cavro XP3000 GUI
 ============================================
 
 Contents:
@@ -11,6 +11,14 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   getting-started
+   hardware
+   installation
+   pump-commands
+   code-walkthrough
+   license
+   about
+   contact-info
 
 
 Indices and tables
@@ -25,5 +33,5 @@ Graphical User Interface for XP3000 Digital Pump Series
 =========================================================
 
 This is the manual for configuring and using the Graphical User interface (GUI) for 
-the Cavro XP3000 Digital modular pump series.
+the Cavro XP3000 Digital modular pump series. 
 

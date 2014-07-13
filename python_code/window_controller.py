@@ -99,8 +99,7 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
         self.newDev()
 
         # Set up a timer for periodical refresh of the pump parameters
-        #TODO Turn on the refresh_status
-        self.refresh_status = False
+        self.refresh_status = True
         self.refreshQtimer = QTimer(self)
         self.refreshQtimer.setInterval(60000)
         self.refreshQtimer.start()
@@ -215,7 +214,7 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
                 self.clear_editor)
 
         # Visualizing the pump 
-        self.pixmap = QPixmap("../Images/cavro.jpg")
+        self.pixmap = QPixmap("../../Images/cavro.jpg")
         self.pixmap_item = QGraphicsPixmapItem(self.pixmap)
         self.scene = QGraphicsScene()
         self.scene.setBackgroundBrush(Qt.gray)
@@ -301,8 +300,7 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
                 elif script_commands[i][0] == '/':
                     self.pump.send_Command(script_commands[i]) 
                 else:
-                    # TODO You can surely prepend other commands with self.pump to 
-                    # execute them on the same time as the ones before them
+                    # TODO The user currently may not issue common python commands yet
                     eval(script_commands[i])
                     print script_commands[i]
         except:
