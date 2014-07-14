@@ -21,10 +21,10 @@ Script #1: pump_model.py
 
 .. literalinclude:: ../python_code/pump_model.py
 
-Script #2: window_controller.py
+Script #2: Pump3000.py
 --------------------------------
 
-.. literalinclude:: ../python_code/window_controller.py
+.. literalinclude:: ../python_code/Pump3000.py
 
 Script #3: classes_used.py
 ---------------------------

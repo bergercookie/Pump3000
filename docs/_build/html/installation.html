@@ -56,14 +56,14 @@
 <h2>Getting the Software<a class="headerlink" href="#getting-the-software" title="Permalink to this headline">¶</a></h2>
 <p>There are 2 ways of running the XP3000 GUI:</p>
 <ul class="simple">
-<li>Running the <em>window_controller.exe</em> [Windows only]</li>
+<li>Running the <em>Pump3000.exe</em> [Windows only]</li>
 <li>Running <em>from source</em> [Python required]</li>
 </ul>
 <p>Either way the user must first download the necessary files for the software,
-located at <a class="reference external" href="http://www.github.com/bergercookie/Cavro-Pump-XP3000-GUI">http://www.github.com/bergercookie/Cavro-Pump-XP3000-GUI</a>. This can be
+located at <a class="reference external" href="http://www.github.com/bergercookie/Pump3000">http://www.github.com/bergercookie/Pump3000</a>. This can be
 done either by downloading the project locally from the github page or by cloning the project</p>
 <p>The user can <em>download the software</em> by visiting the github page:
-<a class="reference external" href="http://www.github.com/bergercookie/Cavro-Pump-XP3000-GUI">http://www.github.com/bergercookie/Cavro-Pump-XP3000-GUI</a> and then pressing
+<a class="reference external" href="http://www.github.com/bergercookie/Pump3000">http://www.github.com/bergercookie/Pump3000</a> and then pressing
 the TODO&lt;Download the Desktop&gt; Button.</p>
 <p>See picture &lt;TODO&gt; for an example case</p>
 <p>&lt;TODO&gt; insert the image</p>
@@ -82,7 +82,7 @@ TODO installing for windows
 </div>
 <div class="section" id="running-the-exe">
 <h2>Running the .exe<a class="headerlink" href="#running-the-exe" title="Permalink to this headline">¶</a></h2>
-<p><em>Running the executable</em> version of the project is as simple as running the window_controller.exe
+<p><em>Running the executable</em> version of the project is as simple as running the Pump3000.exe
 located in the &lt;location_to_project&gt;/build folder.</p>
 <p>&lt;TODO&gt; insert the image</p>
 </div>
@@ -97,10 +97,10 @@ The user must also have the following packages installed:</p>
 </ul>
 <p>After this configuration, the user can run the software from the command-line [*NIX]
 command-prompt [Windows]:</p>
-<div class="highlight-python"><div class="highlight"><pre>python window_controller.py
+<div class="highlight-python"><div class="highlight"><pre>python Pump3000.py
 </pre></div>
 </div>
-<p>Note that the user must first go to the folder, the window_controller.py is located.</p>
+<p>Note that the user must first go to the folder, the Pump3000.py is located.</p>
 <p>&lt;TODO&gt; insert the image</p>
 </div>
 <div class="section" id="using-the-software">
@@ -144,11 +144,25 @@ the software will automatically initialize the pump, by moving the plunger to th
 <li>Issue a quick command to the pump (halt, push_all, etc)</li>
 </ul>
 <p>&lt;TODO&gt; image</p>
-<p>You can also select the editor&#8217;s tab in order to issue a series of commands to the pump
-and either run it or save it for later use.</p>
 <p>From the main window you can navigate to a series of other dialogs:</p>
 <ul>
-<li><p class="first"><strong>History Window</strong></p>
+<li><p class="first"><strong>Editor&#8217;s Tab</strong></p>
+<p>The Editor&#8217;s Tab gives the user the ability to issue a series of commands to the pump.
+These commands are supplied in the &#8220;Pump Commands&#8221; page. The user can also issue raw
+pump commands in the same way.</p>
+<p>A typical example of issued commands would be the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>pump.property_set(&#39;speed&#39;, &#39;5&#39;)
+
+# Python Comments, write as many as you want
+# Empty lines don&#39;t matter
+# Raw commands as well
+/1?2R\r
+
+pump.send_Command(&#39;A0&#39;)
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>History</strong></p>
 <p>From here the user can see all the commands sent to the pump which can be devided to 2 types:</p>
 <ul class="simple">
 <li>Commands issued by the user</li>
@@ -158,11 +172,16 @@ and either run it or save it for later use.</p>
 <li><p class="first"><strong>Syringe Size</strong></p>
 <p>The user can decide the syringe size.</p>
 </li>
-<li><p class="first"><strong>Pump_Settings Window</strong></p>
+<li><p class="first"><strong>Reports</strong></p>
 <p>Gives the user an overview of the pump currently configured settings</p>
 </li>
+<li><p class="first"><strong>Pump Parameters</strong></p>
+<p>The user can change certain parameters of the plunger movement such as &#8220;Top Velocity&#8221;, &#8220;Slope&#8221; etc.</p>
+<p><strong>Port</strong></p>
+<p>The user can configure the port that the pump is connected to. This window is
+also summoned at the start of the Pump30000</p>
+</li>
 </ul>
-<p>&lt;TODO insert the rest of the windows&gt;</p>
 </div>
 </div>
 

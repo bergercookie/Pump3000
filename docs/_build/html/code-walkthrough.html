@@ -430,8 +430,8 @@ and Qt may find the links below useful:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="script-2-window-controller-py">
-<h3>Script #2: window_controller.py<a class="headerlink" href="#script-2-window-controller-py" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="script-2-pump3000-py">
+<h3>Script #2: Pump3000.py<a class="headerlink" href="#script-2-pump3000-py" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="c"># Mon May 26 23:48:35 EEST 2014, nickkouk</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -439,8 +439,9 @@ and Qt may find the links below useful:</p>
 <span class="sd">                                About</span>
 <span class="sd">===============================================================================</span>
 
-<span class="sd">This software was created by Nikos Koukis (nickkouk@gmail.com).</span>
-<span class="sd">It was created primarily for scientific usage for the &quot;Systems Biology and</span>
+<span class="sd">Pump3000 was developed by Nikos Koukis (nickkouk@gmail.com). Its main purpose is </span>
+<span class="sd">to offer a simple Graphical User Interface for communication with the Cavro XP3000</span>
+<span class="sd">pumps. It was created primarily for scientific usage for the &quot;Systems Biology and</span>
 <span class="sd">Bioengineering&quot; Laboratory of the National Technical University of Athens</span>
 <span class="sd">(NTUA).</span>
 
@@ -461,6 +462,7 @@ and Qt may find the links below useful:</p>
 
 <span class="sd">===============================================================================</span>
 <span class="sd">            Python Implementation for the Cavro XP3000 GUI.</span>
+<span class="sd">                             Pump3000</span>
 <span class="sd">===============================================================================</span>
 
 <span class="sd">The GUI is designed with regards to the MVC (Model View Controller)</span>
@@ -504,7 +506,7 @@ and Qt may find the links below useful:</p>
         <span class="nb">super</span><span class="p">(</span><span class="n">MainWindow</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__appname__</span> <span class="o">=</span> <span class="s">&quot;XP3000 Interface&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__appname__</span> <span class="o">=</span> <span class="s">&quot;Pump3000&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__appname__</span><span class="p">)</span>
 
         <span class="c"># Initialize a pump instance</span>
@@ -649,7 +651,11 @@ and Qt may find the links below useful:</p>
                 <span class="bp">self</span><span class="o">.</span><span class="n">clear_editor</span><span class="p">)</span>
 
         <span class="c"># Visualizing the pump </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="p">(</span><span class="s">&quot;../../Images/cavro.jpg&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;win&#39;</span><span class="p">:</span> <span class="c">#Running on windows, most probably executable</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="p">(</span><span class="s">&quot;../../Images/cavro.jpg&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="p">(</span><span class="s">&quot;../Images/cavro.jpg&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">pixmap_item</span> <span class="o">=</span> <span class="n">QGraphicsPixmapItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scene</span> <span class="o">=</span> <span class="n">QGraphicsScene</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">setBackgroundBrush</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
@@ -1287,7 +1293,7 @@ and Qt may find the links below useful:</p>
 <li><a class="reference internal" href="#">Code Walkthrough</a><ul>
 <li><a class="reference internal" href="#full-python-code">Full Python Code</a><ul>
 <li><a class="reference internal" href="#script-1-pump-model-py">Script #1: pump_model.py</a></li>
-<li><a class="reference internal" href="#script-2-window-controller-py">Script #2: window_controller.py</a></li>
+<li><a class="reference internal" href="#script-2-pump3000-py">Script #2: Pump3000.py</a></li>
 <li><a class="reference internal" href="#script-3-classes-used-py">Script #3: classes_used.py</a></li>
 </ul>
 </li>

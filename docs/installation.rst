@@ -111,12 +111,27 @@ You are now in the Main Window. From here you can:
 
 <TODO> image 
 
-You can also select the editor's tab in order to issue a series of commands to the pump 
-and either run it or save it for later use.
-
 From the main window you can navigate to a series of other dialogs: 
 
-- **History Window**
+- **Editor's Tab**
+
+  The Editor's Tab gives the user the ability to issue a series of commands to the pump.
+  These commands are supplied in the "Pump Commands" page. The user can also issue raw 
+  pump commands in the same way.
+  
+  A typical example of issued commands would be the following::
+
+    pump.property_set('speed', '5')
+
+    # Python Comments, write as many as you want
+    # Empty lines don't matter
+    # Raw commands as well
+    /1?2R\r 
+
+    pump.send_Command('A0')
+
+
+- **History**
 
   From here the user can see all the commands sent to the pump which can be devided to 2 types:
 
@@ -128,10 +143,16 @@ From the main window you can navigate to a series of other dialogs:
 
   The user can decide the syringe size.
 
-- **Pump_Settings Window**
+- **Reports**
 
   Gives the user an overview of the pump currently configured settings
 
-<TODO insert the rest of the windows> 
+- **Pump Parameters**
+  
+  The user can change certain parameters of the plunger movement such as "Top Velocity", "Slope" etc.
 
+  **Port**
 
+  The user can configure the port that the pump is connected to. This window is 
+  also summoned at the start of the Pump30000
+  

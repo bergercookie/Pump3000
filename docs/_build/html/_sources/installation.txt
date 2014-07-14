@@ -7,16 +7,16 @@ Getting the Software
 
 There are 2 ways of running the XP3000 GUI:
 
-- Running the *window_controller.exe* [Windows only]
+- Running the *Pump3000.exe* [Windows only]
 - Running *from source* [Python required]
 
 Either way the user must first download the necessary files for the software,
-located at http://www.github.com/bergercookie/Cavro-Pump-XP3000-GUI. This can be 
+located at http://www.github.com/bergercookie/Pump3000. This can be 
 done either by downloading the project locally from the github page or by cloning the project
 
 
 The user can *download the software* by visiting the github page:
-http://www.github.com/bergercookie/Cavro-Pump-XP3000-GUI and then pressing 
+http://www.github.com/bergercookie/Pump3000 and then pressing 
 the TODO<Download the Desktop> Button.
 
 See picture <TODO> for an example case
@@ -39,7 +39,7 @@ After the previous steps the user should locally have a copy of the project.
 Running the .exe 
 ************************
 
-*Running the executable* version of the project is as simple as running the window_controller.exe
+*Running the executable* version of the project is as simple as running the Pump3000.exe
 located in the <location_to_project>/build folder.
 
 <TODO> insert the image
@@ -57,9 +57,9 @@ The user must also have the following packages installed:
 After this configuration, the user can run the software from the command-line [\*NIX]
 command-prompt [Windows]::
 
-    python window_controller.py
+    python Pump3000.py
 
-Note that the user must first go to the folder, the window_controller.py is located. 
+Note that the user must first go to the folder, the Pump3000.py is located. 
 
 <TODO> insert the image
 
@@ -111,12 +111,27 @@ You are now in the Main Window. From here you can:
 
 <TODO> image 
 
-You can also select the editor's tab in order to issue a series of commands to the pump 
-and either run it or save it for later use.
-
 From the main window you can navigate to a series of other dialogs: 
 
-- **History Window**
+- **Editor's Tab**
+
+  The Editor's Tab gives the user the ability to issue a series of commands to the pump.
+  These commands are supplied in the "Pump Commands" page. The user can also issue raw 
+  pump commands in the same way.
+  
+  A typical example of issued commands would be the following::
+
+    pump.property_set('speed', '5')
+
+    # Python Comments, write as many as you want
+    # Empty lines don't matter
+    # Raw commands as well
+    /1?2R\r 
+
+    pump.send_Command('A0')
+
+
+- **History**
 
   From here the user can see all the commands sent to the pump which can be devided to 2 types:
 
@@ -128,10 +143,16 @@ From the main window you can navigate to a series of other dialogs:
 
   The user can decide the syringe size.
 
-- **Pump_Settings Window**
+- **Reports**
 
   Gives the user an overview of the pump currently configured settings
 
-<TODO insert the rest of the windows> 
+- **Pump Parameters**
+  
+  The user can change certain parameters of the plunger movement such as "Top Velocity", "Slope" etc.
 
+  **Port**
 
+  The user can configure the port that the pump is connected to. This window is 
+  also summoned at the start of the Pump30000
+  
