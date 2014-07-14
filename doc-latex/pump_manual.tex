@@ -110,23 +110,23 @@ You can either download directly the executable, extract and run the window\_con
 The first thing you have to do when you try to connect to the pump is to discover the computer port it is running on
 For \emph{Windows users} this can be done in the following way:
 \begin{enumerate}
-    \item Start Menu, right click on the `My Computer' button and select `Manage'
-    \item Click on the `Device Manager' tab
-    \item Click on the `Ports (COM \& LPT)' tab and then select the port your adapter is on
+\item Start Menu, right click on the `My Computer' button and select `Manage'
+\item Click on the `Device Manager' tab
+\item Click on the `Ports (COM \& LPT)' tab and then select the port your adapter is on
 \end{enumerate}
 
 For *nix users (Linux, MacOs etc.) this can be done in the following way:
 \begin{enumerate}
-    \item Open the terminal application
-    \item Issue the following commands:
-        \begin{quote}
-            cd /dev\\
-            ls -lart \verb+|+grep tty\\
-        \end{quote}
-        This will give you a list of the available ports.
-        Run the second command after ejecting and inserting again the serial adapter 
-        so that you can discover the needed port
-    \item Click on the `Ports (COM \& LPT)' tab and then select the port your adapter is on
+\item Open the terminal application
+\item Issue the following commands:
+    \begin{quote}
+        cd /dev\\
+        ls -lart \verb+|+grep tty\\
+    \end{quote}
+    This will give you a list of the available ports.
+    Run the second command after ejecting and inserting again the serial adapter 
+    so that you can discover the needed port
+\item Click on the `Ports (COM \& LPT)' tab and then select the port your adapter is on
 \end{enumerate}
 Make sure that \emph{you have selected the correct port}, otherwise the pump will not respond and will
 not raise any error Message

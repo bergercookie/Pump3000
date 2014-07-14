@@ -215,7 +215,11 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
                 self.clear_editor)
 
         # Visualizing the pump 
-        self.pixmap = QPixmap("../../Images/cavro.jpg")
+        if sys.platform[:3] == 'win': #Running on windows, most probably executable
+            self.pixmap = QPixmap("../../Images/cavro.jpg")
+        else:
+            self.pixmap = QPixmap("../Images/cavro.jpg")
+
         self.pixmap_item = QGraphicsPixmapItem(self.pixmap)
         self.scene = QGraphicsScene()
         self.scene.setBackgroundBrush(Qt.gray)
