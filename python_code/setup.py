@@ -8,7 +8,7 @@ import py2exe
 # windows is a list of scripts that have their own UI and
 # thus don't need to run in a console.
 
-setup(console=['window_controller.py'],
+setup(console=['Pump3000.py'],
       options={
 
 # And now, configure py2exe by passing more options;
