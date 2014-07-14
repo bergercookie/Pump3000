@@ -53,3 +53,6 @@ coverage.xml
 # OSX extensions
 *.DS_Store
 .Trashes
+
+# Don't want the swype files
+*.swp

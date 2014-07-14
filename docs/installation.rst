@@ -7,16 +7,16 @@ Getting the Software
 
 There are 2 ways of running the XP3000 GUI:
 
-- Running the *window_controller.exe* [Windows only]
+- Running the *Pump3000.exe* [Windows only]
 - Running *from source* [Python required]
 
 Either way the user must first download the necessary files for the software,
-located at http://www.github.com/bergercookie/Cavro-Pump-XP3000-GUI. This can be 
+located at http://www.github.com/bergercookie/Pump3000. This can be 
 done either by downloading the project locally from the github page or by cloning the project
 
 
 The user can *download the software* by visiting the github page:
-http://www.github.com/bergercookie/Cavro-Pump-XP3000-GUI and then pressing 
+http://www.github.com/bergercookie/Pump3000 and then pressing 
 the TODO<Download the Desktop> Button.
 
 See picture <TODO> for an example case
@@ -39,7 +39,7 @@ After the previous steps the user should locally have a copy of the project.
 Running the .exe 
 ************************
 
-*Running the executable* version of the project is as simple as running the window_controller.exe
+*Running the executable* version of the project is as simple as running the Pump3000.exe
 located in the <location_to_project>/build folder.
 
 <TODO> insert the image
@@ -57,9 +57,9 @@ The user must also have the following packages installed:
 After this configuration, the user can run the software from the command-line [\*NIX]
 command-prompt [Windows]::
 
-    python window_controller.py
+    python Pump3000.py
 
-Note that the user must first go to the folder, the window_controller.py is located. 
+Note that the user must first go to the folder, the Pump3000.py is located. 
 
 <TODO> insert the image
 

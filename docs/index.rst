@@ -3,10 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Documentation for Cavro XP3000 GUI
+Guide to Pump3000
 ============================================
 
+Pump3000 is a GUI implementation for communication with the Cavro XP3000 pump series
+It was implemented in Python with the use of PySide. 
+This manual should provide a way of setting up the software on your computer and 
+give you a first taste on how to use it efficiently.
+
+
 Contents:
+=========
 
 .. toctree::
    :maxdepth: 2
@@ -27,11 +34,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-
-Graphical User Interface for XP3000 Digital Pump Series
-=========================================================
-
-This is the manual for configuring and using the Graphical User interface (GUI) for 
-the Cavro XP3000 Digital modular pump series. 
 
