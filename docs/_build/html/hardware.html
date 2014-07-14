@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Hardware Configuration &mdash; Cavro XP3000 GUI 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="Cavro XP3000 GUI 1.0 documentation" href="index.html" />
+    <link rel="next" title="Software Configuration" href="installation.html" />
+    <link rel="prev" title="Getting Started" href="getting-started.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Software Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="getting-started.html" title="Getting Started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Cavro XP3000 GUI 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="hardware-configuration">
+<h1>Hardware Configuration<a class="headerlink" href="#hardware-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="equipment-used">
+<h2>Equipment used<a class="headerlink" href="#equipment-used" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>For the hardware communication to be achieved the following equipment is suggested:</dt>
+<dd><ul class="first last simple">
+<li>USB    -&gt;  Serial (RS-232) adapter</li>
+<li>RS-232 -&gt;  RS-485 converter</li>
+<li>Power cables (Power + GND)</li>
+<li>Jumper wires (at least 2 Female to Male)</li>
+<li>Breadboard (optional)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="connecting-the-xp3000">
+<h2>Connecting the XP3000<a class="headerlink" href="#connecting-the-xp3000" title="Permalink to this headline">¶</a></h2>
+<p>The serial communication with the pump was implemented using the RS-485 serial
+protocol. Here is a sample configuration that was used:</p>
+<p>TODO</p>
+<div class="figure align-center" id="hardware-conf">
+<img alt="_images/hardware-conf.jpg" src="_images/hardware-conf.jpg" />
+<p class="caption">Suggested Hardware Communication to the pump</p>
+</div>
+<p>The needed steps to archive a similar connection would be the following:</p>
+<p>1. First you have to supply the pump with the necessary power. As described in the
+manual the XP3000 requires a <strong>24VDC power supply</strong> with a current rating of at least <strong>1.5A</strong>.
+As seen in <a class="reference internal" href="#hardware-conf">hardware-conf</a>, during the development part, the power was supplied indirectly to the pump
+first by running the supply cables into a breadboard and then using extra jumpers to
+connect to pump pins #1 (power) and #9(GND)</p>
+<p>2. For the serial communication, you need to connect the RS-485A, RS-485B signals from the pump PCB
+into the RS-485+, RS-485- of the data terminal (PC) used for the communication.
+Take extra notice when it comes to connecting the jumpers from the serial adapter
+to the pump PCB corresponding pins</p>
+<p>To sum it up, here is the typical RS-485 pinout for the pump <a class="footnote-reference" href="#f1" id="id1">[1]</a>, as it is described above</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="23%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Role</th>
+<th class="head">Pin No</th>
+<th class="head">Signal to Connect</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="2"><strong>Power</strong></td>
+<td>#1 [Power]</td>
+<td>24 VDC</td>
+</tr>
+<tr class="row-odd"><td>#4 [GND]</td>
+<td>Ground (of the power supply)</td>
+</tr>
+<tr class="row-even"><td rowspan="2"><strong>Protocol</strong>
+<strong>Signals</strong></td>
+<td>#11 [RS-485A]</td>
+<td>RS-485 (+)</td>
+</tr>
+<tr class="row-odd"><td>#12 [RS-385B]</td>
+<td>RS-485 (-)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>For more information regarding the pump pinout consult the pump manual</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Hardware Configuration</a><ul>
+<li><a class="reference internal" href="#equipment-used">Equipment used</a></li>
+<li><a class="reference internal" href="#connecting-the-xp3000">Connecting the XP3000</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="getting-started.html"
+                        title="previous chapter">Getting Started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="next chapter">Software Configuration</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/hardware.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Software Configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="getting-started.html" title="Getting Started"
+             >previous</a> |</li>
+        <li><a href="index.html">Cavro XP3000 GUI 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Nikos Koukis.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

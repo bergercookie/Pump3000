@@ -11,9 +11,7 @@ __pycache__/
 .Python
 env/
 bin/
-build/
 develop-eggs/
-dist/
 eggs/
 lib/
 lib64/
@@ -51,8 +49,6 @@ coverage.xml
 *.log
 *.pot
 
-# Sphinx documentation
-docs/_build/
 
 # OSX extensions
 *.DS_Store
