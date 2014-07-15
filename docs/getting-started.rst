@@ -12,22 +12,30 @@ located at http://www.github.com/bergercookie/Pump3000. This can be
 done either by downloading the project locally from the github page or by cloning the project
 
 
-The user can *download the software* by visiting the github page:
+The user can **download the software** by visiting the github page:
 http://www.github.com/bergercookie/Pump3000 and then pressing 
-the TODO<Download the Desktop> Button.
+the *Download Zip* button
 
-See picture <TODO> for an example case
+.. _downloading:
 
-<TODO> insert the image
+.. figure::  ../Images/downloading.png
+   :height: 7000px 
+   :scale:  10 %
+   :align:  center
+
+   Downloading the software
 
 In order to **clone** the project the user must first make sure that git is installed 
 on the platform. If it isn't then installing it requires issuing::
 
     sudo apt-get install git "for Linux users - command-line
     sudo port install git "MacOS users - command-line
-    TODO installing for windows
 
 Then in order to clone the project the user can run the git clone command::
     
     git clone http://wwww.github.com/bergercookie/Cavro-Pump-XP3000-GUI.git 
+
+For windows users, the desktop version of Github is suggested: 
+https://help.github.com/articles/set-up-git#platform-windows
+
 

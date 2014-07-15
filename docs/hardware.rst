@@ -18,13 +18,13 @@ Connecting the XP3000
 The serial communication with the pump was implemented using the RS-485 serial
 protocol. Here is a sample configuration that was used:
 
-TODO 
+.. todo::
 
-.. _hardware-conf:
-.. figure::  ../Images/hardware-conf.jpg
-   :align:   center
+    .. _hardware-conf:
+    .. figure::  ../Images/hardware-conf.jpg
+    :align:   center
 
-   Suggested Hardware Communication to the pump
+    Suggested Hardware Communication to the pump
 
 The needed steps to archive a similar connection would be the following:
 

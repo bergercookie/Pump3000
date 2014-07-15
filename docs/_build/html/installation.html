@@ -53,12 +53,15 @@
   <div class="section" id="software-configuration">
 <h1>Software Configuration<a class="headerlink" href="#software-configuration" title="Permalink to this headline">¶</a></h1>
 <p>By now the user should have a copy of the project on his machine. If not refer
-to section: &#8216;Getting Started&#8217; TODO!! &lt;Cross referense&gt;</p>
+to section: <a class="reference internal" href="getting-started.html"><em>Getting Started</em></a></p>
 <div class="section" id="running-the-exe">
-<h2>Running the .exe<a class="headerlink" href="#running-the-exe" title="Permalink to this headline">¶</a></h2>
+<span id="running-it"></span><h2>Running the .exe<a class="headerlink" href="#running-the-exe" title="Permalink to this headline">¶</a></h2>
 <p><em>Running the executable</em> version of the project is as simple as running the Pump3000.exe
-located in the &lt;location_to_project&gt;/build folder.</p>
-<p>&lt;TODO&gt; insert the image</p>
+located in the &lt;location_to_project&gt;/python_code/dist folder <a class="footnote-reference" href="#f1" id="id1">[1]</a> .</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/finding-exe.png"><img alt="_images/finding-exe.png" src="_images/finding-exe.png" style="height: 700.0px;" /></a>
+<p class="caption">Finding the .exe file</p>
+</div>
 </div>
 <div class="section" id="running-from-source">
 <h2>Running from source<a class="headerlink" href="#running-from-source" title="Permalink to this headline">¶</a></h2>
@@ -75,7 +78,10 @@ command-prompt [Windows]:</p>
 </pre></div>
 </div>
 <p>Note that the user must first go to the folder, the Pump3000.py is located.</p>
-<p>&lt;TODO&gt; insert the image</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/running-py.png"><img alt="_images/running-py.png" src="_images/running-py.png" style="height: 700.0px;" /></a>
+<p class="caption">Running from source on MacOS</p>
+</div>
 </div>
 <div class="section" id="using-the-software">
 <h2>Using the software<a class="headerlink" href="#using-the-software" title="Permalink to this headline">¶</a></h2>
@@ -88,6 +94,7 @@ to the pump, is figure out the correct port:</p>
 (On the &quot;Device Manager&quot;) Click &quot;Ports (COM &amp; LPT)&quot; tab &gt; select the port your connector is on
 </pre></div>
 </div>
+<p>See <a class="reference internal" href="#finding-manage"><em>&#8216;Manage&#8217; tab</em></a>, <a class="reference internal" href="#finding-com-ports"><em>Configuring COM ports</em></a></p>
 </li>
 <li><p class="first">On <strong>*NIX</strong> machines this can be done the following way:</p>
 <div class="highlight-python"><div class="highlight"><pre>cd /dev
@@ -100,15 +107,25 @@ ls -lart| grep tty
 <p>This will give  you a list of the currently available ports. Ejecting and reinserting the connector
 to the computer and in the meantime running the second command again will help you recognise
 the port the pump is running on.</p>
-<p>&lt;TODO insert images!!&gt;</p>
+<div class="figure align-center" id="finding-manage">
+<a class="reference internal image-reference" href="_images/finding-manage.png"><img alt="_images/finding-manage.png" src="_images/finding-manage.png" style="height: 700.0px;" /></a>
+<p class="caption">&#8216;Manage&#8217; tab</p>
+</div>
+<div class="figure align-center" id="finding-com-ports">
+<a class="reference internal image-reference" href="_images/finding-com-ports.png"><img alt="_images/finding-com-ports.png" src="_images/finding-com-ports.png" style="height: 700.0px;" /></a>
+<p class="caption">Configuring COM ports</p>
+</div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Make sure that you have selected the correct port, otherwise the pump will not respond and will
 not raise any error Message</p>
 </div>
-<p>After that you are ready to run the software (whichever way you want). You should be directed to the New_Device window where the
-port connected to the pump must be selected &lt;TODO image ref&gt;</p>
-<p>&lt;TODO&gt; insert the image</p>
+<p>After that you are ready to <a class="reference internal" href="#running-it"><em>run the software</em></a> (whichever way you want). You should be directed to the New_Device window where the
+port connected to the pump must be selected</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/dev-conf.png"><img alt="_images/dev-conf.png" src="_images/dev-conf.png" style="height: 700.0px;" /></a>
+<p class="caption">Configuring correct port for pump</p>
+</div>
 <p>If you have selected the correct port, the connection to the pump is established and
 the software will automatically initialize the pump, by moving the plunger to the upper position.</p>
 <p>You are now in the Main Window. From here you can:</p>
@@ -117,8 +134,11 @@ the software will automatically initialize the pump, by moving the plunger to th
 <li>Change the speed of the plunger,</li>
 <li>Issue a quick command to the pump (halt, push_all, etc)</li>
 </ul>
-<p>&lt;TODO&gt; image</p>
-<p>From the main window you can navigate to a series of other dialogs:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/main-window.png"><img alt="_images/main-window.png" src="_images/main-window.png" style="height: 700.0px;" /></a>
+<p class="caption">Main window</p>
+</div>
+<p>From the main window you can navigate to a series of <strong>other dialogs:</strong></p>
 <ul>
 <li><p class="first"><strong>Editor&#8217;s Tab</strong></p>
 <p>The Editor&#8217;s Tab gives the user the ability to issue a series of commands to the pump.
@@ -126,9 +146,9 @@ These commands are supplied in the &#8220;Pump Commands&#8221; page. The user ca
 pump commands in the same way.</p>
 <p>A typical example of issued commands would be the following:</p>
 <div class="highlight-python"><div class="highlight"><pre>pump.property_set(&#39;speed&#39;, &#39;5&#39;)
-
 # Python Comments, write as many as you want
 # Empty lines don&#39;t matter
+
 # Raw commands as well
 /1?2R\r
 
@@ -136,6 +156,12 @@ pump.send_Command(&#39;A0&#39;)
 </pre></div>
 </div>
 </li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/editor-tab.png"><img alt="_images/editor-tab.png" src="_images/editor-tab.png" style="height: 700.0px;" /></a>
+<p class="caption">The Editor&#8217;s Tab</p>
+</div>
+<ul>
 <li><p class="first"><strong>History</strong></p>
 <p>From here the user can see all the commands sent to the pump which can be devided to 2 types:</p>
 <ul class="simple">
@@ -143,12 +169,24 @@ pump.send_Command(&#39;A0&#39;)
 <li>Commands issued by the software to decide pump status</li>
 </ul>
 </li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/history-window.png"><img alt="_images/history-window.png" src="_images/history-window.png" style="height: 700.0px;" /></a>
+<p class="caption">History window</p>
+</div>
+<ul>
 <li><p class="first"><strong>Syringe Size</strong></p>
 <p>The user can decide the syringe size.</p>
 </li>
 <li><p class="first"><strong>Reports</strong></p>
 <p>Gives the user an overview of the pump currently configured settings</p>
 </li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/reports-window.png"><img alt="_images/reports-window.png" src="_images/reports-window.png" style="height: 700.0px;" /></a>
+<p class="caption">Reports window</p>
+</div>
+<ul>
 <li><p class="first"><strong>Pump Parameters</strong></p>
 <p>The user can change certain parameters of the plunger movement such as &#8220;Top Velocity&#8221;, &#8220;Slope&#8221; etc.</p>
 <p><strong>Port</strong></p>
@@ -156,6 +194,14 @@ pump.send_Command(&#39;A0&#39;)
 also summoned at the start of the Pump30000</p>
 </li>
 </ul>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>You can make a shortcut to Pump.exe file but do not move it outside
+the dist folder as it depends on the dlls files located there</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 

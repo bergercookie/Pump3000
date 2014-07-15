@@ -13,4 +13,4 @@ Tools Used
 
 - The documentation was written in `Sphinx <http://sphinx-doc.org/>`_
 
-- All the code as well as the documentation was editted with the use of `Vim <http://www.vim.org/>`_
+- All the code as well as the documentation was edited using `Vim <http://www.vim.org/>`_

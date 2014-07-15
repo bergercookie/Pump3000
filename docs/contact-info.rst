@@ -2,7 +2,8 @@
 Contact Information
 ===================
 
-For information, bug reports or just to drop a comment about the software, either contact me on github
+For information, bug reports or just to drop a comment about the software,
+either contact me on `github <https://github.com/bergercookie>`_
 or use one of the methods below:
 
 - Mobile: +30 6978952969

@@ -781,12 +781,11 @@ and Qt may find the links below useful:</p>
             <span class="bp">self</span><span class="o">.</span><span class="n">pump</span><span class="o">.</span><span class="n">exc_mode</span> <span class="o">=</span> <span class="s">&#39;interactive&#39;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump</span><span class="o">.</span><span class="n">exc_mode</span>  <span class="o">==</span> <span class="s">&#39;interactive&#39;</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&quot;Setting the GUI values.</span><span class="se">\n</span><span class="s">doit = {0}</span><span class="se">\n</span><span class="s">exc_mode ={1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">doit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump</span><span class="o">.</span><span class="n">exc_mode</span><span class="p">)</span>
+            <span class="c">#print &quot;Setting the GUI values.\ndoit = {0}\nexc_mode ={1}&quot;.format(doit, self.pump.exc_mode)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valve_status</span><span class="p">()</span>
             <span class="n">speed_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_slider</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pump</span><span class="o">.</span><span class="n">property_set</span><span class="p">(</span><span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">speed_val</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pump</span><span class="o">.</span><span class="n">update_values</span><span class="p">()</span>
-
         
     <span class="k">def</span> <span class="nf">cancel_timer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -804,22 +803,27 @@ and Qt may find the links below useful:</p>
             <span class="bp">self</span><span class="o">.</span><span class="n">volume_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">volume_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
-
  
-    <span class="c"># Functions for either fulling or emptying the whole syringe</span>
     <span class="k">def</span> <span class="nf">quick_combobox_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># Functions for either fulling or emptying the whole syringe</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">quick_combobox</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">quick_action</span> <span class="o">=</span> <span class="s">&#39;push_all&#39;</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">quick_combobox</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">quick_action</span> <span class="o">=</span> <span class="s">&#39;pull_all&#39;</span>
+
+        <span class="c"># Other quick_actions</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">quick_combobox</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">quick_action</span> <span class="o">=</span> <span class="s">&#39;terminate&#39;</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">quick_combobox</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">revert_GUI_values</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">quick_action</span> <span class="o">=</span> <span class="s">&#39;revert_values&#39;</span>
+    <span class="c"># Implement when the button is pressed</span>
     <span class="k">def</span> <span class="nf">make_it_so_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">quick_action</span> <span class="o">==</span> <span class="s">&#39;terminate&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pump</span><span class="o">.</span><span class="n">terminate_execution</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">revert_GUI_values</span><span class="p">()</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">quick_action</span> <span class="o">==</span> <span class="s">&#39;revert_values&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">revert_GUI_values</span><span class="p">(</span><span class="n">doit</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bypass_btn</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
                 <span class="n">answer</span> <span class="o">=</span> <span class="s">&quot;Bypass Mode is ON&quot;</span>
