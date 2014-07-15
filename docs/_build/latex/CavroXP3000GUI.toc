@@ -1,0 +1,21 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Contents:}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Getting Started}{3}{section.1.1}
+\contentsline {section}{\numberline {1.2}Hardware Configuration}{3}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Equipment used}{3}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Connecting the XP3000}{4}{subsection.1.2.2}
+\contentsline {section}{\numberline {1.3}Software Configuration}{5}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Running the .exe}{5}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Running from source}{5}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Using the software}{5}{subsection.1.3.3}
+\contentsline {section}{\numberline {1.4}Pump Commands}{7}{section.1.4}
+\contentsline {section}{\numberline {1.5}Code Walkthrough}{9}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}Full Python Code}{9}{subsection.1.5.1}
+\contentsline {subsubsection}{Script \#1: pump\_model.py}{9}{subsubsection*.3}
+\contentsline {subsubsection}{Script \#2: Pump3000.py}{16}{subsubsection*.4}
+\contentsline {subsubsection}{Script \#3: classes\_used.py}{25}{subsubsection*.5}
+\contentsline {section}{\numberline {1.6}License}{30}{section.1.6}
+\contentsline {section}{\numberline {1.7}About}{30}{section.1.7}
+\contentsline {subsection}{\numberline {1.7.1}Tools Used}{31}{subsection.1.7.1}
+\contentsline {section}{\numberline {1.8}Contact Information}{31}{section.1.8}
+\contentsline {chapter}{\numberline {2}Indices and tables}{33}{chapter.2}

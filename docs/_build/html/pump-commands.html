@@ -52,6 +52,148 @@
             
   <div class="section" id="pump-commands">
 <h1>Pump Commands<a class="headerlink" href="#pump-commands" title="Permalink to this headline">¶</a></h1>
+<p>In this section the basic commands for communication with the pump are explained.
+You can issue a series of these commands from the editor&#8217;s tab.
+For the full list of available commands see the code Walkthrough section.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&#8216;self&#8217; is a Python class arguement and shouldn&#8217;t be issued by the user.</p>
+</div>
+<p><strong>pump.send_Command(self, command, bits_on_return = 0)</strong></p>
+<p><em>Arguements</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>command        : string
+bits_on_return : int [Optional]
+</pre></div>
+</div>
+<p><em>Description</em></p>
+<blockquote>
+<div>Sending Commands to the pump.
+Consult the manual for a detailed list of the pump commands for the RS-485 Protocol.
+Using this method you must have already defined the pump address to send to (Via
+the main window or the Editor tab) and you should issue neither
+the Run character [R] nor the terminating character</div></blockquote>
+<p><em>Examples</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>pump.send_Command(`A3000&#39;, 10) -&gt; Move the plunger to abs. position 3000, read back 10 bits
+pump.send_Command(`T&#39;) -&gt; Terminate plunger move in progress
+</pre></div>
+</div>
+<p><strong>pump.connect_new(self, port_name)</strong></p>
+<p><em>Arguements</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>port_name: string
+</pre></div>
+</div>
+<p><em>Description</em></p>
+<blockquote>
+<div>Connect to the given port address.</div></blockquote>
+<p><em>Example</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>pump.connect_new(`/dev/tty.-SerialPort1-1&#39;) -&gt; Configuring a serial connection on OSX
+</pre></div>
+</div>
+<p><strong>pump.initialize_pump(self, output = &#8216;right&#8217;)</strong></p>
+<p><em>Arguements</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>output: string [Optional]
+
+    values: &#39;left&#39;, &#39;right&#39;
+</pre></div>
+</div>
+<p><em>Description</em></p>
+<blockquote>
+<div>Initialize the pump. The user can optionally issue the output valve. By default if not
+given otherwise, the output valve is set to the right.</div></blockquote>
+<p><em>Examples</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>pump.initialize_pump() -&gt; Initializing the pump with default output valve (right)
+pump.initialize_pump(output = `left&#39;) -&gt; Initializing the pump with output valve set to left
+</pre></div>
+</div>
+<p><strong>pump.valve_command(self, position)</strong></p>
+<p><em>Arguements</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>position: string
+
+    values: &#39;I&#39; (Input)
+            &#39;O&#39; (Output)
+            &#39;B&#39; (Bypass)
+</pre></div>
+</div>
+<p><em>Description</em></p>
+<blockquote>
+<div>Set the valve to certain position.</div></blockquote>
+<p><em>Examples</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>pump.valve_command(`B&#39;) -&gt; Set the valve to Bypass position
+</pre></div>
+</div>
+<p><strong>pump.property_set(self, a_proprty, value)</strong></p>
+<p><em>Arguements</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>a_property : string
+value      : int
+</pre></div>
+</div>
+<p><em>Description</em></p>
+<blockquote>
+<div><p>Set a certain property for the plunger. The following properties are available for
+modification. These are listed with regards to the command that should be issued
+and the range of the values permitted:</p>
+<div class="highlight-python"><div class="highlight"><pre>&#39;speed&#39;                 : &#39;S&#39;, [1  , 40]
+&#39;backlash&#39;              : &#39;K&#39;, [0  , 31]
+&#39;slope                  : &#39;L&#39;, [1  , 20]
+&#39;start_velocity&#39;        : &#39;v&#39;, [50 , 1000]
+&#39;top_velocity&#39;          : &#39;V&#39;, [5  , 5800]
+&#39;cutoff_velocity&#39;       : &#39;c&#39;, [50 , 2700]
+&#39;cuttof_velocity_steps&#39; : &#39;C&#39;, [0  , 25]
+</pre></div>
+</div>
+<p>The user is encouraged to consult the manual for an overview on the
+commands above</p>
+</div></blockquote>
+<p><em>Examples</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>pump.property_set(`speed&#39;, `10&#39;) -&gt; Set the plunger speed to 10
+pump.property_set(`backlash&#39;, `15&#39;) -&gt; set the backlash steps to 15
+</pre></div>
+</div>
+<p><strong>pump.volume_command(self, direction = `P&#8217;, vol = `0&#8217;, special=None)</strong></p>
+<p><em>Arguements</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>direction : string
+
+    Values: &#39;P&#39;
+            &#39;D&#39;
+
+vol       : string [Microliters]
+
+special   : string [Optional]
+
+    Values: &#39;push_all&#39;
+            &#39;pull_all&#39;
+</pre></div>
+</div>
+<p><em>Description</em></p>
+<blockquote>
+<div>Volume pushing / drawing mechanism. The user can issue a volume delivery as well
+as issue a special push / pull all action. In case the special action is given,
+the  &#8216;vol&#8217; argument is neglected</div></blockquote>
+<p><em>Examples</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>pump.volume_command(direction = &#39;D&#39;, vol = &#39;5&#39;) -&gt; Dispense 5 microlitres
+pump.volume_command(special = `push_all&#39;) -&gt; Dispense fluid volume
+</pre></div>
+</div>
+<p><strong>pump.ser.write(comand)</strong></p>
+<p><em>Arguements</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>command: string
+</pre></div>
+</div>
+<p><em>Description</em></p>
+<blockquote>
+<div>This command should be used when a direct serial command has to be sent to the pump.
+User must issue the pump to which he is addressing to as well as the terminating character
+It is advisable that the user should prefere higher level commands such as &#8216;send_Command&#8217;
+which doesn&#8217;t require the prefix &amp; suffix characters, and also check the availability of the pump</div></blockquote>
+<p><em>Examples</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>pump.ser.write(`/2ZR\r&#39;) \verb|-&gt;| Initialize the pump with the address 1
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As seen in the Examples section of pump.ser.write, the user should refer to the pump
+address + 1.</p>
+</div>
 </div>
 
 
