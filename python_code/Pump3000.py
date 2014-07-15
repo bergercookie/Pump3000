@@ -347,12 +347,11 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
             self.pump.exc_mode = 'interactive'
 
         if self.pump.exc_mode  == 'interactive':
-            print "Setting the GUI values.\ndoit = {0}\nexc_mode ={1}".format(doit, self.pump.exc_mode)
+            #print "Setting the GUI values.\ndoit = {0}\nexc_mode ={1}".format(doit, self.pump.exc_mode)
             self.valve_status()
             speed_val = self.speed_slider.value()
             self.pump.property_set('speed', '%s' % speed_val)
             self.pump.update_values()
-
         
     def cancel_timer(self):
         """
@@ -370,22 +369,27 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
             self.volume_button.setEnabled(True)
         else:
             self.volume_button.setEnabled(False)
-
  
-    # Functions for either fulling or emptying the whole syringe
     def quick_combobox_fun(self):
+        # Functions for either fulling or emptying the whole syringe
         if self.quick_combobox.currentIndex() == 0:
             self.quick_action = 'push_all'
         elif self.quick_combobox.currentIndex() == 1:
             self.quick_action = 'pull_all'
+
+        # Other quick_actions
         elif self.quick_combobox.currentIndex() == 2:
             self.quick_action = 'terminate'
         elif self.quick_combobox.currentIndex() == 3:
-            self.revert_GUI_values()
+            self.quick_action = 'revert_values'
+    # Implement when the button is pressed
     def make_it_so_function(self):
         if self.quick_action == 'terminate':
             self.pump.terminate_execution()
             self.revert_GUI_values()
+
+        elif self.quick_action == 'revert_values':
+            self.revert_GUI_values(doit = True)
         else:
             if self.bypass_btn.isChecked():
                 answer = "Bypass Mode is ON"
