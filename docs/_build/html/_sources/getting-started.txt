@@ -25,7 +25,7 @@ the *Download Zip* button
 
    Downloading the software
 
-In order to **clone** the project the user must first make sure that git is installed 
+Alternatively the user can **clone** the project. In order to do that he must first make sure that git is installed 
 on the platform. If it isn't then installing it requires issuing::
 
     sudo apt-get install git "for Linux users - command-line

@@ -9,7 +9,8 @@ Guide to Pump3000
 Pump3000 is a GUI implementation for communicating with the Cavro XP3000 pump series.
 It was implemented in Python with the use of PySide. 
 This guide should provide a way of setting up the software on your computer and 
-give you a first taste on how to use it efficiently.
+give you a first taste on how to use it efficiently. 
+For the source code or the .exe file click `here <http://www.github.com/bergercookie/Pump3000>`_
 
 
 Contents:

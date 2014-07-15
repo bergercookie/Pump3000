@@ -12,7 +12,7 @@ Running the .exe
 ************************
 
 *Running the executable* version of the project is as simple as running the Pump3000.exe
-located in the <location_to_project>/python_code/dist folder [#f1]_ .
+located in the <location_to_project>/python_code/dist folder [#f1]_ [#f2]_.
 
 .. figure::  ../Images/finding-exe.png
    :height: 7000px
@@ -192,3 +192,7 @@ From the main window you can navigate to a series of **other dialogs:**
 
 .. [#f1] You can make a shortcut to Pump.exe file but do not move it outside 
          the dist folder as it depends on the dlls files located there
+
+.. [#f2] If the executable doesn't run correctly try installing the vcredist86.exe
+         (located at the root of the Pump3000 folder) and after the installation, rerun the .exe. If the 
+         problem persists, `contact me <http://www.github.com/bergercookie>`_
