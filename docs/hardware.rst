@@ -28,7 +28,7 @@ protocol. Here is a sample configuration that was used:
 
 The needed steps to archive a similar connection would be the following:
 
-1. First you have to supply the pump with the necessary power. As described in the 
+1. Connect the pump to a power supply. As described in the 
 manual the XP3000 requires a **24VDC power supply** with a current rating of at least **1.5A**.
 As seen in hardware-conf_, during the development part, the power was supplied indirectly to the pump
 first by running the supply cables into a breadboard and then using extra jumpers to 

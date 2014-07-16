@@ -241,9 +241,10 @@ class SyringePickDialog(QDialog, syringe_pick.Ui_Dialog):
 
     def select_new_syringe(self):
         """Passes the selected item into the connect_new method of the pump."""
-        syringe = self.listWidget.currentItem().text().split()[0]
-        self.pump.syringe_size = syringe
-        text = "Syringe size is set to {size}".format(size = self.pump.syringe_size)
+        syringe = int(self.listWidget.currentItem().text().split()[0])
+        print "the syringe size is {0}, type: {1}".format(syringe, type(syringe))
+        self.pump.own_status["syringe_size"] = syringe
+        text = "Syringe size is set to {size}".format(size = self.pump.own_status["syringe_size"])
         self.window.command_label.setText(text)
 
         self.pump.update_values()
