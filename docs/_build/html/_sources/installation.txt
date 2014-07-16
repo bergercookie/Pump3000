@@ -193,6 +193,8 @@ From the main window you can navigate to a series of **other dialogs:**
 .. [#f1] You can make a shortcut to Pump.exe file but do not move it outside 
          the dist folder as it depends on the dlls files located there
 
-.. [#f2] If the executable doesn't run correctly try installing the vcredist86.exe
-         (located at the root of the Pump3000 folder) and after the installation, rerun the .exe. If the 
-         problem persists, `contact me <http://www.github.com/bergercookie>`_
+.. [#f2] If the executable doesn't run correctly, try installing the vcredist_XXX file.
+         Replace the XXX with the architecture of your processor.
+         The vcredist files are located in the vcredist directory.
+         After the installation, rerun the executable. 
+         If the problem persists, `contact me <http://www.github.com/bergercookie>`_

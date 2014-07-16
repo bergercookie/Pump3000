@@ -6,7 +6,7 @@
 Guide to Pump3000
 ============================================
 
-Pump3000 is a GUI implementation for communicating with the Cavro XP3000 pump series.
+Pump3000 is a GUI implementation for communicating with the `Cavro XP3000 pump series <http://cladlab.com/download/electronics/teardowns/cavro-xl3000/cavro-xp3000-syringe-pump-operators-manual.pdf>`_.
 It was implemented in Python with the use of PySide. 
 This guide should provide a way of setting up the software on your computer and 
 give you a first taste on how to use it efficiently. 
