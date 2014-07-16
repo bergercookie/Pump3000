@@ -56,15 +56,17 @@
 to section: <a class="reference internal" href="getting-started.html"><em>Getting Started</em></a></p>
 <div class="section" id="windows-installation">
 <span id="running-it"></span><h2>Windows Installation<a class="headerlink" href="#windows-installation" title="Permalink to this headline">¶</a></h2>
-<p>There are two ways of running the software on windows:
-- Running the executable
-- Running from source</p>
+<p>There are two ways of running the software on windows:</p>
+<ul class="simple">
+<li>Running the executable</li>
+<li>Running from source</li>
+</ul>
 <div class="section" id="running-the-executable">
 <h3>Running the executable<a class="headerlink" href="#running-the-executable" title="Permalink to this headline">¶</a></h3>
 <p><strong>Running the executable</strong> is as simple as running the Pump3000.exe
 located in the &lt;location_to_project&gt;/python_code/dist folder <a class="footnote-reference" href="#f1" id="id1">[1]</a> <a class="footnote-reference" href="#f2" id="id2">[2]</a>.</p>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="_images/finding-exe.png"><img alt="_images/finding-exe.png" src="_images/finding-exe.png" style="width: 192.0px; height: 700.0px;" /></a>
+<a class="reference internal image-reference" href="_images/finding-exe.png"><img alt="_images/finding-exe.png" src="_images/finding-exe.png" style="height: 700.0px;" /></a>
 <p class="caption">Finding the .exe file</p>
 </div>
 </div>
@@ -111,7 +113,7 @@ command-prompt [Windows]:</p>
 </div>
 <p>Note that the user should first go to the folder, the Pump3000.py is located.</p>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="_images/running-py.png"><img alt="_images/running-py.png" src="_images/running-py.png" style="width: 192.0px; height: 700.0px;" /></a>
+<a class="reference internal image-reference" href="_images/running-py.png"><img alt="_images/running-py.png" src="_images/running-py.png" style="height: 700.0px;" /></a>
 <p class="caption">Running from source on MacOS</p>
 </div>
 </div>
@@ -140,11 +142,11 @@ ls -lart| grep tty
 to the computer and in the meantime running the second command again will help you recognise
 the port the pump is running on.</p>
 <div class="figure align-center" id="finding-manage">
-<a class="reference internal image-reference" href="_images/finding-manage.png"><img alt="_images/finding-manage.png" src="_images/finding-manage.png" style="width: 192.0px; height: 700.0px;" /></a>
+<a class="reference internal image-reference" href="_images/finding-manage.png"><img alt="_images/finding-manage.png" src="_images/finding-manage.png" style="height: 700.0px;" /></a>
 <p class="caption">&#8216;Manage&#8217; tab</p>
 </div>
 <div class="figure align-center" id="finding-com-ports">
-<a class="reference internal image-reference" href="_images/finding-com-ports.png"><img alt="_images/finding-com-ports.png" src="_images/finding-com-ports.png" style="width: 192.0px; height: 700.0px;" /></a>
+<a class="reference internal image-reference" href="_images/finding-com-ports.png"><img alt="_images/finding-com-ports.png" src="_images/finding-com-ports.png" style="height: 700.0px;" /></a>
 <p class="caption">Configuring COM ports</p>
 </div>
 <div class="admonition warning">
@@ -155,7 +157,7 @@ not raise any error Message</p>
 <p>After that you are ready to <a class="reference internal" href="#running-it"><em>run the software</em></a> (whichever way you want). You should be directed to the New_Device window where the
 port connected to the pump must be selected</p>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="_images/dev-conf.png"><img alt="_images/dev-conf.png" src="_images/dev-conf.png" style="width: 192.0px; height: 700.0px;" /></a>
+<a class="reference internal image-reference" href="_images/dev-conf.png"><img alt="_images/dev-conf.png" src="_images/dev-conf.png" style="height: 700.0px;" /></a>
 <p class="caption">Configuring correct port for pump</p>
 </div>
 <p>If you have selected the correct port, the connection to the pump is established and
@@ -167,7 +169,7 @@ the software will automatically initialize the pump, by moving the plunger to th
 <li>Issue a quick command to the pump (halt, push_all, etc)</li>
 </ul>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="_images/main-window.png"><img alt="_images/main-window.png" src="_images/main-window.png" style="width: 192.0px; height: 700.0px;" /></a>
+<a class="reference internal image-reference" href="_images/main-window.png"><img alt="_images/main-window.png" src="_images/main-window.png" style="height: 700.0px;" /></a>
 <p class="caption">Main window</p>
 </div>
 <p>From the main window you can navigate to a series of <strong>other dialogs:</strong></p>
@@ -190,7 +192,7 @@ pump.send_Command(&#39;A0&#39;)
 </li>
 </ul>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="_images/editor-tab.png"><img alt="_images/editor-tab.png" src="_images/editor-tab.png" style="width: 192.0px; height: 700.0px;" /></a>
+<a class="reference internal image-reference" href="_images/editor-tab.png"><img alt="_images/editor-tab.png" src="_images/editor-tab.png" style="height: 700.0px;" /></a>
 <p class="caption">The Editor&#8217;s Tab</p>
 </div>
 <ul>
@@ -203,7 +205,7 @@ pump.send_Command(&#39;A0&#39;)
 </li>
 </ul>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="_images/history-window.png"><img alt="_images/history-window.png" src="_images/history-window.png" style="width: 192.0px; height: 700.0px;" /></a>
+<a class="reference internal image-reference" href="_images/history-window.png"><img alt="_images/history-window.png" src="_images/history-window.png" style="height: 700.0px;" /></a>
 <p class="caption">History window</p>
 </div>
 <ul>
@@ -215,7 +217,7 @@ pump.send_Command(&#39;A0&#39;)
 </li>
 </ul>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="_images/reports-window.png"><img alt="_images/reports-window.png" src="_images/reports-window.png" style="width: 192.0px; height: 700.0px;" /></a>
+<a class="reference internal image-reference" href="_images/reports-window.png"><img alt="_images/reports-window.png" src="_images/reports-window.png" style="height: 700.0px;" /></a>
 <p class="caption">Reports window</p>
 </div>
 <ul>

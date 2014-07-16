@@ -23,7 +23,6 @@ Contents:
    hardware
    installation
    pump-commands
-   code-walkthrough
    license
    about
    contact-info

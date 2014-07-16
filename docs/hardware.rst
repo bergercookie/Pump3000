@@ -16,15 +16,25 @@ Connecting the XP3000
 ----------------------
 
 The serial communication with the pump was implemented using the RS-485 serial
-protocol. Here is a sample configuration that was used:
+protocol.
 
-.. todo::
+.. _hardware-conf:
 
-    .. _hardware-conf:
-    .. figure::  ../Images/hardware-conf.jpg
+.. figure::  ../Images/breadboard.jpg
+    :height: 7000px
+    :scale:  10 %
     :align:   center
 
     Suggested Hardware Communication to the pump
+
+.. _adapters:
+
+.. figure:: ../Images/adapters.jpg
+    :height: 7000px
+    :scale:  10 %
+    :align:   center
+
+    Adapters setup
 
 The needed steps to archive a similar connection would be the following:
 
@@ -40,8 +50,8 @@ Take extra notice when it comes to connecting the jumpers from the serial adapte
 to the pump PCB corresponding pins
 
 3. Also if the computer in use doesn't have a serial port available, the user should use either
-   a *USB to RS-485 adapter*, or combine a more commonly found *USB to RS-232 with a RS-232 to 
-   RS-485 adapter.* An implementation of the above is shown below
+a USB to RS-485 adapter, or combine a more commonly found *USB to RS-232 with a RS-232 to 
+RS-485* adapters_
 
 To sum it up, here is the typical RS-485 pinout for the pump [#f1]_, as it is described above
 

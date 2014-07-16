@@ -69,7 +69,15 @@
 <div class="section" id="connecting-the-xp3000">
 <h2>Connecting the XP3000<a class="headerlink" href="#connecting-the-xp3000" title="Permalink to this headline">¶</a></h2>
 <p>The serial communication with the pump was implemented using the RS-485 serial
-protocol. Here is a sample configuration that was used:</p>
+protocol.</p>
+<div class="figure align-center" id="hardware-conf">
+<a class="reference internal image-reference" href="_images/breadboard.jpg"><img alt="_images/breadboard.jpg" src="_images/breadboard.jpg" style="height: 700.0px;" /></a>
+<p class="caption">Suggested Hardware Communication to the pump</p>
+</div>
+<div class="figure align-center" id="adapters">
+<a class="reference internal image-reference" href="_images/adapters.jpg"><img alt="_images/adapters.jpg" src="_images/adapters.jpg" style="height: 700.0px;" /></a>
+<p class="caption">Adapters setup</p>
+</div>
 <p>The needed steps to archive a similar connection would be the following:</p>
 <p>1. Connect the pump to a power supply. As described in the
 manual the XP3000 requires a <strong>24VDC power supply</strong> with a current rating of at least <strong>1.5A</strong>.
@@ -80,11 +88,9 @@ connect to pump pins #1 (power) and #9(GND)</p>
 into the RS-485+, RS-485- of the data terminal (PC) used for the communication.
 Take extra notice when it comes to connecting the jumpers from the serial adapter
 to the pump PCB corresponding pins</p>
-<ol class="arabic simple" start="3">
-<li>Also if the computer in use doesn&#8217;t have a serial port available, the user should use either
-a <em>USB to RS-485 adapter</em>, or combine a more commonly found <em>USB to RS-232 with a RS-232 to
-RS-485 adapter.</em> An implementation of the above is shown below</li>
-</ol>
+<p>3. Also if the computer in use doesn&#8217;t have a serial port available, the user should use either
+a USB to RS-485 adapter, or combine a more commonly found <em>USB to RS-232 with a RS-232 to
+RS-485</em> <a class="reference internal" href="#adapters">adapters</a></p>
 <p>To sum it up, here is the typical RS-485 pinout for the pump <a class="footnote-reference" href="#f1" id="id1">[1]</a>, as it is described above</p>
 <table border="1" class="docutils">
 <colgroup>

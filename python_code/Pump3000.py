@@ -20,11 +20,11 @@ project, or contact me in person (nickouk@gmail.com)
                         Redistribution Policy
 ===============================================================================
 
-This is a free software, licensed under LGPLv2. It can be redistributed and
-modified as long as the freedom to use is passed on to the recipients. For complete
-policy of terms, consult a version of the license, either on the documentation page:
+The Pump3000 software is licensed under BSD. The specific license encourages redistribution and 
+free usage of the software as long as the use complies to the license terms.
+For complete policy of terms, consult a version of the license, either on the documentation page:
 https://github.com/bergercookie/Cavro-Pump-XP3000-GUI/blob/master/LICENSE or on
-the GNU page: https://www.gnu.org/licenses/lgpl-2.1.html
+the page: http://opensource.org/licenses/BSD-2-Clause
 
 ===============================================================================
             Python Implementation for the Cavro XP3000 GUI.
@@ -416,7 +416,7 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
 
     def about_license(self):
 
-        fd1 = open('../text_files/lgpl-2.1.txt', 'r')
+        fd1 = open('../text_files/bsd-2clause.txt', 'r')
         text = fd1.read()
         self.open_files.append(fd1)
         self.about_dialog = AboutDialog(text, "Software License")

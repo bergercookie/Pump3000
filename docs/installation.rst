@@ -12,7 +12,9 @@ Windows Installation
 ************************
 
 There are two ways of running the software on windows:
+
 - Running the executable
+
 - Running from source
 
 Running the executable
