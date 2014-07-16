@@ -14,7 +14,7 @@
 
 
 \title{Cavro XP3000 GUI Documentation}
-\date{July 15, 2014}
+\date{July 16, 2014}
 \release{1.0}
 \author{Nikos Koukis}
 \newcommand{\sphinxlogo}{}
@@ -121,10 +121,11 @@
 \phantomsection\label{index::doc}
 
 
-Pump3000 is a GUI implementation for communicating with the Cavro XP3000 pump series.
+Pump3000 is a GUI implementation for communicating with the \href{http://cladlab.com/download/electronics/teardowns/cavro-xl3000/cavro-xp3000-syringe-pump-operators-manual.pdf}{Cavro XP3000 pump series}.
 It was implemented in Python with the use of PySide.
 This guide should provide a way of setting up the software on your computer and
 give you a first taste on how to use it efficiently.
+For the source code or the .exe file click \href{http://www.github.com/bergercookie/Pump3000}{here}
 
 
 \chapter{Contents:}
@@ -146,21 +147,22 @@ Either way the user must first download the necessary files for the software,
 located at \href{http://www.github.com/bergercookie/Pump3000}{http://www.github.com/bergercookie/Pump3000}. This can be
 done either by downloading the project locally from the github page or by cloning the project
 
-The user can \emph{download the software} by visiting the github page:
+The user can \textbf{download the software} by visiting the github page:
 \href{http://www.github.com/bergercookie/Pump3000}{http://www.github.com/bergercookie/Pump3000} and then pressing
-the TODO\textless{}Download the Desktop\textgreater{} Button.
+the \emph{Download Zip} button
+\begin{figure}[htbp]
+\centering
+\capstart
 
-See picture \textless{}TODO\textgreater{} for an example case
+\scalebox{0.100000}{\includegraphics{downloading.png}}
+\caption{Downloading the software}\label{getting-started:downloading}\end{figure}
 
-\textless{}TODO\textgreater{} insert the image
-
-In order to \textbf{clone} the project the user must first make sure that git is installed
+Alternatively the user can \textbf{clone} the project. In order to do that he must first make sure that git is installed
 on the platform. If it isn't then installing it requires issuing:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 sudo apt\PYGZhy{}get install git \PYGZdq{}for Linux users \PYGZhy{} command\PYGZhy{}line
 sudo port install git \PYGZdq{}MacOS users \PYGZhy{} command\PYGZhy{}line
-TODO installing for windows
 \end{Verbatim}
 
 Then in order to clone the project the user can run the git clone command:
@@ -168,6 +170,9 @@ Then in order to clone the project the user can run the git clone command:
 \begin{Verbatim}[commandchars=\\\{\}]
 git clone http://wwww.github.com/bergercookie/Cavro\PYGZhy{}Pump\PYGZhy{}XP3000\PYGZhy{}GUI.git
 \end{Verbatim}
+
+For windows users, the desktop version of Github is suggested:
+\href{https://help.github.com/articles/set-up-git\#platform-windows}{https://help.github.com/articles/set-up-git\#platform-windows}
 
 
 \section{Hardware Configuration}
@@ -199,19 +204,23 @@ Breadboard (optional)
 \subsection{Connecting the XP3000}
 \label{hardware:connecting-the-xp3000}
 The serial communication with the pump was implemented using the RS-485 serial
-protocol. Here is a sample configuration that was used:
-
-TODO
+protocol.
 \begin{figure}[htbp]
 \centering
 \capstart
 
-\includegraphics{hardware-conf.jpg}
+\scalebox{0.100000}{\includegraphics{breadboard.jpg}}
 \caption{Suggested Hardware Communication to the pump}\label{hardware:hardware-conf}\end{figure}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\scalebox{0.100000}{\includegraphics{adapters.jpg}}
+\caption{Adapters setup}\label{hardware:adapters}\end{figure}
 
 The needed steps to archive a similar connection would be the following:
 
-1. First you have to supply the pump with the necessary power. As described in the
+1. Connect the pump to a power supply. As described in the
 manual the XP3000 requires a \textbf{24VDC power supply} with a current rating of at least \textbf{1.5A}.
 As seen in {\hyperref[hardware:hardware-conf]{hardware-conf}}, during the development part, the power was supplied indirectly to the pump
 first by running the supply cables into a breadboard and then using extra jumpers to
@@ -221,6 +230,10 @@ connect to pump pins \#1 (power) and \#9(GND)
 into the RS-485+, RS-485- of the data terminal (PC) used for the communication.
 Take extra notice when it comes to connecting the jumpers from the serial adapter
 to the pump PCB corresponding pins
+
+3. Also if the computer in use doesn't have a serial port available, the user should use either
+a USB to RS-485 adapter, or combine a more commonly found \emph{USB to RS-232 with a RS-232 to
+RS-485} {\hyperref[hardware:adapters]{adapters}}
 
 To sum it up, here is the typical RS-485 pinout for the pump \footnote{
 For more information regarding the pump pinout consult the pump manual
@@ -243,7 +256,7 @@ Signal to Connect
 24 VDC
 \\
  & 
-\#4 {[}GND{]}
+\#9 {[}GND{]}
  & 
 Ground (of the power supply)
 \\
@@ -267,28 +280,97 @@ RS-485 (-)
 \section{Software Configuration}
 \label{installation:software-configuration}\label{installation::doc}
 By now the user should have a copy of the project on his machine. If not refer
-to section: `Getting Started' TODO!! \textless{}Cross referense\textgreater{}
+to section: {\hyperref[getting-started::doc]{\emph{Getting Started}}}
 
 
-\subsection{Running the .exe}
-\label{installation:running-the-exe}
-\emph{Running the executable} version of the project is as simple as running the Pump3000.exe
-located in the \textless{}location\_to\_project\textgreater{}/build folder.
+\subsection{Windows Installation}
+\label{installation:running-it}\label{installation:windows-installation}
+There are two ways of running the software on windows:
+\begin{itemize}
+\item {} 
+Running the executable
 
-\textless{}TODO\textgreater{} insert the image
+\item {} 
+Running from source
+
+\end{itemize}
 
 
-\subsection{Running from source}
+\subsubsection{Running the executable}
+\label{installation:running-the-executable}
+\textbf{Running the executable} is as simple as running the Pump3000.exe
+located in the \textless{}location\_to\_project\textgreater{}/python\_code/dist folder \footnote{
+You can make a shortcut to Pump.exe file but do not move it outside
+the dist folder as it depends on the dlls files located there
+} \footnote{
+If the executable doesn't run correctly, try installing the vcredist\_XXX file.
+Replace the XXX with the architecture of your processor.
+The vcredist files are located in the vcredist directory.
+After the installation, rerun the executable.
+If the problem persists, \href{http://www.github.com/bergercookie}{contact me}
+}.
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\scalebox{0.100000}{\includegraphics{finding-exe.png}}
+\caption{Finding the .exe file}\end{figure}
+
+
+\subsubsection{Running from source}
 \label{installation:running-from-source}
-In case the user wants to run the software \emph{from source}, a basic python distribution
+Alternatively, the user can \textbf{run the software from source}. This requires the execution
+of a full python distribution. It is advised that the user uses one of the following distributions
+due to the simplicity of the installation process
+\begin{itemize}
+\item {} 
+\href{http://continuum.io/downloads}{Anaconda}
+
+\item {} 
+\href{https://store.enthought.com/downloads/}{Canopy}
+
+\end{itemize}
+
+The user must also have the following packages installed:
+\begin{itemize}
+\item {} 
+\href{http://pyserial.sourceforge.net/}{Pyserial}
+
+\item {} 
+\href{http://qt-project.org/wiki/pyside}{PySide}
+
+\end{itemize}
+
+For the Anaconda distribution the user can install packages from the Command line
+using one of the following ways \footnote{
+Consult the instructions on the site of the corresponding distribution for more details on
+installing packages
+}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZdl{}conda install \PYGZlt{}package\PYGZus{}name\PYGZgt{}
+
+\PYGZdl{}pip install \PYGZlt{}package\PYGZus{}name\PYGZgt{}
+\end{Verbatim}
+
+Finally, the user should run the software using the command prompt:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+python \PYGZlt{}location\PYGZus{}to\PYGZus{}project\PYGZgt{}\PYGZbs{}python\PYGZus{}code\PYGZbs{}Pump3000.py
+\end{Verbatim}
+
+
+\subsection{Linux/Mac Installation}
+\label{installation:linux-mac-installation}
+In case the user wants to run the software from a *NIX environment, a basic python distribution
 must be installed on the platform, (already preconfigured on most *NIX systems).
 The user must also have the following packages installed:
 \begin{itemize}
 \item {} 
-pyserial
+\href{http://pyserial.sourceforge.net/}{Pyserial}
 
 \item {} 
-PySide
+\href{http://qt-project.org/wiki/pyside}{PySide}
 
 \end{itemize}
 
@@ -299,9 +381,13 @@ command-prompt {[}Windows{]}:
 python Pump3000.py
 \end{Verbatim}
 
-Note that the user must first go to the folder, the Pump3000.py is located.
+Note that the user should first go to the folder, the Pump3000.py is located.
+\begin{figure}[htbp]
+\centering
+\capstart
 
-\textless{}TODO\textgreater{} insert the image
+\scalebox{0.100000}{\includegraphics{running-py.png}}
+\caption{Running from source on MacOS}\end{figure}
 
 
 \subsection{Using the software}
@@ -318,6 +404,8 @@ Start Menu \PYGZgt{} right\PYGZhy{}click \PYGZdq{}My Computer\PYGZdq{} \PYGZgt{}
 (On the \PYGZdq{}Device Manager\PYGZdq{}) Click \PYGZdq{}Ports (COM \PYGZam{} LPT)\PYGZdq{} tab \PYGZgt{} select the port your connector is on
 \end{Verbatim}
 
+See {\hyperref[installation:finding-manage]{\emph{`Manage' tab}}}, {\hyperref[installation:finding-com-ports]{\emph{Configuring COM ports}}}
+
 \item {} 
 On \textbf{*NIX} machines this can be done the following way:
 
@@ -332,18 +420,32 @@ ls \PYGZhy{}lart\textbar{} grep tty
 This will give  you a list of the currently available ports. Ejecting and reinserting the connector
 to the computer and in the meantime running the second command again will help you recognise
 the port the pump is running on.
+\begin{figure}[htbp]
+\centering
+\capstart
 
-\textless{}TODO insert images!!\textgreater{}
+\scalebox{0.100000}{\includegraphics{finding-manage.png}}
+\caption{`Manage' tab}\label{installation:finding-manage}\end{figure}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\scalebox{0.100000}{\includegraphics{finding-com-ports.png}}
+\caption{Configuring COM ports}\label{installation:finding-com-ports}\end{figure}
 
 \begin{notice}{warning}{Warning:}
 Make sure that you have selected the correct port, otherwise the pump will not respond and will
 not raise any error Message
 \end{notice}
 
-After that you are ready to run the software (whichever way you want). You should be directed to the New\_Device window where the
-port connected to the pump must be selected \textless{}TODO image ref\textgreater{}
+After that you are ready to {\hyperref[installation:running-it]{\emph{run the software}}} (whichever way you want). You should be directed to the New\_Device window where the
+port connected to the pump must be selected
+\begin{figure}[htbp]
+\centering
+\capstart
 
-\textless{}TODO\textgreater{} insert the image
+\scalebox{0.100000}{\includegraphics{dev-conf.png}}
+\caption{Configuring correct port for pump}\end{figure}
 
 If you have selected the correct port, the connection to the pump is established and
 the software will automatically initialize the pump, by moving the plunger to the upper position.
@@ -360,10 +462,14 @@ Change the speed of the plunger,
 Issue a quick command to the pump (halt, push\_all, etc)
 
 \end{itemize}
+\begin{figure}[htbp]
+\centering
+\capstart
 
-\textless{}TODO\textgreater{} image
+\scalebox{0.100000}{\includegraphics{main-window.png}}
+\caption{Main window}\end{figure}
 
-From the main window you can navigate to a series of other dialogs:
+From the main window you can navigate to a series of \textbf{other dialogs:}
 \begin{itemize}
 \item {} 
 \textbf{Editor's Tab}
@@ -376,19 +482,27 @@ A typical example of issued commands would be the following:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 pump.property\PYGZus{}set(\PYGZsq{}speed\PYGZsq{}, \PYGZsq{}5\PYGZsq{})
-
 \PYGZsh{} Python Comments, write as many as you want
 \PYGZsh{} Empty lines don\PYGZsq{}t matter
+
 \PYGZsh{} Raw commands as well
 /1?2R\PYGZbs{}r
 
 pump.send\PYGZus{}Command(\PYGZsq{}A0\PYGZsq{})
 \end{Verbatim}
 
+\end{itemize}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\scalebox{0.100000}{\includegraphics{editor-tab.png}}
+\caption{The Editor's Tab}\end{figure}
+\begin{itemize}
 \item {} 
 \textbf{History}
 
-From here the user can see all the commands sent to the pump which can be devided to 2 types:
+From here the user can see all the commands sent to the pump which can be divided to 2 types:
 \begin{itemize}
 \item {} 
 Commands issued by the user
@@ -398,6 +512,14 @@ Commands issued by the software to decide pump status
 
 \end{itemize}
 
+\end{itemize}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\scalebox{0.100000}{\includegraphics{history-window.png}}
+\caption{History window}\end{figure}
+\begin{itemize}
 \item {} 
 \textbf{Syringe Size}
 
@@ -408,6 +530,14 @@ The user can decide the syringe size.
 
 Gives the user an overview of the pump currently configured settings
 
+\end{itemize}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\scalebox{0.100000}{\includegraphics{reports-window.png}}
+\caption{Reports window}\end{figure}
+\begin{itemize}
 \item {} 
 \textbf{Pump Parameters}
 
@@ -423,39 +553,14 @@ also summoned at the start of the Pump30000
 
 \section{Pump Commands}
 \label{pump-commands:pump-commands}\label{pump-commands::doc}
-In this section the basic commands for communication with the pump are explained.
+In this section the basic commands for communication with the pump are introduced.
 You can issue a series of these commands from the editor's tab.
-For the full list of available commands see the code Walkthrough section.
+For the full list of available commands see the pump\_model.py. You can use most
+of the methods of the Pump Class in the Editor tab as well.
 
 \begin{notice}{note}{Note:}
 `self' is a Python class arguement and shouldn't be issued by the user.
 \end{notice}
-
-\textbf{pump.send\_Command(self, command, bits\_on\_return = 0)}
-
-\emph{Arguements}:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-command        : string
-bits\PYGZus{}on\PYGZus{}return : int [Optional]
-\end{Verbatim}
-
-\emph{Description}
-\begin{quote}
-
-Sending Commands to the pump.
-Consult the manual for a detailed list of the pump commands for the RS-485 Protocol.
-Using this method you must have already defined the pump address to send to (Via
-the main window or the Editor tab) and you should issue neither
-the Run character {[}R{]} nor the terminating character
-\end{quote}
-
-\emph{Examples}:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-pump.send\PYGZus{}Command({}`A3000\PYGZsq{}, 10) \PYGZhy{}\PYGZgt{} Move the plunger to abs. position 3000, read back 10 bits
-pump.send\PYGZus{}Command({}`T\PYGZsq{}) \PYGZhy{}\PYGZgt{} Terminate plunger move in progress
-\end{Verbatim}
 
 \textbf{pump.connect\_new(self, port\_name)}
 
@@ -595,6 +700,32 @@ pump.volume\PYGZus{}command(direction = \PYGZsq{}D\PYGZsq{}, vol = \PYGZsq{}5\PY
 pump.volume\PYGZus{}command(special = {}`push\PYGZus{}all\PYGZsq{}) \PYGZhy{}\PYGZgt{} Dispense fluid volume
 \end{Verbatim}
 
+\textbf{pump.send\_Command(self, command, bits\_on\_return = 0)}
+
+\emph{Arguements}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+command        : string
+bits\PYGZus{}on\PYGZus{}return : int [Optional]
+\end{Verbatim}
+
+\emph{Description}
+\begin{quote}
+
+Sending Commands to the pump.
+Consult the manual for a detailed list of the pump commands for the RS-485 Protocol.
+Using this method you must have already defined the pump address to send to (Via
+the main window or the Editor tab) and you should issue neither
+the Run character {[}R{]} nor the terminating character
+\end{quote}
+
+\emph{Examples}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+pump.send\PYGZus{}Command({}`A3000\PYGZsq{}, 10) \PYGZhy{}\PYGZgt{} Move the plunger to abs. position 3000, read back 10 bits
+pump.send\PYGZus{}Command({}`T\PYGZsq{}) \PYGZhy{}\PYGZgt{} Terminate plunger move in progress
+\end{Verbatim}
+
 \textbf{pump.ser.write(comand)}
 
 \emph{Arguements}:
@@ -606,7 +737,7 @@ command: string
 \emph{Description}
 \begin{quote}
 
-This command should be used when a direct serial command has to be sent to the pump.
+This command should be used only when a direct serial command has to be sent to the pump.
 User must issue the pump to which he is addressing to as well as the terminating character
 It is advisable that the user should prefere higher level commands such as `send\_Command'
 which doesn't require the prefix \& suffix characters, and also check the availability of the pump
@@ -615,1250 +746,13 @@ which doesn't require the prefix \& suffix characters, and also check the availa
 \emph{Examples}:
 
 \begin{Verbatim}[commandchars=\\\{\}]
-pump.ser.write({}`/2ZR\PYGZbs{}r\PYGZsq{}) \PYGZbs{}verb\textbar{}\PYGZhy{}\PYGZgt{}\textbar{} Initialize the pump with the address 1
+pump.ser.write({}`/2ZR\PYGZbs{}r\PYGZsq{}) \PYGZhy{}\PYGZgt{} Initialize the pump with the address 1
 \end{Verbatim}
 
 \begin{notice}{note}{Note:}
 As seen in the Examples section of pump.ser.write, the user should refer to the pump
 address + 1.
 \end{notice}
-
-
-\section{Code Walkthrough}
-\label{code-walkthrough:code-walkthrough}\label{code-walkthrough::doc}
-This purpose of this section is to give you the basic information about the GUI
-implementation with the use of Python and PySide.
-For those who aren't familiar coding in Python or haven't heard of GUI development using PySide
-and Qt may find the links below useful:
-
--Official Python website: \href{https://www.python.org/}{https://www.python.org/}
-
--PySide: Python Bindings for Qt: \href{http://qt-project.org/wiki/pyside}{http://qt-project.org/wiki/pyside}
-
-
-\subsection{Full Python Code}
-\label{code-walkthrough:full-python-code}
-
-\subsubsection{Script \#1: pump\_model.py}
-\label{code-walkthrough:script-1-pump-model-py}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{} Tue Jun 3 19:49:03 EEST 2014, nickkouk}
-
-\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{} }
-
-\PYG{l+s+sd}{This is the pump model for the Cavro XP3000 Pump series.}
-
-\PYG{l+s+sd}{It is designed to implement all the basic controls of the pump independent of}
-\PYG{l+s+sd}{the way the user interacts with it (GUI, CLI, etc).}
-
-\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-\PYG{c}{\PYGZsh{} Imports }
-
-\PYG{k+kn}{from} \PYG{n+nn}{\PYGZus{}\PYGZus{}future\PYGZus{}\PYGZus{}} \PYG{k+kn}{import} \PYG{n}{division}
-\PYG{n+nb}{\PYGZus{}\PYGZus{}import\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{serial.urlhandler.protocol\PYGZus{}loop}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)} \PYG{c}{\PYGZsh{} Special import, needed for py2exe}
-\PYG{k+kn}{import} \PYG{n+nn}{serial}
-\PYG{k+kn}{import} \PYG{n+nn}{threading}
-\PYG{k+kn}{import} \PYG{n+nn}{sys}
-\PYG{k+kn}{from} \PYG{n+nn}{exceptions\PYGZus{}module} \PYG{k+kn}{import} \PYG{n}{BusyPump}
-\PYG{k+kn}{import} \PYG{n+nn}{time}
-\PYG{k+kn}{import} \PYG{n+nn}{signal}
-\PYG{k+kn}{import} \PYG{n+nn}{Queue}
-
-\PYG{k}{class} \PYG{n+nc}{Pump}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{addr}\PYG{p}{,} \PYG{n}{com} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{serial}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{:}
-
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{addr} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{/}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s}{\PYGZsq{}} \PYG{o}{\PYGZpc{}}\PYG{n}{addr}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{term} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{R}\PYG{l+s+se}{\PYGZbs{}r}\PYG{l+s}{\PYGZsq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{com} \PYG{o}{=} \PYG{n}{com}
-
-        \PYG{c}{\PYGZsh{} Control Related properties}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{history} \PYG{o}{=} \PYG{p}{[} \PYG{p}{]}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{interval} \PYG{o}{=} \PYG{l+m+mi}{2}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{timeout\PYGZus{}time} \PYG{o}{=} \PYG{l+m+mf}{0.2} 
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{stop\PYGZus{}flag} \PYG{o}{=} \PYG{n+nb+bp}{False}
-        \PYG{n}{signal}\PYG{o}{.}\PYG{n}{signal}\PYG{p}{(}\PYG{n}{signal}\PYG{o}{.}\PYG{n}{SIGINT}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{stop\PYGZus{}thread}\PYG{p}{)}
-
-
-        \PYG{c}{\PYGZsh{} sending mechanism}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{interactive}\PYG{l+s}{\PYGZsq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{questions\PYGZus{}out} \PYG{o}{=} \PYG{n}{Queue}\PYG{o}{.}\PYG{n}{Queue}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{answers\PYGZus{}ret} \PYG{o}{=} \PYG{n}{Queue}\PYG{o}{.}\PYG{n}{Queue}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{answers\PYGZus{}lock} \PYG{o}{=} \PYG{n}{threading}\PYG{o}{.}\PYG{n}{Lock}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{update\PYGZus{}sema} \PYG{o}{=} \PYG{n}{threading}\PYG{o}{.}\PYG{n}{Semaphore}\PYG{p}{(}\PYG{n}{value}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Dictionary for holding the pump properties}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{absolute\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{top\PYGZus{}vel}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cutoff\PYGZus{}vel}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{actual\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{starting\PYGZus{}vel}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{backlash\PYGZus{}steps}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{fluid\PYGZus{}sensor}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{buffer\PYGZus{}status}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{version}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{checksum}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}
-
-
-        \PYG{c}{\PYGZsh{} Hold local properties}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{plung\PYGZus{}pos\PYGZus{}mine}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{0}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{valve\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{0}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{syringe\PYGZus{}size}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{50}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{steps\PYGZus{}tot}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{3000}\PYG{p}{\PYGZcb{}}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{correspondance} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{speed}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{S}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{40}\PYG{p}{]}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{backlash}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{K}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{31}\PYG{p}{]}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{slope}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{L}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{]}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{start\PYGZus{}velocity}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{v}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{,} \PYG{l+m+mi}{1000}\PYG{p}{]}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{top\PYGZus{}velocity}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{V}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{5800}\PYG{p}{]}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cutoff\PYGZus{}velocity}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{c}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{,} \PYG{l+m+mi}{2700}\PYG{p}{]}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cutoff\PYGZus{}velocity\PYGZus{}steps}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{C}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{25}\PYG{p}{]}\PYG{p}{,}\PYGZbs{}
-                \PYG{p}{\PYGZcb{}}
-
-
-        \PYG{c}{\PYGZsh{} Start the delivery thread}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{deliveryThread} \PYG{o}{=} \PYG{n}{delivery\PYGZus{}thread}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{deliveryThread}\PYG{o}{.}\PYG{n}{start}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{THREAD STARTED}\PYG{l+s}{\PYGZdq{}}
-
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect\PYGZus{}new}\PYG{p}{(}\PYG{n}{port\PYGZus{}name} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{loop://}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-
-    \PYG{c}{\PYGZsh{} New serial connection}
-    \PYG{k}{def} \PYG{n+nf}{connect\PYGZus{}new}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{port\PYGZus{}name}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Function for configuring a new serial connection.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{k}{try}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ser} \PYG{o}{=} \PYG{n}{serial}\PYG{o}{.}\PYG{n}{Serial}\PYG{p}{(}\PYG{n}{port} \PYG{o}{=} \PYG{n}{port\PYGZus{}name}\PYG{p}{,}\PYGZbs{}
-                    \PYG{n}{baudrate} \PYG{o}{=} \PYG{l+m+mi}{9600}\PYG{p}{,}\PYGZbs{}
-                    \PYG{n}{parity} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{N}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-                    \PYG{n}{stopbits} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{,}\PYGZbs{}
-                    \PYG{n}{bytesize} \PYG{o}{=} \PYG{l+m+mi}{8}\PYG{p}{,}\PYGZbs{}
-                    \PYG{n}{timeout} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{timeout\PYGZus{}time}\PYG{p}{)}
-        \PYG{k}{except} \PYG{n}{serial}\PYG{o}{.}\PYG{n}{SerialException}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ser} \PYG{o}{=} \PYG{n}{sys}\PYG{o}{.}\PYG{n}{modules}\PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{serial.urlhandler.protocol\PYGZus{}loop}\PYG{l+s}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{Serial}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{loop://}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{timeout} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{timeout\PYGZus{}time}\PYG{p}{)}
-        \PYG{k}{except}\PYG{p}{:}
-            \PYG{k}{print} \PYG{n}{sys}\PYG{o}{.}\PYG{n}{exc\PYGZus{}info}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
-
-        \PYG{k}{finally}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{initialize\PYGZus{}pump}\PYG{p}{(}\PYG{p}{)}
-
-
-    \PYG{c}{\PYGZsh{} Initialization Phase}
-    \PYG{k}{def} \PYG{n+nf}{initialize\PYGZus{}pump}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{output} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{right}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Initialize (the newly) configured pump\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{k}{try}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ser}\PYG{o}{.}\PYG{n}{open}\PYG{p}{(}\PYG{p}{)}
-            \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Opened the Serial port \PYGZob{}\PYGZcb{} successfully}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ser}\PYG{o}{.}\PYG{n}{port}\PYG{p}{)}
-        \PYG{k}{except}\PYG{p}{:}
-            \PYG{k}{pass}
-
-        \PYG{c}{\PYGZsh{} These commands should be sent when the pump first gets set}
-        \PYG{k}{if} \PYG{n}{output} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{right}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-            \PYG{n}{commands} \PYG{o}{=} \PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{S10}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Z}\PYG{l+s}{\PYGZsq{}}\PYG{p}{]}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{n}{commands} \PYG{o}{=} \PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Y}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{S10}\PYG{l+s}{\PYGZsq{}}\PYG{p}{]}
-        \PYG{k}{for} \PYG{n}{command} \PYG{o+ow}{in} \PYG{n}{commands}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{n}{command}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Actions after every initialization}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{history} \PYG{o}{=} \PYG{p}{[} \PYG{p}{]}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{update\PYGZus{}values}\PYG{p}{(}\PYG{n}{initialize} \PYG{o}{=} \PYG{n+nb+bp}{True}\PYG{p}{)}
-
-    \PYG{c}{\PYGZsh{} Valve Position}
-    \PYG{k}{def} \PYG{n+nf}{valve\PYGZus{}command}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{position}\PYG{p}{)}\PYG{p}{:}
-        \PYG{k}{if} \PYG{n}{position} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{out}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:}
-            \PYG{n}{answer} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{O}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{valve\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{O}\PYG{l+s}{\PYGZsq{}}
-        \PYG{k}{elif} \PYG{n}{position} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{in}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:}
-            \PYG{n}{answer} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{I}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{valve\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{I}\PYG{l+s}{\PYGZsq{}}
-        \PYG{k}{elif} \PYG{n}{position} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{bypass}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:}
-            \PYG{n}{answer} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{B}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{valve\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{B}\PYG{l+s}{\PYGZsq{}}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{NO SUCH VALUE for position available}\PYG{l+s}{\PYGZdq{}}
-        \PYG{k}{return} \PYG{n}{answer}
-
-    \PYG{c}{\PYGZsh{} Plunger Functions}
-    \PYG{k}{def} \PYG{n+nf}{property\PYGZus{}set}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{a\PYGZus{}property}\PYG{p}{,} \PYG{n}{value}\PYG{p}{)}\PYG{p}{:}
-        \PYG{c}{\PYGZsh{} Checking the validity of the command}
-        \PYG{n}{min\PYGZus{}value}\PYG{p}{,} \PYG{n}{max\PYGZus{}value} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{correspondance}\PYG{p}{[}\PYG{n}{a\PYGZus{}property}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{p}{]}
-        \PYG{k}{if} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{value}\PYG{p}{)} \PYG{o}{\PYGZgt{}}\PYG{o}{=} \PYG{n}{min\PYGZus{}value} \PYG{o+ow}{and} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{value}\PYG{p}{)} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n}{max\PYGZus{}value}\PYG{p}{:}
-            \PYG{c}{\PYGZsh{} Sending the Command to the queue}
-            \PYG{n}{command} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{correspondance}\PYG{p}{[}\PYG{n}{a\PYGZus{}property}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
-            \PYG{n}{value} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s}{\PYGZdq{}} \PYG{o}{\PYGZpc{}}\PYG{n}{value}
-            \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{SENDING THE COMMNAND}\PYG{l+s}{\PYGZdq{}}
-            \PYG{n}{return\PYGZus{}stat} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZob{}\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYGZbs{}
-                \PYG{n}{command} \PYG{o}{+} \PYG{n}{value}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}
-            \PYG{k}{return} \PYG{n}{return\PYGZus{}stat}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{k}{return} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{OUT OF BOUNDS}\PYG{l+s}{\PYGZdq{}}
-                        
-    \PYG{k}{def} \PYG{n+nf}{volume\PYGZus{}command}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{direction} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{P}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{vol} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{special} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-\PYG{l+s+sd}{        This is the volume command.}
-
-\PYG{l+s+sd}{        The volume\PYGZus{}command function first decides if it can }
-\PYG{l+s+sd}{        deliver the needed volume, }
-\PYG{l+s+sd}{        then if the volume given is a valid one,}
-\PYG{l+s+sd}{        calls the move\PYGZus{}plunger method with the needed arguments}
-\PYG{l+s+sd}{        to deliver the volume.}
-
-\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{n}{valid} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{True}\PYG{l+s}{\PYGZdq{}}
-        \PYG{n}{status} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Done}\PYG{l+s}{\PYGZdq{}}
-
-        \PYG{k}{if} \PYG{n}{special}\PYG{p}{:}
-            \PYG{k}{if} \PYG{n}{special} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{push\PYGZus{}all}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{A0}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{plung\PYGZus{}pos\PYGZus{}mine}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{0}
-            \PYG{k}{else}\PYG{p}{:}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{A3000}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{plung\PYGZus{}pos\PYGZus{}mine}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{3000}
-
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{vol}\PYG{o}{.}\PYG{n}{isdigit}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-                \PYG{k}{return} \PYG{p}{(}\PYG{n+nb+bp}{False}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Please enter a numerical value}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-
-            \PYG{n}{vol} \PYG{o}{=} \PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{vol}\PYG{p}{)}
-            \PYG{n}{steps} \PYG{o}{=} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{steps\PYGZus{}tot}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{/} \PYGZbs{}
-                    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{syringe\PYGZus{}size}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{*} \PYG{n}{vol}\PYG{p}{)}
-
-            \PYG{k}{if} \PYG{n}{direction} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{D}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-                \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{plung\PYGZus{}pos\PYGZus{}mine}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{steps} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{:}
-                    \PYG{n}{valid} \PYG{o}{=} \PYG{n+nb+bp}{False}
-                    \PYG{n}{status} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Not a valid Value}\PYG{l+s}{\PYGZdq{}}
-                \PYG{k}{else}\PYG{p}{:}
-                    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{plung\PYGZus{}pos\PYGZus{}mine}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{\PYGZhy{}}\PYG{o}{=} \PYG{n}{steps}
-                    \PYG{n}{status} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{n}{direction} \PYG{o}{+} \PYG{l+s}{\PYGZdq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s}{\PYGZdq{}} \PYG{o}{\PYGZpc{}}\PYG{n}{steps}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}
-
-            \PYG{k}{else}\PYG{p}{:}
-                \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{plung\PYGZus{}pos\PYGZus{}mine}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{+}\PYGZbs{}
-                        \PYG{n}{steps} \PYG{o}{\PYGZgt{}} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{steps\PYGZus{}tot}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{:}
-                    \PYG{n}{valid} \PYG{o}{=} \PYG{n+nb+bp}{False}
-                    \PYG{n}{status} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Not a valid Value}\PYG{l+s}{\PYGZdq{}}
-                \PYG{k}{else}\PYG{p}{:} 
-                    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{plung\PYGZus{}pos\PYGZus{}mine}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{+}\PYG{o}{=} \PYG{n}{steps}
-                    \PYG{n}{status} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{n}{direction} \PYG{o}{+} \PYG{l+s}{\PYGZdq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s}{\PYGZdq{}} \PYG{o}{\PYGZpc{}}\PYG{n}{steps}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}
-
-        \PYG{k}{return} \PYG{p}{(}\PYG{n}{valid}\PYG{p}{,} \PYG{n}{status}\PYG{p}{)}
-            
-    \PYG{c}{\PYGZsh{} Pump related Settings update method}
-    \PYG{k}{def} \PYG{n+nf}{update\PYGZus{}values}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{initialize} \PYG{o}{=} \PYG{n+nb+bp}{False}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-\PYG{l+s+sd}{        This is the parameters update method.}
-
-\PYG{l+s+sd}{        The purpose of this function is to constantly update the settings }
-\PYG{l+s+sd}{        related to the pump, should be run by a thread periodically}
-\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{update\PYGZus{}sema}\PYG{o}{.}\PYG{n}{acquire}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{ENTERED THE SEMAPHORE}\PYG{l+s}{\PYGZdq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{update\PYGZus{}thread} \PYG{o}{=} \PYG{n}{threading}\PYG{o}{.}\PYG{n}{Thread}\PYG{p}{(}\PYGZbs{}
-                \PYG{n}{target} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actual\PYGZus{}update\PYGZus{}method}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{args} \PYG{o}{=} \PYG{p}{(}\PYG{n}{initialize}\PYG{p}{,}\PYG{p}{)}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{update\PYGZus{}thread}\PYG{o}{.}\PYG{n}{start}\PYG{p}{(}\PYG{p}{)}
-    \PYG{k}{def} \PYG{n+nf}{actual\PYGZus{}update\PYGZus{}method}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{initialize}\PYG{p}{)}\PYG{p}{:}
-        \PYG{k}{try}\PYG{p}{:}
-            \PYG{c}{\PYGZsh{} reading info mechanism}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{absolute\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{?}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{p}{]}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{actual\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{?4}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{p}{]}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{starting\PYGZus{}vel}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{?1}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{p}{]}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{top\PYGZus{}vel}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{?2}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{p}{]}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cutoff\PYGZus{}vel}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{?3}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{p}{]}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{backlash\PYGZus{}steps}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{?12}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{p}{]}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{fluid\PYGZus{}sensor}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{?22}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{p}{]}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{buffer\PYGZus{}status}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{?F}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{p}{]}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{version}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{?\PYGZam{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{p}{]}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{checksum}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{?\PYGZsh{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{p}{]}
-        \PYG{k}{except} \PYG{n+ne}{TypeError}\PYG{p}{:}
-            \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{In actual\PYGZus{}update\PYGZus{}method,}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZob{}\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{sys}\PYG{o}{.}\PYG{n}{exc\PYGZus{}info}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{)}
-
-        \PYG{n}{abs\PYGZus{}pos} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{absolute\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{[}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{3}\PYG{p}{]}
-        \PYG{k}{try}\PYG{p}{:}
-            \PYG{k}{if} \PYG{l+m+mi}{0} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{abs\PYGZus{}pos}\PYG{p}{)} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{l+m+mi}{3000}\PYG{p}{:}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{plung\PYGZus{}pos\PYGZus{}mine}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{abs\PYGZus{}pos}\PYG{p}{)}
-                \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Plunger Position is set: \PYGZob{}\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{plung\PYGZus{}pos\PYGZus{}mine}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-            \PYG{k}{else}\PYG{p}{:}
-                \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Out of range value reported by pump!}\PYG{l+s}{\PYGZdq{}}
-                \PYG{k}{pass}
-        \PYG{k}{except} \PYG{n+ne}{ValueError}\PYG{p}{:}
-            \PYG{k}{print} \PYG{n}{sys}\PYG{o}{.}\PYG{n}{exc\PYGZus{}info}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{update\PYGZus{}sema}\PYG{o}{.}\PYG{n}{release}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{EXITED THE SEMAPHORE}\PYG{l+s}{\PYGZdq{}}
-    \PYG{c}{\PYGZsh{} Supplementary Functions}
-    \PYG{k}{def} \PYG{n+nf}{terminate\PYGZus{}execution}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{T}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-        \PYG{n}{time}\PYG{o}{.}\PYG{n}{sleep}\PYG{p}{(}\PYG{l+m+mf}{0.1}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{update\PYGZus{}values}\PYG{p}{(}\PYG{p}{)} \PYG{c}{\PYGZsh{} So that the plunger position may refresh itself}
-
-    \PYG{k}{def} \PYG{n+nf}{stop\PYGZus{}thread}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{signum}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{fname}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{:}
-        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{C\PYGZhy{}c caught!!}\PYG{l+s}{\PYGZdq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{stop\PYGZus{}flag} \PYG{o}{=} \PYG{n+nb+bp}{True}
-        \PYG{n}{sys}\PYG{o}{.}\PYG{n}{exit}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{change\PYGZus{}mode}\PYG{p}{(}\PYG{n}{mode}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{} Function for changing the mode the commands are executed.}
-
-\PYG{l+s+sd}{        Must be invoked at the end of the editor commands\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode} \PYG{o}{=} \PYG{n}{mode}
-        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{the mode has changed to \PYGZob{}\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{send\PYGZus{}Command}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{command}\PYG{p}{,} \PYG{n}{bits\PYGZus{}to\PYGZus{}read} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Major mechanism for sending the commands to the pump.}
-
-\PYG{l+s+sd}{        Stores the coming commands on a queue from which they are sent to the pump.}
-\PYG{l+s+sd}{        Decides upon waiting for the answer if on interactive mode, or not.}
-\PYG{l+s+sd}{        Finally returns the answer to the calling function}
-\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{n}{full\PYGZus{}command} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{addr} \PYG{o}{+} \PYG{n}{command} \PYG{o}{+} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{term}
-        \PYG{k}{try}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{answers\PYGZus{}lock}\PYG{o}{.}\PYG{n}{acquire}\PYG{p}{(}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{questions\PYGZus{}out}\PYG{o}{.}\PYG{n}{put}\PYG{p}{(}\PYG{n}{full\PYGZus{}command}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{history}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{full\PYGZus{}command}\PYG{p}{)}
-            \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{interactive}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-                \PYG{k}{if} \PYG{n}{bits\PYGZus{}to\PYGZus{}read}\PYG{p}{:}
-                    \PYG{n}{answer} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{answers\PYGZus{}ret}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{n}{timeout} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{)}
-                \PYG{k}{else}\PYG{p}{:}
-                    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{answers\PYGZus{}ret}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{n}{timeout} \PYG{o}{=} \PYG{l+m+mf}{0.5}\PYG{p}{)}
-                    \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{NO NEED TO READ}\PYG{l+s}{\PYGZdq{}}
-
-        \PYG{k}{except} \PYG{n}{Queue}\PYG{o}{.}\PYG{n}{Empty}\PYG{p}{:}
-            \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Answer Queue is empty!!}\PYG{l+s}{\PYGZdq{}}
-        \PYG{k}{except}\PYG{p}{:}
-            \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{ERROR in SEND\PYGZus{}COMMAND:}\PYG{l+s}{\PYGZdq{}}
-            \PYG{k}{print} \PYG{n}{sys}\PYG{o}{.}\PYG{n}{exc\PYGZus{}info}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{stop\PYGZus{}thread}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{finally}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{answers\PYGZus{}lock}\PYG{o}{.}\PYG{n}{release}\PYG{p}{(}\PYG{p}{)}
-            \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{interactive}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-                \PYG{k}{if} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{answer}\PYG{l+s}{\PYGZsq{}} \PYG{o+ow}{in} \PYG{n+nb}{locals}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-                    \PYG{k}{return} \PYG{n}{answer}
-            \PYG{k}{else}\PYG{p}{:}
-                \PYG{k}{return} \PYG{l+m+mi}{0}
-
-\PYG{k}{class} \PYG{n+nc}{delivery\PYGZus{}thread}\PYG{p}{(}\PYG{n}{threading}\PYG{o}{.}\PYG{n}{Thread}\PYG{p}{)}\PYG{p}{:}
-    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-\PYG{l+s+sd}{    Class for sending the queued commands to the pump.}
-
-\PYG{l+s+sd}{    When initialized, the instance of the class inherits the pump instance as}
-\PYG{l+s+sd}{    well as the send \PYGZam{} return queues.}
-
-\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{pump}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n}{threading}\PYG{o}{.}\PYG{n}{Thread}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump} \PYG{o}{=} \PYG{n}{pump}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{forSending} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{questions\PYGZus{}out}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{forGivingBack} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{answers\PYGZus{}ret}
-
-    \PYG{k}{def} \PYG{n+nf}{run}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{k}{while} \PYG{o+ow}{not} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{stop\PYGZus{}flag}\PYG{p}{:}
-            \PYG{k}{try}\PYG{p}{:}
-                \PYG{n}{com\PYGZus{}to\PYGZus{}send} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{forSending}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{n}{timeout} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{p}{)}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{ser}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{n}{com\PYGZus{}to\PYGZus{}send}\PYG{p}{)}
-                \PYG{n}{time}\PYG{o}{.}\PYG{n}{sleep}\PYG{p}{(}\PYG{l+m+mf}{0.1}\PYG{p}{)}
-                \PYG{n}{answer} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{ser}\PYG{o}{.}\PYG{n}{read}\PYG{p}{(}\PYG{l+m+mi}{11}\PYG{p}{)}
-                \PYG{n}{done}\PYG{p}{,} \PYG{n}{answer} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{push\PYGZus{}command}\PYG{p}{(}\PYG{n}{com\PYGZus{}to\PYGZus{}send}\PYG{p}{,} \PYG{n}{answer}\PYG{p}{)}
-                \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{interactive}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-                    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{forGivingBack}\PYG{o}{.}\PYG{n}{put}\PYG{p}{(}\PYG{p}{(}\PYG{n}{answer}\PYG{p}{,} \PYG{n}{done}\PYG{p}{)}\PYG{p}{)}
-            \PYG{k}{except} \PYG{n}{Queue}\PYG{o}{.}\PYG{n}{Empty}\PYG{p}{:}
-                \PYG{n}{time}\PYG{o}{.}\PYG{n}{sleep}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
-                \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Questions Queue is empty}\PYG{l+s}{\PYGZdq{}}
-
-    \PYG{k}{def} \PYG{n+nf}{push\PYGZus{}command}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{o}{*}\PYG{n}{QA}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n}{com\PYGZus{}to\PYGZus{}send} \PYG{o}{=} \PYG{n}{QA}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
-        \PYG{n}{answer} \PYG{o}{=} \PYG{n}{QA}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{editor}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-            \PYG{c}{\PYGZsh{} editor Mode}
-            \PYG{k}{while} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump\PYGZus{}busy}\PYG{p}{(}\PYG{n}{com\PYGZus{}to\PYGZus{}send}\PYG{p}{,} \PYG{n}{answer}\PYG{p}{)}\PYG{p}{:}
-
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{ser}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{n}{com\PYGZus{}to\PYGZus{}send}\PYG{p}{)}
-                \PYG{n}{time}\PYG{o}{.}\PYG{n}{sleep}\PYG{p}{(}\PYG{l+m+mf}{0.1}\PYG{p}{)} 
-                \PYG{n}{answer} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{ser}\PYG{o}{.}\PYG{n}{read}\PYG{p}{(}\PYG{l+m+mi}{11}\PYG{p}{)}
-            \PYG{n}{done} \PYG{o}{=} \PYG{n+nb+bp}{True}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{c}{\PYGZsh{} interactive Mode}
-            \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump\PYGZus{}busy}\PYG{p}{(}\PYG{n}{com\PYGZus{}to\PYGZus{}send}\PYG{p}{,} \PYG{n}{answer}\PYG{p}{)}\PYG{p}{:}
-                \PYG{n}{done} \PYG{o}{=} \PYG{n+nb+bp}{False}
-            \PYG{k}{else}\PYG{p}{:}
-                \PYG{n}{done} \PYG{o}{=} \PYG{n+nb+bp}{True}
-        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{done = \PYGZob{}0\PYGZcb{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{mode = \PYGZob{}1\PYGZcb{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{question = \PYGZob{}2\PYGZcb{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{answer = \PYGZob{}3\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{done}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode}\PYG{p}{,} \PYG{n}{com\PYGZus{}to\PYGZus{}send}\PYG{p}{,} \PYG{n}{answer}\PYG{p}{)}
-        \PYG{k}{return} \PYG{p}{(}\PYG{n}{done}\PYG{p}{,} \PYG{n}{answer}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{pump\PYGZus{}busy}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{o}{*}\PYG{n}{QA}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{} }
-\PYG{l+s+sd}{        Determines if the pump is busy for the specific command to send.}
-
-\PYG{l+s+sd}{        Accepts as input the command to the pump the answer returned and returns}
-\PYG{l+s+sd}{        to the caller if the command has been accepted by the pump}
-\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
-        \PYG{n}{question} \PYG{o}{=} \PYG{n}{QA}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
-        \PYG{n}{answer} \PYG{o}{=} \PYG{n}{QA}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}
-
-        \PYG{k}{print} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{The answer is \PYGZob{}\PYGZcb{}}\PYG{l+s}{\PYGZsq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{answer}\PYG{p}{)}
-        \PYG{k}{if} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{o}\PYG{l+s}{\PYGZsq{}} \PYG{o+ow}{in} \PYG{n}{answer}\PYG{p}{:}
-            \PYG{k}{return} \PYG{n+nb+bp}{True}
-\end{Verbatim}
-
-
-\subsubsection{Script \#2: Pump3000.py}
-\label{code-walkthrough:script-2-pump3000-py}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}!/usr/bin/env python}
-\PYG{c}{\PYGZsh{} Mon May 26 23:48:35 EEST 2014, nickkouk}
-\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-\PYG{l+s+sd}{===============================================================================}
-\PYG{l+s+sd}{                                About}
-\PYG{l+s+sd}{===============================================================================}
-
-\PYG{l+s+sd}{Pump3000 was developed by Nikos Koukis (nickkouk@gmail.com). Its main purpose is }
-\PYG{l+s+sd}{to offer a simple Graphical User Interface for communication with the Cavro XP3000}
-\PYG{l+s+sd}{pumps. It was created primarily for scientific usage for the \PYGZdq{}Systems Biology and}
-\PYG{l+s+sd}{Bioengineering\PYGZdq{} Laboratory of the National Technical University of Athens}
-\PYG{l+s+sd}{(NTUA).}
-
-\PYG{l+s+sd}{For further assistance see the documentation on http://https://github.com/bergercookie}
-
-\PYG{l+s+sd}{For bug reports, and suggestions either raise an issue on the Github page of the}
-\PYG{l+s+sd}{project, or contact me in person (nickouk@gmail.com)}
-
-\PYG{l+s+sd}{===============================================================================}
-\PYG{l+s+sd}{                        Redistribution Policy}
-\PYG{l+s+sd}{===============================================================================}
-
-\PYG{l+s+sd}{This is a free software, licensed under LGPLv2. It can be redistributed and}
-\PYG{l+s+sd}{modified as long as the freedom to use is passed on to the recipients. For complete}
-\PYG{l+s+sd}{policy of terms, consult a version of the license, either on the documentation page:}
-\PYG{l+s+sd}{https://github.com/bergercookie/Cavro\PYGZhy{}Pump\PYGZhy{}XP3000\PYGZhy{}GUI/blob/master/LICENSE or on}
-\PYG{l+s+sd}{the GNU page: https://www.gnu.org/licenses/lgpl\PYGZhy{}2.1.html}
-
-\PYG{l+s+sd}{===============================================================================}
-\PYG{l+s+sd}{            Python Implementation for the Cavro XP3000 GUI.}
-\PYG{l+s+sd}{                             Pump3000}
-\PYG{l+s+sd}{===============================================================================}
-
-\PYG{l+s+sd}{The GUI is designed with regards to the MVC (Model View Controller)}
-\PYG{l+s+sd}{UI architectural pattern. Inside this module the View \PYGZhy{} Controller behaviors}
-\PYG{l+s+sd}{are implemented while the Model behavior is implemented in the imported module: pump\PYGZus{}model.py}
-
-
-\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-
-\PYG{c}{\PYGZsh{} proper division for python 2.7}
-\PYG{k+kn}{from} \PYG{n+nn}{\PYGZus{}\PYGZus{}future\PYGZus{}\PYGZus{}} \PYG{k+kn}{import} \PYG{n}{division}
-
-\PYG{c}{\PYGZsh{} Usual importing stuff for PySide}
-\PYG{k+kn}{from} \PYG{n+nn}{PySide.QtGui} \PYG{k+kn}{import} \PYG{o}{*}
-\PYG{k+kn}{from} \PYG{n+nn}{PySide.QtCore} \PYG{k+kn}{import} \PYG{o}{*}
-
-\PYG{c}{\PYGZsh{} Module imports}
-\PYG{k+kn}{import} \PYG{n+nn}{sys}
-\PYG{k+kn}{import} \PYG{n+nn}{time}
-
-\PYG{k+kn}{import} \PYG{n+nn}{pump\PYGZus{}model}
-\PYG{k+kn}{from} \PYG{n+nn}{classes\PYGZus{}used} \PYG{k+kn}{import} \PYG{n}{HistoryDialog}\PYG{p}{,}\PYGZbs{}
-        \PYG{n}{ReportsDialog}\PYG{p}{,}\PYGZbs{}
-        \PYG{n}{NewDevDialog}\PYG{p}{,}\PYGZbs{}
-        \PYG{n}{SyringePickDialog}\PYG{p}{,}\PYGZbs{}
-        \PYG{n}{ParametersChange}\PYG{p}{,}\PYGZbs{}
-        \PYG{n}{AboutDialog}\PYG{p}{,}\PYGZbs{}
-        \PYG{n}{AboutDialog2}
-
-\PYG{c}{\PYGZsh{} Qt\PYGZhy{}Designer compiled python code}
-\PYG{k+kn}{import} \PYG{n+nn}{python\PYGZus{}gui}
-\PYG{k+kn}{import} \PYG{n+nn}{python\PYGZus{}settings}
-\PYG{k+kn}{import} \PYG{n+nn}{history\PYGZus{}settings}
-\PYG{k+kn}{import} \PYG{n+nn}{device\PYGZus{}configuration}
-
-
-\PYG{k}{class} \PYG{n+nc}{MainWindow}\PYG{p}{(}\PYG{n}{QMainWindow}\PYG{p}{,} \PYG{n}{python\PYGZus{}gui}\PYG{o}{.}\PYG{n}{Ui\PYGZus{}MainWindow}\PYG{p}{)}\PYG{p}{:}
-
-    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{parent}\PYG{o}{=}\PYG{n+nb+bp}{None}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb}{super}\PYG{p}{(}\PYG{n}{MainWindow}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setupUi}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Pump3000}\PYG{l+s}{\PYGZdq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setWindowTitle}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Initialize a pump instance}
-        \PYG{c}{\PYGZsh{} You define how to start the pump}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump} \PYG{o}{=} \PYG{n}{pump\PYGZus{}model}\PYG{o}{.}\PYG{n}{Pump}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{serial}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} MainWindow related parameters}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}action} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{push\PYGZus{}all}\PYG{l+s}{\PYGZsq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{editors\PYGZus{}open} \PYG{o}{=} \PYG{l+m+mi}{1}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{lcdNumber}\PYG{o}{.}\PYG{n}{display}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{}open fd}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{open\PYGZus{}files} \PYG{o}{=} \PYG{p}{[} \PYG{p}{]}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{save\PYGZus{}time} \PYG{o}{=} \PYG{l+m+mi}{0}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{modified\PYGZus{}time} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
-
-        \PYG{c}{\PYGZsh{} Setting tabs titles}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{tabWidget}\PYG{o}{.}\PYG{n}{setTabText}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Controls}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{tabWidget}\PYG{o}{.}\PYG{n}{setTabText}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Editor \PYGZhy{} \PYGZob{}\PYGZcb{}}\PYG{l+s}{\PYGZsq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{editors\PYGZus{}open}\PYG{p}{)}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Reverting any changes not shown in the Window}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{revertQtimer} \PYG{o}{=} \PYG{n}{QTimer}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{revertQtimer}\PYG{o}{.}\PYG{n}{setInterval}\PYG{p}{(}\PYG{l+m+mi}{60000}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{revertQtimer}\PYG{o}{.}\PYG{n}{start}\PYG{p}{(}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Initialize the port configuration}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{newDev}\PYG{p}{(}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Set up a timer for periodical refresh of the pump parameters}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}status} \PYG{o}{=} \PYG{n+nb+bp}{True}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refreshQtimer} \PYG{o}{=} \PYG{n}{QTimer}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refreshQtimer}\PYG{o}{.}\PYG{n}{setInterval}\PYG{p}{(}\PYG{l+m+mi}{60000}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refreshQtimer}\PYG{o}{.}\PYG{n}{start}\PYG{p}{(}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Other dialogs instances}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{reports\PYGZus{}window} \PYG{o}{=} \PYG{n}{ReportsDialog}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{parent} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} saving the previous status of commands to revert in case pump busy}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{prev\PYGZus{}plung\PYGZus{}pos} \PYG{o}{=} \PYG{l+m+mi}{10}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{prev\PYGZus{}valve\PYGZus{}btn} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{output\PYGZus{}btn}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{valve\PYGZus{}correspond} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{out}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{output\PYGZus{}btn}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{in}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{input\PYGZus{}btn}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{bypass}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{bypass\PYGZus{}btn}
-                \PYG{p}{\PYGZcb{}}
-
-        \PYG{c}{\PYGZsh{} Valve Signals}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{output\PYGZus{}btn}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{valve\PYGZus{}status}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{input\PYGZus{}btn}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{valve\PYGZus{}status}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{bypass\PYGZus{}btn}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{valve\PYGZus{}status}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Plunger Movement}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{speed\PYGZus{}slider}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{sliderReleased()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{speed\PYGZus{}control}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{speed\PYGZus{}slider}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{valueChanged(int)}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{lcd\PYGZus{}display}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{volume\PYGZus{}button}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{volume\PYGZus{}control}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{volume\PYGZus{}prompt}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{textEdited(QString)}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{enable\PYGZus{}button}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Quick CommandsComboBox}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}combobox}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{currentIndexChanged(int)}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}combobox\PYGZus{}fun}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{address\PYGZus{}combobox}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{currentIndexChanged(int)}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{set\PYGZus{}address}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{make\PYGZus{}it\PYGZus{}so}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{make\PYGZus{}it\PYGZus{}so\PYGZus{}function}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Other Dialogs}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionReports}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{reports\PYGZus{}window\PYGZus{}open}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionHistory}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{history\PYGZus{}window\PYGZus{}open}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionNew\PYGZus{}Device}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{newDev}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionSyringe\PYGZus{}Size}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{newSyringe}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionPump\PYGZus{}Parameters}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{parameters\PYGZus{}change\PYGZus{}open}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionLeft\PYGZus{}Valve}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{init\PYGZus{}valve\PYGZus{}left}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionRight\PYGZus{}Valve}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{init\PYGZus{}valve\PYGZus{}right}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionAbout}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{about\PYGZus{}software}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionLicense}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{about\PYGZus{}license}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionCommands}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{editor\PYGZus{}help}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} QTimer events}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refreshQtimer}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{timeout()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{update\PYGZus{}pump\PYGZus{}values}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{revertQtimer}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{timeout()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{revert\PYGZus{}GUI\PYGZus{}values}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Editor related action buttons}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionSave}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{save\PYGZus{}btn}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionSaveAs}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{saveAs\PYGZus{}btn}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actionOpen}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{triggered()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{open\PYGZus{}btn}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{textEdit}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{textChanged()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{update\PYGZus{}modify\PYGZus{}time}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{run\PYGZus{}script\PYGZus{}btn}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{run\PYGZus{}script}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{clear\PYGZus{}editor\PYGZus{}btn}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{clear\PYGZus{}editor}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Visualizing the pump }
-        \PYG{k}{if} \PYG{n}{sys}\PYG{o}{.}\PYG{n}{platform}\PYG{p}{[}\PYG{p}{:}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{win}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:} \PYG{c}{\PYGZsh{}Running on windows, most probably executable}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pixmap} \PYG{o}{=} \PYG{n}{QPixmap}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{../../Images/cavro.jpg}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pixmap} \PYG{o}{=} \PYG{n}{QPixmap}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{../Images/cavro.jpg}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pixmap\PYGZus{}item} \PYG{o}{=} \PYG{n}{QGraphicsPixmapItem}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pixmap}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{scene} \PYG{o}{=} \PYG{n}{QGraphicsScene}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{scene}\PYG{o}{.}\PYG{n}{setBackgroundBrush}\PYG{p}{(}\PYG{n}{Qt}\PYG{o}{.}\PYG{n}{gray}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{scene}\PYG{o}{.}\PYG{n}{addItem}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pixmap\PYGZus{}item}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{graphicsView}\PYG{o}{.}\PYG{n}{setScene}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{scene}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{closeEvent}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{event}\PYG{p}{)}\PYG{p}{:}
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{save\PYGZus{}time} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{modified\PYGZus{}time}\PYG{p}{:}
-            \PYG{n}{quit\PYGZus{}msg} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{The editor script has been modified,}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Do you still want to continue}\PYG{l+s}{\PYGZdq{}}
-            \PYG{n}{reply} \PYG{o}{=} \PYG{n}{QMessageBox}\PYG{o}{.}\PYG{n}{question}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{,}\PYGZbs{}
-                    \PYG{n}{quit\PYGZus{}msg}\PYG{p}{,}\PYGZbs{}
-                    \PYG{n}{QMessageBox}\PYG{o}{.}\PYG{n}{Yes}\PYG{p}{,}\PYGZbs{}
-                    \PYG{n}{QMessageBox}\PYG{o}{.}\PYG{n}{No}\PYG{p}{)}
-
-            \PYG{k}{if} \PYG{n}{reply} \PYG{o}{==} \PYG{n}{QMessageBox}\PYG{o}{.}\PYG{n}{Yes}\PYG{p}{:}
-                \PYG{n}{event}\PYG{o}{.}\PYG{n}{accept}\PYG{p}{(}\PYG{p}{)}
-            \PYG{k}{else}\PYG{p}{:}
-                \PYG{n}{event}\PYG{o}{.}\PYG{n}{ignore}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{else}\PYG{p}{:} 
-            \PYG{k}{try}\PYG{p}{:}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refreshQtimer}\PYG{o}{.}\PYG{n}{stop}\PYG{p}{(}\PYG{p}{)}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{stop\PYGZus{}thread}\PYG{p}{(}\PYG{p}{)}
-            \PYG{k}{except}\PYG{p}{:}
-                \PYG{k}{pass}
-            \PYG{c}{\PYGZsh{} Close open file descriptors}
-            \PYG{k}{for} \PYG{n}{a\PYGZus{}file} \PYG{o+ow}{in} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{open\PYGZus{}files}\PYG{p}{:}
-                \PYG{n}{a\PYGZus{}file}\PYG{o}{.}\PYG{n}{close}\PYG{p}{(}\PYG{p}{)}
-                \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{closing \PYGZob{}\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{a\PYGZus{}file}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{stop\PYGZus{}thread}\PYG{p}{(}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{close}\PYG{p}{(}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{save\PYGZus{}btn}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb}{dir} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{.}\PYG{l+s}{\PYGZdq{}}
-        \PYG{n}{text} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{textEdit}\PYG{o}{.}\PYG{n}{toPlainText}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{try}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}fd}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{n}{text}\PYG{p}{)}\PYG{p}{;}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}fd}\PYG{o}{.}\PYG{n}{seek}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{save\PYGZus{}time} \PYG{o}{=} \PYG{n}{time}\PYG{o}{.}\PYG{n}{time}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{except} \PYG{n+ne}{AttributeError}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{saveAs\PYGZus{}btn}\PYG{p}{(}\PYG{p}{)}
-            
-    \PYG{k}{def} \PYG{n+nf}{saveAs\PYGZus{}btn}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb}{dir} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{.}\PYG{l+s}{\PYGZdq{}}
-        \PYG{n}{text} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{textEdit}\PYG{o}{.}\PYG{n}{toPlainText}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n}{fileObj} \PYG{o}{=} \PYG{n}{QFileDialog}\PYG{o}{.}\PYG{n}{getSaveFileName}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{,} \PYG{n+nb}{dir}\PYG{o}{=}\PYG{n+nb}{dir}\PYG{p}{,} \PYG{n+nb}{filter}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Text Files (*.txt)}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-        \PYG{n}{fileName} \PYG{o}{=} \PYG{n}{fileObj}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
-        \PYG{k}{try}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}fd} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{fileName}\PYG{p}{,} \PYG{n}{mode}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{w}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{open\PYGZus{}files}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}fd}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}fd}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{n}{text}\PYG{p}{)}\PYG{p}{;}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}fd}\PYG{o}{.}\PYG{n}{seek}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{save\PYGZus{}time} \PYG{o}{=} \PYG{n}{time}\PYG{o}{.}\PYG{n}{time}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{except} \PYG{n+ne}{IOError}\PYG{p}{:} \PYG{c}{\PYGZsh{} Cancel was pressed}
-            \PYG{k}{pass}
-
-    \PYG{k}{def} \PYG{n+nf}{open\PYGZus{}btn}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb}{dir} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{.}\PYG{l+s}{\PYGZdq{}}
-        \PYG{n}{fileObj} \PYG{o}{=} \PYG{n}{QFileDialog}\PYG{o}{.}\PYG{n}{getOpenFileName}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}} \PYG{o}{+} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{ Open File Dialog}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{dir}\PYG{o}{=}\PYG{n+nb}{dir}\PYG{p}{,} \PYG{n+nb}{filter}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Text files (*.txt)}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-        \PYG{n}{fileName} \PYG{o}{=} \PYG{n}{fileObj}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
-
-        \PYG{k}{try}\PYG{p}{:}
-            \PYG{n}{file\PYGZus{}fd} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{fileName}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{r}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{open\PYGZus{}files}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{file\PYGZus{}fd}\PYG{p}{)}
-            \PYG{n}{read} \PYG{o}{=} \PYG{n}{file\PYGZus{}fd}\PYG{o}{.}\PYG{n}{read}\PYG{p}{(}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{textEdit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{read}\PYG{p}{)}
-            \PYG{n}{file\PYGZus{}fd}\PYG{o}{.}\PYG{n}{close}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{except} \PYG{n+ne}{IOError}\PYG{p}{:}
-            \PYG{k}{pass}
-
-    \PYG{k}{def} \PYG{n+nf}{update\PYGZus{}modify\PYGZus{}time}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{modified\PYGZus{}time} \PYG{o}{=} \PYG{n}{time}\PYG{o}{.}\PYG{n}{time}\PYG{p}{(}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{run\PYGZus{}script}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{editor}\PYG{l+s}{\PYGZsq{}}
-        \PYG{n}{text} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{textEdit}\PYG{o}{.}\PYG{n}{toPlainText}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n}{script\PYGZus{}commands} \PYG{o}{=} \PYG{n}{text}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-        \PYG{n}{script\PYGZus{}commands} \PYG{o}{=} \PYG{n+nb}{filter}\PYG{p}{(}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{x} \PYG{o}{!=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{script\PYGZus{}commands}\PYG{p}{)}
-        \PYG{n}{script\PYGZus{}commands}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{pump.change\PYGZus{}mode(interactive)}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-        \PYG{k}{try}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{update\PYGZus{}values}\PYG{p}{(}\PYG{p}{)}
-            \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{script\PYGZus{}commands}\PYG{p}{)}\PYG{p}{)}\PYG{p}{:}
-                \PYG{k}{if} \PYG{n}{script\PYGZus{}commands}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{[}\PYG{p}{:}\PYG{l+m+mi}{4}\PYG{p}{]} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{pump}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-                    \PYG{n+nb}{eval}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{self.}\PYG{l+s}{\PYGZdq{}} \PYG{o}{+} \PYG{n}{script\PYGZus{}commands}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}
-                    \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{self.}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s}{\PYGZdq{}} \PYG{o}{\PYGZpc{}}\PYG{n}{script\PYGZus{}commands}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
-                \PYG{k}{elif} \PYG{n}{script\PYGZus{}commands}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{/}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-                    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{send\PYGZus{}Command}\PYG{p}{(}\PYG{n}{script\PYGZus{}commands}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)} 
-                \PYG{k}{else}\PYG{p}{:}
-                    \PYG{c}{\PYGZsh{} TODO The user currently may not issue common python commands yet}
-                    \PYG{n+nb}{eval}\PYG{p}{(}\PYG{n}{script\PYGZus{}commands}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}
-                    \PYG{k}{print} \PYG{n}{script\PYGZus{}commands}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
-        \PYG{k}{except}\PYG{p}{:}
-            \PYG{k}{print} \PYG{n}{sys}\PYG{o}{.}\PYG{n}{exc\PYGZus{}info}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
-
-
-    \PYG{k}{def} \PYG{n+nf}{clear\PYGZus{}editor}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{textEdit}\PYG{o}{.}\PYG{n}{clear}\PYG{p}{(}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{init\PYGZus{}valve\PYGZus{}left}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{initialize\PYGZus{}pump}\PYG{p}{(}\PYG{n}{output} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{left}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{speed\PYGZus{}slider}\PYG{o}{.}\PYG{n}{setValue}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)}
-    \PYG{k}{def} \PYG{n+nf}{init\PYGZus{}valve\PYGZus{}right}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{initialize\PYGZus{}pump}\PYG{p}{(}\PYG{n}{output} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{right}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{speed\PYGZus{}slider}\PYG{o}{.}\PYG{n}{setValue}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)}
-
-
-    \PYG{c}{\PYGZsh{} Qtimer event handling}
-    \PYG{k}{def} \PYG{n+nf}{update\PYGZus{}pump\PYGZus{}values}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{} }
-\PYG{l+s+sd}{        First call the refresh method of the reports\PYGZus{}window instance}
-\PYG{l+s+sd}{        which in turn calls the update\PYGZus{}values on the pump}
-\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{reports\PYGZus{}window}\PYG{o}{.}\PYG{n}{refresh}\PYG{p}{(}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{revert\PYGZus{}GUI\PYGZus{}values}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{doit} \PYG{o}{=} \PYG{n+nb+bp}{False}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{} }
-\PYG{l+s+sd}{        Function for applying the GUI properties to the pump. }
-
-\PYG{l+s+sd}{        The user can call this function to make sure that the status on screen}
-\PYG{l+s+sd}{        do correspond to the actual pump properties. The function should always}
-\PYG{l+s+sd}{        be called when the pump was previously running on editor mode and the}
-\PYG{l+s+sd}{        user switches back to interactive mode.}
-\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{k}{if} \PYG{n}{doit}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{interactive}\PYG{l+s}{\PYGZsq{}}
-
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode}  \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{interactive}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-            \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Setting the GUI values.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{doit = \PYGZob{}0\PYGZcb{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{exc\PYGZus{}mode =\PYGZob{}1\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{doit}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{exc\PYGZus{}mode}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{valve\PYGZus{}status}\PYG{p}{(}\PYG{p}{)}
-            \PYG{n}{speed\PYGZus{}val} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{speed\PYGZus{}slider}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{property\PYGZus{}set}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{speed}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{speed\PYGZus{}val}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{update\PYGZus{}values}\PYG{p}{(}\PYG{p}{)}
-
-        
-    \PYG{k}{def} \PYG{n+nf}{cancel\PYGZus{}timer}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-\PYG{l+s+sd}{        The purpose of the cancel\PYGZus{}timer is to cancel the status refreshing.}
-\PYG{l+s+sd}{        Can be used by the user to manually update the pump status }
-\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refreshQtimer}\PYG{o}{.}\PYG{n}{stop}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}status} \PYG{o}{=} \PYG{n+nb+bp}{False}
-        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{TIMER closed}\PYG{l+s}{\PYGZdq{}}
-
-    \PYG{c}{\PYGZsh{} Enabling the volume button}
-    \PYG{k}{def} \PYG{n+nf}{enable\PYGZus{}button}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{volume\PYGZus{}prompt}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{isdigit}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{volume\PYGZus{}button}\PYG{o}{.}\PYG{n}{setEnabled}\PYG{p}{(}\PYG{n+nb+bp}{True}\PYG{p}{)}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{volume\PYGZus{}button}\PYG{o}{.}\PYG{n}{setEnabled}\PYG{p}{(}\PYG{n+nb+bp}{False}\PYG{p}{)}
-
- 
-    \PYG{c}{\PYGZsh{} Functions for either fulling or emptying the whole syringe}
-    \PYG{k}{def} \PYG{n+nf}{quick\PYGZus{}combobox\PYGZus{}fun}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}combobox}\PYG{o}{.}\PYG{n}{currentIndex}\PYG{p}{(}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}action} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{push\PYGZus{}all}\PYG{l+s}{\PYGZsq{}}
-        \PYG{k}{elif} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}combobox}\PYG{o}{.}\PYG{n}{currentIndex}\PYG{p}{(}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}action} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{pull\PYGZus{}all}\PYG{l+s}{\PYGZsq{}}
-        \PYG{k}{elif} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}combobox}\PYG{o}{.}\PYG{n}{currentIndex}\PYG{p}{(}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{2}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}action} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{terminate}\PYG{l+s}{\PYGZsq{}}
-        \PYG{k}{elif} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}combobox}\PYG{o}{.}\PYG{n}{currentIndex}\PYG{p}{(}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{3}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{revert\PYGZus{}GUI\PYGZus{}values}\PYG{p}{(}\PYG{p}{)}
-    \PYG{k}{def} \PYG{n+nf}{make\PYGZus{}it\PYGZus{}so\PYGZus{}function}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}action} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{terminate}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{terminate\PYGZus{}execution}\PYG{p}{(}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{revert\PYGZus{}GUI\PYGZus{}values}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{bypass\PYGZus{}btn}\PYG{o}{.}\PYG{n}{isChecked}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-                \PYG{n}{answer} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Bypass Mode is ON}\PYG{l+s}{\PYGZdq{}}
-                \PYG{n}{QMessageBox}\PYG{o}{.}\PYG{n}{warning}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{,} \PYG{n}{answer}\PYG{p}{)}
-                \PYG{k}{return}
-            \PYG{k}{else}\PYG{p}{:}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{volume\PYGZus{}command}\PYG{p}{(}\PYG{n}{special} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}action}\PYG{p}{)}
-                \PYG{n}{label} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Quick Action \PYGZob{}action\PYGZcb{} executed}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{action} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quick\PYGZus{}action}\PYG{p}{)}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{command\PYGZus{}label\PYGZus{}show}\PYG{p}{(}\PYG{n}{label}\PYG{p}{)}
-
-    \PYG{c}{\PYGZsh{} Opening Dialogs}
-    \PYG{k}{def} \PYG{n+nf}{editor\PYGZus{}help}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-
-        \PYG{n}{fd1} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{../text\PYGZus{}files/pump\PYGZus{}commands\PYGZus{}html}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{r}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-        \PYG{n}{text} \PYG{o}{=} \PYG{n}{fd1}\PYG{o}{.}\PYG{n}{read}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{open\PYGZus{}files}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{fd1}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{editor\PYGZus{}help\PYGZus{}win} \PYG{o}{=} \PYG{n}{AboutDialog}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Editor Commands}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{parent} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{editor\PYGZus{}help\PYGZus{}win}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{editor\PYGZus{}help\PYGZus{}win}\PYG{o}{.}\PYG{n}{raise\PYGZus{}}\PYG{p}{(}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{about\PYGZus{}license}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-
-        \PYG{n}{fd1} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{../text\PYGZus{}files/lgpl\PYGZhy{}2.1.txt}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{r}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-        \PYG{n}{text} \PYG{o}{=} \PYG{n}{fd1}\PYG{o}{.}\PYG{n}{read}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{open\PYGZus{}files}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{fd1}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{about\PYGZus{}dialog} \PYG{o}{=} \PYG{n}{AboutDialog}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Software License}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{about\PYGZus{}dialog}\PYG{o}{.}\PYG{n}{exec\PYGZus{}}\PYG{p}{(}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{about\PYGZus{}software}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-
-        \PYG{n}{fd1} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{../text\PYGZus{}files/about.txt}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{r}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-        \PYG{n}{text} \PYG{o}{=} \PYG{n}{fd1}\PYG{o}{.}\PYG{n}{read}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{open\PYGZus{}files}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{fd1}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{about\PYGZus{}soft} \PYG{o}{=} \PYG{n}{AboutDialog2}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{About the Software}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{about\PYGZus{}soft}\PYG{o}{.}\PYG{n}{exec\PYGZus{}}\PYG{p}{(}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{parameters\PYGZus{}change\PYGZus{}open}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{} Opens a ParametersChange Instance.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{parameters\PYGZus{}window} \PYG{o}{=} \PYG{n}{ParametersChange}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{parameters\PYGZus{}window}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{parameters\PYGZus{}window}\PYG{o}{.}\PYG{n}{raise\PYGZus{}}\PYG{p}{(}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{parameters\PYGZus{}window}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{accepted()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{parameters\PYGZus{}window}\PYG{o}{.}\PYG{n}{update\PYGZus{}pump\PYGZus{}param}\PYG{p}{)}
-
-
-
-    \PYG{k}{def} \PYG{n+nf}{history\PYGZus{}window\PYGZus{}open}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{} Opens a HistoryDialog Instance\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{history\PYGZus{}window} \PYG{o}{=} \PYG{n}{HistoryDialog}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{history\PYGZus{}window}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{history\PYGZus{}window}\PYG{o}{.}\PYG{n}{raise\PYGZus{}}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{history\PYGZus{}window}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}Btn}\PYG{o}{.}\PYG{n}{click}\PYG{p}{(}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{reports\PYGZus{}window\PYGZus{}open}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{} Opens a ReportsDialog Instance\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{reports\PYGZus{}window}\PYG{o}{.}\PYG{n}{noRefresh}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{reports\PYGZus{}window}\PYG{o}{.}\PYG{n}{tick\PYGZus{}refresh}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{reports\PYGZus{}window}\PYG{o}{.}\PYG{n}{refresh}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{reports\PYGZus{}window}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{reports\PYGZus{}window}\PYG{o}{.}\PYG{n}{raise\PYGZus{}}\PYG{p}{(}\PYG{p}{)}
-   
-    \PYG{c}{\PYGZsh{} Device Configuration}
-    \PYG{k}{def} \PYG{n+nf}{newDev}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{dev\PYGZus{}window} \PYG{o}{=} \PYG{n}{NewDevDialog}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{dev\PYGZus{}window}\PYG{o}{.}\PYG{n}{exec\PYGZus{}}\PYG{p}{(}\PYG{p}{)}
-       
-    \PYG{k}{def} \PYG{n+nf}{newSyringe}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{syringe\PYGZus{}window} \PYG{o}{=} \PYG{n}{SyringePickDialog}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{syringe\PYGZus{}window}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{syringe\PYGZus{}window}\PYG{o}{.}\PYG{n}{exec\PYGZus{}}\PYG{p}{(}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{syringe\PYGZus{}window}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{accepted()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{syringe\PYGZus{}window}\PYG{o}{.}\PYG{n}{select\PYGZus{}new\PYGZus{}syringe}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{set\PYGZus{}address}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{addr} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{/}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s}{\PYGZsq{}} \PYG{o}{\PYGZpc{}}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{address\PYGZus{}combobox}\PYG{o}{.}\PYG{n}{currentText}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n}{label} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Addressing to pump \PYGZsh{}\PYGZob{}\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{addr}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{command\PYGZus{}label\PYGZus{}show}\PYG{p}{(}\PYG{n}{label}\PYG{p}{)}
-       
-    \PYG{c}{\PYGZsh{} Valve Status}
-    \PYG{k}{def} \PYG{n+nf}{valve\PYGZus{}status}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{} Configures the valve of the pump}
-\PYG{l+s+sd}{        Determines which valve is pressed, }
-\PYG{l+s+sd}{        sends the command, }
-\PYG{l+s+sd}{        updates the label \PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{output\PYGZus{}btn}\PYG{o}{.}\PYG{n}{isChecked}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n}{pos} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{out}\PYG{l+s}{\PYGZdq{}}
-        \PYG{k}{elif} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{input\PYGZus{}btn}\PYG{o}{.}\PYG{n}{isChecked}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n}{pos} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{in}\PYG{l+s}{\PYGZdq{}}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{n}{pos} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{bypass}\PYG{l+s}{\PYGZdq{}}
-
-        \PYG{n}{answer}\PYG{p}{,} \PYG{n}{done} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{valve\PYGZus{}command}\PYG{p}{(}\PYG{n}{pos}\PYG{p}{)}
-        \PYG{k}{if} \PYG{n}{done}\PYG{p}{:}
-            \PYG{n}{label} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Valve position changed to \PYGZob{}valve\PYGZus{}pos\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYGZbs{}
-                    \PYG{n}{valve\PYGZus{}pos} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{own\PYGZus{}status}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{valve\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{command\PYGZus{}label\PYGZus{}show}\PYG{p}{(}\PYG{n}{label}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{prev\PYGZus{}valve\PYGZus{}btn} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{valve\PYGZus{}correspond}\PYG{p}{[}\PYG{n}{pos}\PYG{p}{]}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{prev\PYGZus{}valve\PYGZus{}btn}\PYG{o}{.}\PYG{n}{click}\PYG{p}{(}\PYG{p}{)}
-
-
-    \PYG{c}{\PYGZsh{} Plunger speed}
-    \PYG{k}{def} \PYG{n+nf}{speed\PYGZus{}control}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{c}{\PYGZsh{} Changing the velocity of the plunger}
-
-        \PYG{n}{speed} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{speed\PYGZus{}slider}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{property\PYGZus{}set}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{speed}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{speed}\PYG{p}{)}
-        \PYG{n}{label} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Plunger Speed Changed: \PYGZob{}\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{speed}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{command\PYGZus{}label\PYGZus{}show}\PYG{p}{(}\PYG{n}{label}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{lcd\PYGZus{}display}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n}{speed} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{speed\PYGZus{}slider}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{lcdNumber}\PYG{o}{.}\PYG{n}{display}\PYG{p}{(}\PYG{n}{speed}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{volume\PYGZus{}control}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}function for calling the pump.volume\PYGZus{}command method.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{n}{volume} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{volume\PYGZus{}prompt}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{bypass\PYGZus{}btn}\PYG{o}{.}\PYG{n}{isChecked}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n}{answer} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Bypass Mode is ON}\PYG{l+s}{\PYGZdq{}}
-            \PYG{n}{QMessageBox}\PYG{o}{.}\PYG{n}{warning}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{,} \PYG{n}{answer}\PYG{p}{)}
-            \PYG{k}{return}
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{PushBtn}\PYG{o}{.}\PYG{n}{isChecked}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n}{direction} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{D}\PYG{l+s}{\PYGZdq{}}
-        \PYG{k}{elif} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{PullBtn}\PYG{o}{.}\PYG{n}{isChecked}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n}{direction} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{P}\PYG{l+s}{\PYGZdq{}}
-        \PYG{c}{\PYGZsh{}print \PYGZdq{}volume: \PYGZob{}0\PYGZcb{}\PYGZbs{}n volume\PYGZus{}type: \PYGZob{}1\PYGZcb{}\PYGZbs{}n direction: \PYGZob{}2\PYGZcb{}: \PYGZdq{}.format(volume, type(volume), direction)}
-        \PYG{p}{(}\PYG{n}{done}\PYG{p}{,} \PYG{n}{answer}\PYG{p}{)} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{volume\PYGZus{}command}\PYG{p}{(}\PYG{n}{direction}\PYG{p}{,} \PYG{n}{volume}\PYG{p}{)}
-        \PYG{c}{\PYGZsh{}print \PYGZdq{}done: \PYGZob{}0\PYGZcb{}\PYGZbs{}n answer: \PYGZob{}1\PYGZcb{}\PYGZdq{}.format(done, answer)}
-
-        \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{done}\PYG{p}{:}
-            \PYG{n}{QMessageBox}\PYG{o}{.}\PYG{n}{warning}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{,} \PYG{n}{answer}\PYG{p}{)}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{k}{if} \PYG{n}{direction} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{D}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:}
-                \PYG{n}{label} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Pushed \PYGZob{}volume\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{volume} \PYG{o}{=} \PYG{n}{volume}\PYG{p}{)}
-            \PYG{k}{else}\PYG{p}{:}
-                \PYG{n}{label} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Drew \PYGZob{}volume\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{volume} \PYG{o}{=} \PYG{n}{volume}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{command\PYGZus{}label\PYGZus{}show}\PYG{p}{(}\PYG{n}{label}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{volume\PYGZus{}prompt}\PYG{o}{.}\PYG{n}{selectAll}\PYG{p}{(}\PYG{p}{)}
-
-
-    \PYG{c}{\PYGZsh{} The statusline}
-    \PYG{k}{def} \PYG{n+nf}{command\PYGZus{}label\PYGZus{}show}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{a\PYGZus{}string}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{command\PYGZus{}label}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{a\PYGZus{}string}\PYG{p}{)}
-
-
-\PYG{k}{if} \PYG{n}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}}\PYG{l+s}{\PYGZsq{}}\PYG{p}{:}
-    \PYG{n}{app} \PYG{o}{=} \PYG{n}{QApplication}\PYG{p}{(}\PYG{n}{sys}\PYG{o}{.}\PYG{n}{argv}\PYG{p}{)}
-    \PYG{n}{window}\PYG{o}{=} \PYG{n}{MainWindow}\PYG{p}{(}\PYG{p}{)}
-    \PYG{n}{window}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
-    \PYG{n}{app}\PYG{o}{.}\PYG{n}{exec\PYGZus{}}\PYG{p}{(}\PYG{p}{)} \PYG{c}{\PYGZsh{} Event\PYGZhy{}loop of the application}
-\end{Verbatim}
-
-
-\subsubsection{Script \#3: classes\_used.py}
-\label{code-walkthrough:script-3-classes-used-py}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c}{\PYGZsh{}  Thu May 29 02:59:41 EEST 2014, nickkouk}
-
-\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-\PYG{l+s+sd}{In this module a set of supplementary classes are set.}
-
-\PYG{l+s+sd}{These classes are used primarily for the window\PYGZus{}controller functions and assist}
-\PYG{l+s+sd}{in the UI setup}
-\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-\PYG{c}{\PYGZsh{} proper division for python 2.7}
-\PYG{k+kn}{from} \PYG{n+nn}{\PYGZus{}\PYGZus{}future\PYGZus{}\PYGZus{}} \PYG{k+kn}{import} \PYG{n}{division}
-
-\PYG{c}{\PYGZsh{} Usual importing stuff for PySide}
-\PYG{k+kn}{from} \PYG{n+nn}{PySide.QtGui} \PYG{k+kn}{import} \PYG{o}{*}
-\PYG{k+kn}{from} \PYG{n+nn}{PySide.QtCore} \PYG{k+kn}{import} \PYG{o}{*}
-
-\PYG{c}{\PYGZsh{} Module imports}
-\PYG{k+kn}{import} \PYG{n+nn}{sys}
-\PYG{k+kn}{import} \PYG{n+nn}{os}
-\PYG{k+kn}{from} \PYG{n+nn}{serial.tools.list\PYGZus{}ports} \PYG{k+kn}{import} \PYG{n}{comports}
-
-\PYG{c}{\PYGZsh{} Qt\PYGZhy{}Designer compiled python code}
-\PYG{k+kn}{import} \PYG{n+nn}{python\PYGZus{}gui}
-\PYG{k+kn}{import} \PYG{n+nn}{python\PYGZus{}settings}
-\PYG{k+kn}{import} \PYG{n+nn}{history\PYGZus{}settings}
-\PYG{k+kn}{import} \PYG{n+nn}{device\PYGZus{}configuration}
-\PYG{k+kn}{import} \PYG{n+nn}{parameters\PYGZus{}change}
-\PYG{k+kn}{import} \PYG{n+nn}{about\PYGZus{}dialog}
-\PYG{k+kn}{import} \PYG{n+nn}{syringe\PYGZus{}pick}
-
-
-\PYG{k}{class} \PYG{n+nc}{ParametersChange}\PYG{p}{(}\PYG{n}{QDialog}\PYG{p}{,} \PYG{n}{parameters\PYGZus{}change}\PYG{o}{.}\PYG{n}{Ui\PYGZus{}Dialog}\PYG{p}{)}\PYG{p}{:}
-    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-\PYG{l+s+sd}{    This is the ParametersChange Class. }
-
-\PYG{l+s+sd}{    When an instance of this class is generated the ParametersChange }
-\PYG{l+s+sd}{    window pops up in the screen}
-\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{pump}\PYG{p}{,} \PYG{n}{window}\PYG{p}{,} \PYG{n}{parent} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb}{super}\PYG{p}{(}\PYG{n}{ParametersChange}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setupUi}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump} \PYG{o}{=} \PYG{n}{pump}
-
-    \PYG{k}{def} \PYG{n+nf}{update\PYGZus{}pump\PYGZus{}param}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n}{pairs} \PYG{o}{=} \PYG{p}{[}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{top\PYGZus{}velocity}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Top\PYGZus{}Velocity\PYGZus{}Edit\PYGZus{}2}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,}
-                \PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{cutoff\PYGZus{}velocity}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Cutoff\PYGZus{}Velocity\PYGZus{}Edit\PYGZus{}2}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,}
-                \PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{backlash}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Backlash\PYGZus{}Steps\PYGZus{}Edit\PYGZus{}2}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,}
-                \PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{start\PYGZus{}velocity}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Start\PYGZus{}Velocity\PYGZus{}Edit\PYGZus{}2}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,}
-                \PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{slope}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{SlopeEdit}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
-                \PYG{p}{]}
-        
-        \PYG{n}{valid\PYGZus{}prs} \PYG{o}{=} \PYG{n+nb}{filter}\PYG{p}{(}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{n}{isdigit}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{pairs}\PYG{p}{)}
-        \PYG{k}{for} \PYG{n}{pair} \PYG{o+ow}{in} \PYG{n}{valid\PYGZus{}prs}\PYG{p}{:}
-            \PYG{n}{answer} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{property\PYGZus{}set}\PYG{p}{(}\PYG{o}{*}\PYG{n}{pair}\PYG{p}{)}
-            \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{In ParametersChange:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{asnwer = \PYGZob{}0\PYGZcb{},value = \PYGZob{}1\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{answer}\PYG{p}{,} \PYG{n}{pair}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
-
-\PYG{k}{class} \PYG{n+nc}{HistoryDialog}\PYG{p}{(}\PYG{n}{QDialog}\PYG{p}{,} \PYG{n}{history\PYGZus{}settings}\PYG{o}{.}\PYG{n}{Ui\PYGZus{}Dialog}\PYG{p}{)}\PYG{p}{:}
-    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{pump}\PYG{p}{,} \PYG{n}{parent} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb}{super}\PYG{p}{(}\PYG{n}{HistoryDialog}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setupUi}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)} 
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump} \PYG{o}{=} \PYG{n}{pump}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Command History}\PYG{l+s}{\PYGZdq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setWindowTitle}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}Btn}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{commands\PYGZus{}only}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{clear\PYGZus{}history\PYGZus{}btn}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{clear\PYGZus{}history}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{user\PYGZus{}com\PYGZus{}btn}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{clear\PYGZus{}history}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{history} \PYG{o}{=} \PYG{p}{[} \PYG{p}{]}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh}\PYG{p}{(}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{refresh}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n}{wanted} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{history}
-        \PYG{n}{wanted\PYGZus{}string} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{\PYGZsq{}}
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{user\PYGZus{}com\PYGZus{}btn}\PYG{o}{.}\PYG{n}{isChecked}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n}{wanted} \PYG{o}{=} \PYG{n+nb}{filter}\PYG{p}{(}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{?}\PYG{l+s}{\PYGZsq{}} \PYG{o+ow}{not} \PYG{o+ow}{in} \PYG{n}{x}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{history}\PYG{p}{)}
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{commands\PYGZus{}only}\PYG{o}{.}\PYG{n}{isChecked}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-            \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n}{wanted}\PYG{p}{:}
-                \PYG{n}{wanted\PYGZus{}string} \PYG{o}{+}\PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZob{}\PYGZcb{}}\PYG{l+s+se}{\PYGZbs{}\PYGZbs{}}\PYG{l+s}{r}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{i}\PYG{p}{[}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{wanted}\PYG{p}{)}\PYG{p}{)}\PYG{p}{:}
-                \PYG{n}{wanted\PYGZus{}string} \PYG{o}{+}\PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZob{}0\PYGZcb{}:}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s}{ \PYGZob{}1\PYGZcb{}}\PYG{l+s+se}{\PYGZbs{}\PYGZbs{}}\PYG{l+s}{r}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{wanted}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{[}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{history\PYGZus{}edit}\PYG{o}{.}\PYG{n}{setPlainText}\PYG{p}{(}\PYG{n}{wanted\PYGZus{}string}\PYG{p}{)}
-
-\PYG{k}{class} \PYG{n+nc}{ReportsDialog}\PYG{p}{(}\PYG{n}{QDialog}\PYG{p}{,} \PYG{n}{python\PYGZus{}settings}\PYG{o}{.}\PYG{n}{Ui\PYGZus{}Dialog}\PYG{p}{)}\PYG{p}{:}
-
-    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{pump}\PYG{p}{,} \PYG{n}{window}\PYG{p}{,} \PYG{n}{parent}\PYG{o}{=}\PYG{n+nb+bp}{None}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb}{super}\PYG{p}{(}\PYG{n}{ReportsDialog}\PYG{p}{,}  \PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setupUi}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Reports Screen}\PYG{l+s}{\PYGZdq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setWindowTitle}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump} \PYG{o}{=} \PYG{n}{pump}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window} \PYG{o}{=} \PYG{n}{window}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}interval\PYGZus{}edit}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{textEdited(QString)}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{enable\PYGZus{}button}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}now\PYGZus{}button}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh}\PYG{p}{)}
-        
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}interval\PYGZus{}edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s}{\PYGZdq{}}\PYGZbs{}
-                \PYG{o}{\PYGZpc{}} \PYG{n+nb}{int}\PYG{p}{(}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{refreshQtimer}\PYG{o}{.}\PYG{n}{interval}\PYG{p}{(}\PYG{p}{)} \PYG{o}{/} \PYG{l+m+mi}{1000}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
-
-        \PYG{c}{\PYGZsh{} Setting the refresh interval manually}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}interval\PYGZus{}button}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setRefreshTime}\PYG{p}{)}
-
-    \PYG{c}{\PYGZsh{} Enabling the volume button}
-    \PYG{k}{def} \PYG{n+nf}{enable\PYGZus{}button}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}interval\PYGZus{}edit}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{isdigit}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}interval\PYGZus{}button}\PYG{o}{.}\PYG{n}{setEnabled}\PYG{p}{(}\PYG{n+nb+bp}{True}\PYG{p}{)}
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}interval\PYGZus{}button}\PYG{o}{.}\PYG{n}{setEnabled}\PYG{p}{(}\PYG{n+nb+bp}{False}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{refresh}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{} The refresh function shows the pump major statistics.}
-
-\PYG{l+s+sd}{        The refresh function is periodically run using the QTimer refreshQtimer}
-\PYG{l+s+sd}{        When the timer timeouts the stats are fetched from the pump}
-\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{update\PYGZus{}values}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n}{stats} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{status}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Actual\PYGZus{}Position\PYGZus{}Edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{stats}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{actual\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Backlash\PYGZus{}Steps\PYGZus{}Edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{stats}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{backlash\PYGZus{}steps}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Cutoff\PYGZus{}Velocity\PYGZus{}Edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{stats}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cutoff\PYGZus{}vel}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Position\PYGZus{}Edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{stats}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{absolute\PYGZus{}pos}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Start\PYGZus{}Velocity\PYGZus{}Edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{stats}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{starting\PYGZus{}vel}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Top\PYGZus{}Velocity\PYGZus{}Edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{stats}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{top\PYGZus{}vel}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Checksum\PYGZus{}Edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{stats}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{checksum}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Fluid\PYGZus{}Sensor\PYGZus{}Edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{stats}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{fluid\PYGZus{}sensor}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Buffer\PYGZus{}Status\PYGZus{}Edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{stats}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{buffer\PYGZus{}status}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Version\PYGZus{}Edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{stats}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{version}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{setRefreshTime}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n}{text} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}interval\PYGZus{}edit}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{if} \PYG{n}{text}\PYG{o}{.}\PYG{n}{isdigit}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{refreshQtimer}\PYG{o}{.}\PYG{n}{setInterval}\PYG{p}{(}\PYGZbs{}
-                    \PYG{n+nb}{eval}\PYG{p}{(}\PYG{n}{text}\PYG{p}{)} \PYG{o}{*} \PYG{l+m+mi}{1000}\PYG{p}{)}
-
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}interval\PYGZus{}edit}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s}{\PYGZdq{}}\PYGZbs{}
-                    \PYG{o}{\PYGZpc{}} \PYG{n+nb}{int}\PYG{p}{(}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{refreshQtimer}\PYG{o}{.}\PYG{n}{interval}\PYG{p}{(}\PYG{p}{)} \PYG{o}{/} \PYG{l+m+mi}{1000}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
-            \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Timer interval Set: \PYGZob{}\PYGZcb{} microseconds}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n+nb}{eval}\PYG{p}{(}\PYG{n}{text}\PYG{p}{)} \PYG{o}{*} \PYG{l+m+mi}{1000}\PYG{p}{)}
-        \PYG{k}{else}\PYG{p}{:} 
-            \PYG{n}{QMessageBox}\PYG{o}{.}\PYG{n}{warning}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Not a valid input}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}interval\PYGZus{}edit}\PYG{o}{.}\PYG{n}{selectAll}\PYG{p}{(}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{tick\PYGZus{}refresh}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{noRefresh}\PYG{o}{.}\PYG{n}{isChecked}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{cancel\PYGZus{}timer}\PYG{p}{(}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}status} \PYG{o}{=} \PYG{n+nb+bp}{False}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{scene}\PYG{o}{.}\PYG{n}{setForegroundBrush}\PYG{p}{(}\PYGZbs{}
-                    \PYG{n}{QBrush}\PYG{p}{(}\PYG{n}{Qt}\PYG{o}{.}\PYG{n}{lightGray}\PYG{p}{,} \PYG{n}{Qt}\PYG{o}{.}\PYG{n}{CrossPattern}\PYG{p}{)}\PYG{p}{)}
-           
-        \PYG{k}{else}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{refresh\PYGZus{}status} \PYG{o}{=} \PYG{n+nb+bp}{True}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{refreshQtimer}\PYG{o}{.}\PYG{n}{start}\PYG{p}{(}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{scene}\PYG{o}{.}\PYG{n}{setForegroundBrush}\PYG{p}{(}\PYGZbs{}
-                    \PYG{n}{Qt}\PYG{o}{.}\PYG{n}{NoBrush}\PYG{p}{)}
-
-
-\PYG{k}{class} \PYG{n+nc}{NewDevDialog}\PYG{p}{(}\PYG{n}{QDialog}\PYG{p}{,} \PYG{n}{device\PYGZus{}configuration}\PYG{o}{.}\PYG{n}{Ui\PYGZus{}Dialog}\PYG{p}{)}\PYG{p}{:}
-
-    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{pump}\PYG{p}{,} \PYG{n}{window}\PYG{p}{,}  \PYG{n}{parent}\PYG{o}{=}\PYG{n+nb+bp}{None}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb}{super}\PYG{p}{(}\PYG{n}{NewDevDialog}\PYG{p}{,}  \PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setupUi}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Device Configuration}\PYG{l+s}{\PYGZdq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{buttonBox} \PYG{o}{=}\PYG{n}{QDialogButtonBox}\PYG{p}{(}\PYG{n}{QDialogButtonBox}\PYG{o}{.}\PYG{n}{Ok}
-                \PYG{o}{\textbar{}}\PYG{n}{QDialogButtonBox}\PYG{o}{.}\PYG{n}{Cancel}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{buttonBox}\PYG{o}{.}\PYG{n}{accepted}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect\PYGZus{}with\PYGZus{}port}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{buttonBox}\PYG{o}{.}\PYG{n}{rejected}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{reject}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{horizontalLayout}\PYG{o}{.}\PYG{n}{addWidget}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{buttonBox}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setWindowTitle}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{comports} \PYG{o}{=} \PYG{n}{comports}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump} \PYG{o}{=} \PYG{n}{pump}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window} \PYG{o}{=} \PYG{n}{window}
-        \PYG{n}{ports\PYGZus{}available} \PYG{o}{=} \PYG{n+nb}{list}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{comports}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{listWidget}\PYG{o}{.}\PYG{n}{addItem}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{loop://}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
-        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{ports\PYGZus{}available}\PYG{p}{)}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{listWidget}\PYG{o}{.}\PYG{n}{addItem}\PYG{p}{(}\PYG{n}{ports\PYGZus{}available}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{indexes} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{0}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{1}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{2}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{3}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{4}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:}\PYG{l+m+mi}{4}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{5}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{6}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{7}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{7}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{8}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{8}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{9}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{9}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{A}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{10}\PYG{p}{,}\PYGZbs{}
-                \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{B}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{11}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{C}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{12}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{D}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{13}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{E}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{14}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{F}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{15}\PYG{p}{\PYGZcb{}}
-
-    \PYG{k}{def} \PYG{n+nf}{connect\PYGZus{}with\PYGZus{}port}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Passes the selected item into the connect\PYGZus{}new method of the pump.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-
-        \PYG{k}{try}\PYG{p}{:}
-            \PYG{n}{port} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{listWidget}\PYG{o}{.}\PYG{n}{currentItem}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{p}{)}
-            \PYG{n}{address} \PYG{o}{=} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{/}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s}{\PYGZsq{}} \PYG{o}{\PYGZpc{}}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{address\PYGZus{}box}\PYG{o}{.}\PYG{n}{currentText}\PYG{p}{(}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{addr} \PYG{o}{=} \PYG{n}{address}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{address\PYGZus{}combobox}\PYG{o}{.}\PYG{n}{setCurrentIndex}\PYG{p}{(}\PYGZbs{}
-                    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{indexes}\PYG{p}{[}\PYG{n}{address}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{connect\PYGZus{}new}\PYG{p}{(}\PYG{n}{port}\PYG{p}{)}
-            \PYG{n}{text} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Port changed to }\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{ Addressing to pump \PYGZsh{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s}{\PYGZdq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{port}\PYG{p}{,}\PYGZbs{}
-                    \PYG{n}{address}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{command\PYGZus{}label}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{text}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{accept}\PYG{p}{(}\PYG{p}{)}
-        \PYG{k}{except}\PYG{p}{:}
-            \PYG{n}{text} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Parameters weren}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{t set correctly!}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZob{}\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{sys}\PYG{o}{.}\PYG{n}{exc\PYGZus{}info}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{command\PYGZus{}label}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{text}\PYG{p}{)}
-
-\PYG{k}{class} \PYG{n+nc}{SyringePickDialog}\PYG{p}{(}\PYG{n}{QDialog}\PYG{p}{,} \PYG{n}{syringe\PYGZus{}pick}\PYG{o}{.}\PYG{n}{Ui\PYGZus{}Dialog}\PYG{p}{)}\PYG{p}{:}
-
-    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{pump}\PYG{p}{,} \PYG{n}{window}\PYG{p}{,} \PYG{n}{parent}\PYG{o}{=}\PYG{n+nb+bp}{None}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb}{super}\PYG{p}{(}\PYG{n}{SyringePickDialog}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setupUi}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Syringe Configuration}\PYG{l+s}{\PYGZdq{}}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setWindowTitle}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump} \PYG{o}{=} \PYG{n}{pump}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window} \PYG{o}{=} \PYG{n}{window}
-
-        \PYG{n}{syringe\PYGZus{}sizes} \PYG{o}{=} \PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{50 micro}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{100 micro}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{250 micro}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{500 micro}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYGZbs{}
-                \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{1000 micro}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{5000 micro}\PYG{l+s}{\PYGZsq{}}\PYG{p}{]}
-
-        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{syringe\PYGZus{}sizes}\PYG{p}{)}\PYG{p}{)}\PYG{p}{:}
-            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{listWidget}\PYG{o}{.}\PYG{n}{addItem}\PYG{p}{(}\PYG{n}{syringe\PYGZus{}sizes}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{select\PYGZus{}new\PYGZus{}syringe}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Passes the selected item into the connect\PYGZus{}new method of the pump.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
-        \PYG{n}{syringe} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{listWidget}\PYG{o}{.}\PYG{n}{currentItem}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{text}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{syringe\PYGZus{}size} \PYG{o}{=} \PYG{n}{syringe}
-        \PYG{n}{text} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Syringe size is set to \PYGZob{}size\PYGZcb{}}\PYG{l+s}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{size} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{syringe\PYGZus{}size}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{window}\PYG{o}{.}\PYG{n}{command\PYGZus{}label}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{text}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pump}\PYG{o}{.}\PYG{n}{update\PYGZus{}values}\PYG{p}{(}\PYG{p}{)}
-
-\PYG{k}{class} \PYG{n+nc}{AboutDialog}\PYG{p}{(}\PYG{n}{QDialog}\PYG{p}{,} \PYG{n}{about\PYGZus{}dialog}\PYG{o}{.}\PYG{n}{Ui\PYGZus{}Form}\PYG{p}{)}\PYG{p}{:}
-
-    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{text}\PYG{p}{,} \PYG{n}{appname}\PYG{p}{,} \PYG{n}{parent} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb}{super}\PYG{p}{(}\PYG{n}{AboutDialog}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setupUi}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}} \PYG{o}{=} \PYG{n}{appname}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setWindowTitle}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setFixedSize}\PYG{p}{(}\PYG{l+m+mi}{800}\PYG{p}{,} \PYG{l+m+mi}{500}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{text} \PYG{o}{=} \PYG{n}{text}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{load\PYGZus{}text}\PYG{p}{(}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{load\PYGZus{}text}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{textBrowser}\PYG{o}{.}\PYG{n}{setHtml}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{text}\PYG{p}{)}
-
-\PYG{k}{class} \PYG{n+nc}{AboutDialog2}\PYG{p}{(}\PYG{n}{QDialog}\PYG{p}{,} \PYG{n}{about\PYGZus{}dialog}\PYG{o}{.}\PYG{n}{Ui\PYGZus{}Form}\PYG{p}{)}\PYG{p}{:}
-
-    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{text}\PYG{p}{,} \PYG{n}{appname}\PYG{p}{,} \PYG{n}{parent} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb}{super}\PYG{p}{(}\PYG{n}{AboutDialog2}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setupUi}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}
-
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}} \PYG{o}{=} \PYG{n}{appname}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{setWindowTitle}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}appname\PYGZus{}\PYGZus{}}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{text} \PYG{o}{=} \PYG{n}{text}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{load\PYGZus{}text}\PYG{p}{(}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{QtButton} \PYG{o}{=} \PYG{n}{QPushButton}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{About Qt}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{horizontalLayout}\PYG{o}{.}\PYG{n}{addWidget}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{QtButton}\PYG{p}{)}
-        
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{QtButton}\PYG{p}{,}\PYGZbs{}
-                \PYG{n}{SIGNAL}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{clicked()}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{about\PYGZus{}qt}\PYG{p}{)}
-
-    \PYG{k}{def} \PYG{n+nf}{load\PYGZus{}text}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{textBrowser}\PYG{o}{.}\PYG{n}{setText}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{text}\PYG{p}{)}
-    \PYG{k}{def} \PYG{n+nf}{about\PYGZus{}qt}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-        \PYG{n}{QMessageBox}\PYG{o}{.}\PYG{n}{aboutQt}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{title} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{About Qt}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-\end{Verbatim}
 
 
 \section{License}
@@ -1887,14 +781,15 @@ For the GUI development I used the \href{http://qt-project.org/wiki/pyside}{PySi
 The documentation was written in \href{http://sphinx-doc.org/}{Sphinx}
 
 \item {} 
-All the code as well as the documentation was editted with the use of \href{http://www.vim.org/}{Vim}
+All the code as well as the documentation was edited using \href{http://www.vim.org/}{Vim}
 
 \end{itemize}
 
 
 \section{Contact Information}
 \label{contact-info::doc}\label{contact-info:contact-information}
-For information, bug reports or just to drop a comment about the software, either contact me on github
+For information, bug reports or just to drop a comment about the software,
+either contact me on \href{https://github.com/bergercookie}{github}
 or use one of the methods below:
 \begin{itemize}
 \item {} 
