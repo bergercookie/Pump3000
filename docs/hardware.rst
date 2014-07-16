@@ -39,6 +39,10 @@ into the RS-485+, RS-485- of the data terminal (PC) used for the communication.
 Take extra notice when it comes to connecting the jumpers from the serial adapter
 to the pump PCB corresponding pins
 
+3. Also if the computer in use doesn't have a serial port available, the user should use either
+   a *USB to RS-485 adapter*, or combine a more commonly found *USB to RS-232 with a RS-232 to 
+   RS-485 adapter.* An implementation of the above is shown below
+
 To sum it up, here is the typical RS-485 pinout for the pump [#f1]_, as it is described above
 
 +-------------+--------------+---------------------------------+

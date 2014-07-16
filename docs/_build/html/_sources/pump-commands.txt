@@ -10,26 +10,6 @@ For the full list of available commands see the code Walkthrough section.
 
     'self' is a Python class arguement and shouldn't be issued by the user. 
 
-**pump.send_Command(self, command, bits_on_return = 0)**
-
-*Arguements*::
-
-    command        : string
-    bits_on_return : int [Optional]
-
-*Description*
-
-    Sending Commands to the pump.
-    Consult the manual for a detailed list of the pump commands for the RS-485 Protocol. 
-    Using this method you must have already defined the pump address to send to (Via
-    the main window or the Editor tab) and you should issue neither 
-    the Run character [R] nor the terminating character
-
-*Examples*::
-
-    pump.send_Command(`A3000', 10) -> Move the plunger to abs. position 3000, read back 10 bits
-    pump.send_Command(`T') -> Terminate plunger move in progress
-
 **pump.connect_new(self, port_name)**
 
 *Arguements*::
@@ -137,6 +117,27 @@ For the full list of available commands see the code Walkthrough section.
     pump.volume_command(direction = 'D', vol = '5') -> Dispense 5 microlitres
     pump.volume_command(special = `push_all') -> Dispense fluid volume
 
+**pump.send_Command(self, command, bits_on_return = 0)**
+
+*Arguements*::
+
+    command        : string
+    bits_on_return : int [Optional]
+
+*Description*
+
+    Sending Commands to the pump.
+    Consult the manual for a detailed list of the pump commands for the RS-485 Protocol. 
+    Using this method you must have already defined the pump address to send to (Via
+    the main window or the Editor tab) and you should issue neither 
+    the Run character [R] nor the terminating character
+
+*Examples*::
+
+    pump.send_Command(`A3000', 10) -> Move the plunger to abs. position 3000, read back 10 bits
+    pump.send_Command(`T') -> Terminate plunger move in progress
+
+
 **pump.ser.write(comand)**
 
 *Arguements*::
@@ -145,14 +146,14 @@ For the full list of available commands see the code Walkthrough section.
 
 *Description*
 
-    This command should be used when a direct serial command has to be sent to the pump.
+    This command should be used only when a direct serial command has to be sent to the pump.
     User must issue the pump to which he is addressing to as well as the terminating character
     It is advisable that the user should prefere higher level commands such as 'send_Command'
     which doesn't require the prefix & suffix characters, and also check the availability of the pump
 
 *Examples*::
 
-    pump.ser.write(`/2ZR\r') \verb|->| Initialize the pump with the address 1
+    pump.ser.write(`/2ZR\r') -> Initialize the pump with the address 1
 
 .. note::
 

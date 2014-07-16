@@ -71,7 +71,7 @@
 <p>The serial communication with the pump was implemented using the RS-485 serial
 protocol. Here is a sample configuration that was used:</p>
 <p>The needed steps to archive a similar connection would be the following:</p>
-<p>1. First you have to supply the pump with the necessary power. As described in the
+<p>1. Connect the pump to a power supply. As described in the
 manual the XP3000 requires a <strong>24VDC power supply</strong> with a current rating of at least <strong>1.5A</strong>.
 As seen in <a class="reference internal" href="#hardware-conf">hardware-conf</a>, during the development part, the power was supplied indirectly to the pump
 first by running the supply cables into a breadboard and then using extra jumpers to
@@ -80,6 +80,11 @@ connect to pump pins #1 (power) and #9(GND)</p>
 into the RS-485+, RS-485- of the data terminal (PC) used for the communication.
 Take extra notice when it comes to connecting the jumpers from the serial adapter
 to the pump PCB corresponding pins</p>
+<ol class="arabic simple" start="3">
+<li>Also if the computer in use doesn&#8217;t have a serial port available, the user should use either
+a <em>USB to RS-485 adapter</em>, or combine a more commonly found <em>USB to RS-232 with a RS-232 to
+RS-485 adapter.</em> An implementation of the above is shown below</li>
+</ol>
 <p>To sum it up, here is the typical RS-485 pinout for the pump <a class="footnote-reference" href="#f1" id="id1">[1]</a>, as it is described above</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -98,7 +103,7 @@ to the pump PCB corresponding pins</p>
 <td>#1 [Power]</td>
 <td>24 VDC</td>
 </tr>
-<tr class="row-odd"><td>#4 [GND]</td>
+<tr class="row-odd"><td>#9 [GND]</td>
 <td>Ground (of the power supply)</td>
 </tr>
 <tr class="row-even"><td rowspan="2"><strong>Protocol</strong>

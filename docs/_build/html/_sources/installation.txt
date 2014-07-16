@@ -8,10 +8,17 @@ to section: :doc:`Getting Started <getting-started>`
 
 .. _running-it:
 
-Running the .exe 
+Windows Installation
 ************************
 
-*Running the executable* version of the project is as simple as running the Pump3000.exe
+There are two ways of running the software on windows:
+- Running the executable
+- Running from source
+
+Running the executable
+-----------------------
+
+**Running the executable** is as simple as running the Pump3000.exe
 located in the <location_to_project>/python_code/dist folder [#f1]_ [#f2]_.
 
 .. figure::  ../Images/finding-exe.png
@@ -22,21 +29,50 @@ located in the <location_to_project>/python_code/dist folder [#f1]_ [#f2]_.
    Finding the .exe file
 
 Running from source
+--------------------
+
+Alternatively, the user can **run the software from source**. This requires the execution 
+of a full python distribution. It is advised that the user uses one of the following distributions
+due to the simplicity of the installation process
+
+- `Anaconda <http://continuum.io/downloads>`_
+- `Canopy <https://store.enthought.com/downloads/>`_
+
+
+The user must also have the following packages installed:
+
+- `Pyserial <http://pyserial.sourceforge.net/>`_
+
+- `PySide <http://qt-project.org/wiki/pyside>`_
+
+For the Anaconda distribution the user can install packages from the Command line
+using one of the following ways [#f3]_ ::
+    
+    $conda install <package_name>
+
+    $pip install <package_name>
+
+Finally, the user should run the software using the command prompt::
+    
+    python <location_to_project>\python_code\Pump3000.py
+
+Linux/Mac Installation
 ************************
 
-In case the user wants to run the software *from source*, a basic python distribution 
+In case the user wants to run the software from a \*NIX environment, a basic python distribution 
 must be installed on the platform, (already preconfigured on most \*NIX systems). 
 The user must also have the following packages installed:
 
-- pyserial
-- PySide
+- `Pyserial <http://pyserial.sourceforge.net/>`_
+
+- `PySide <http://qt-project.org/wiki/pyside>`_
 
 After this configuration, the user can run the software from the command-line [\*NIX]
 command-prompt [Windows]::
 
     python Pump3000.py
 
-Note that the user must first go to the folder, the Pump3000.py is located. 
+Note that the user should first go to the folder, the Pump3000.py is located. 
 
 .. figure::  ../Images/running-py.png
    :height: 7000px 
@@ -47,7 +83,6 @@ Note that the user must first go to the folder, the Pump3000.py is located.
 
 Using the software
 ************************
-
 
 The first thing the user should do, if he doesn't know the serial connector 
 to the pump, is figure out the correct port:
@@ -151,7 +186,7 @@ From the main window you can navigate to a series of **other dialogs:**
 
 - **History**
 
-  From here the user can see all the commands sent to the pump which can be devided to 2 types:
+  From here the user can see all the commands sent to the pump which can be divided to 2 types:
 
   * Commands issued by the user
 
@@ -198,3 +233,6 @@ From the main window you can navigate to a series of **other dialogs:**
          The vcredist files are located in the vcredist directory.
          After the installation, rerun the executable. 
          If the problem persists, `contact me <http://www.github.com/bergercookie>`_
+         
+.. [#f3] Consult the instructions on the site of the corresponding distribution for more details on 
+         installing packages
