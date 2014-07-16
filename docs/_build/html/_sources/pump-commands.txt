@@ -2,9 +2,10 @@
 Pump Commands
 =========================================================
 
-In this section the basic commands for communication with the pump are explained.
+In this section the basic commands for communication with the pump are introduced.
 You can issue a series of these commands from the editor's tab.
-For the full list of available commands see the code Walkthrough section.
+For the full list of available commands see the pump_model.py. You can use most 
+of the methods of the Pump Class in the Editor tab as well.
 
 .. note::
 
