@@ -152,7 +152,7 @@ For the full list of available commands see the code Walkthrough section.
 
 *Examples*::
 
-    pump.ser.write(`/2ZR\r') \verb|->| Initialize the pump with the address 1
+    pump.ser.write(`/2ZR\r') -> Initialize the pump with the address 1
 
 .. note::
 
