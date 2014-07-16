@@ -306,10 +306,12 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
                     print "self.%s" %script_commands[i]
                 elif script_commands[i][0] == '/':
                     self.pump.send_Command(script_commands[i]) 
+                elif script_commands[i][0] == '#':
+                    pass
                 else:
                     # TODO The user currently may not issue common python commands yet
-                    eval(script_commands[i])
                     print script_commands[i]
+                    eval(script_commands[i])
         except:
             print sys.exc_info()[0]
 
