@@ -47,8 +47,9 @@ setup(console=['Pump3000.py'],
                   'PyQt4.QtNetwork',
                   ],
 
-                'packages': 'encodings, serial.urlhandler.protocol_loop'
-            },
+              'packages': 'encodings, serial.urlhandler.protocol_loop'
+
+            }
       },
 
 )
