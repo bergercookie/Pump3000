@@ -351,7 +351,7 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
         if self.pump.exc_mode  == 'interactive':
             speed_val = self.speed_slider.value()
             self.pump.property_set('speed', '%s' % speed_val)
-            sleep(0.5)
+            time.sleep(0.5)
             self.pump.update_values()
             self.valve_status()
         
