@@ -117,7 +117,7 @@ class Pump():
         if output == 'right':
             commands = ['S10', 'Z']
         else:
-            commands = ['Y', 'S10']
+            commands = ['S10', 'Y']
         for command in commands:
             self.send_Command(command, 10)
 
@@ -234,7 +234,7 @@ class Pump():
             self.status["version"] = self.send_Command('?&', 10)[0][3:]
             self.status["checksum"] = self.send_Command('?#', 10)[0][3:]
         except TypeError:
-            print "In actual_update_method,\n{}".format(sys.exc_info()[0])
+            print "In actual_update_method,\n{}".format(sys.exc_info())
 
         abs_pos = self.status["absolute_pos"][:-3]
         try:

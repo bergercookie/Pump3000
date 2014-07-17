@@ -349,11 +349,11 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
             self.pump.exc_mode = 'interactive'
 
         if self.pump.exc_mode  == 'interactive':
-            #print "Setting the GUI values.\ndoit = {0}\nexc_mode ={1}".format(doit, self.pump.exc_mode)
-            self.valve_status()
             speed_val = self.speed_slider.value()
             self.pump.property_set('speed', '%s' % speed_val)
+            sleep(0.5)
             self.pump.update_values()
+            self.valve_status()
         
     def cancel_timer(self):
         """
