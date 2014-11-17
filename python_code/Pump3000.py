@@ -76,8 +76,11 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
         self.setWindowTitle(self.__appname__)
 
         # Initialize a pump instance
-        # You define how to start the pump
+        # Define how to start the pump
         self.pump = pump_model.Pump(3, 'serial')
+        #avail_meths = [method for method in dir(self.pump) \
+                #if callable(getattr(self.pump, method))]
+        #print "Pump3000->__init__->avail_meths = {}".format(avail_meths)
 
         # MainWindow related parameters
         self.quick_action = 'push_all'
@@ -293,11 +296,14 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
         self.modified_time = time.time()
 
     def run_script(self):
+        """Evaluate all the commands written in the given script."""
+
         self.pump.exc_mode = 'editor'
-        text = self.textEdit.toPlainText()
+        text = self.textEdit.toPlainText() #Grab the commands
         script_commands = text.split('\n')
-        script_commands = filter(lambda x: x != '', script_commands)
-        script_commands.append('pump.change_mode(interactive)')
+        script_commands = filter(lambda x: x != '' and not x.startswith('#'), script_commands) #remove the empty lines & the # lines
+        print "*****\nPump3000.py -> run_script: script_commands = {}\n*****".format(script_commands)
+        script_commands.append('pump.change_mode(interactive)') #change back to interactive mode
         try:
             self.pump.update_values()
             for i in range(len(script_commands)):
@@ -306,8 +312,6 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
                     print "self.%s" %script_commands[i]
                 elif script_commands[i][0] == '/':
                     self.pump.send_Command(script_commands[i]) 
-                elif script_commands[i][0] == '#':
-                    pass
                 else:
                     # TODO The user currently may not issue common python commands yet
                     print script_commands[i]

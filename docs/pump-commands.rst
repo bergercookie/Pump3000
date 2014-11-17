@@ -90,7 +90,7 @@ of the methods of the Pump Class in the Editor tab as well.
     pump.property_set(`speed', `10') -> Set the plunger speed to 10
     pump.property_set(`backlash', `15') -> set the backlash steps to 15
 
-**pump.volume_command(self, direction = `P', vol = `0', special=None)**
+**pump.volume_Command(self, direction = `P', vol = `0', special=None)**
 
 
 *Arguements*::
