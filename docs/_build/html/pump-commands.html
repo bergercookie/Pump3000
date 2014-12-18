@@ -69,7 +69,7 @@ of the methods of the Pump Class in the Editor tab as well.</p>
 <blockquote>
 <div>Connect to the given port address.</div></blockquote>
 <p><em>Example</em>:</p>
-<div class="highlight-python"><div class="highlight"><pre>pump.connect_new(`/dev/tty.-SerialPort1-1&#39;) -&gt; Configuring a serial connection on OSX
+<div class="highlight-python"><div class="highlight"><pre>pump.connect_new(&#39;/dev/tty.-SerialPort1-1&#39;) -&gt; Configuring a serial connection on OSX
 </pre></div>
 </div>
 <p><strong>pump.initialize_pump(self, output = &#8216;right&#8217;)</strong></p>
@@ -85,23 +85,23 @@ of the methods of the Pump Class in the Editor tab as well.</p>
 given otherwise, the output valve is set to the right.</div></blockquote>
 <p><em>Examples</em>:</p>
 <div class="highlight-python"><div class="highlight"><pre>pump.initialize_pump() -&gt; Initializing the pump with default output valve (right)
-pump.initialize_pump(output = `left&#39;) -&gt; Initializing the pump with output valve set to left
+pump.initialize_pump(output = &#39;left&#39;) -&gt; Initializing the pump with output valve set to left
 </pre></div>
 </div>
 <p><strong>pump.valve_command(self, position)</strong></p>
 <p><em>Arguements</em>:</p>
 <div class="highlight-python"><div class="highlight"><pre>position: string
 
-    values: &#39;I&#39; (Input)
-            &#39;O&#39; (Output)
-            &#39;B&#39; (Bypass)
+    values: &#39;in&#39; (Input)
+            &#39;out&#39; (Output)
+            &#39;bypass&#39; (Bypass)
 </pre></div>
 </div>
 <p><em>Description</em></p>
 <blockquote>
 <div>Set the valve to certain position.</div></blockquote>
 <p><em>Examples</em>:</p>
-<div class="highlight-python"><div class="highlight"><pre>pump.valve_command(`B&#39;) -&gt; Set the valve to Bypass position
+<div class="highlight-python"><div class="highlight"><pre>pump.valve_command(&#39;bypass&#39;) -&gt; Set the valve to Bypass position
 </pre></div>
 </div>
 <p><strong>pump.property_set(self, a_proprty, value)</strong></p>
@@ -128,11 +128,11 @@ and the range of the values permitted:</p>
 commands above</p>
 </div></blockquote>
 <p><em>Examples</em>:</p>
-<div class="highlight-python"><div class="highlight"><pre>pump.property_set(`speed&#39;, `10&#39;) -&gt; Set the plunger speed to 10
-pump.property_set(`backlash&#39;, `15&#39;) -&gt; set the backlash steps to 15
+<div class="highlight-python"><div class="highlight"><pre>pump.property_set(&#39;speed&#39;, &#39;10&#39;) -&gt; Set the plunger speed to 10
+pump.property_set(&#39;backlash&#39;, &#39;15&#39;) -&gt; set the backlash steps to 15
 </pre></div>
 </div>
-<p><strong>pump.volume_command(self, direction = `P&#8217;, vol = `0&#8217;, special=None)</strong></p>
+<p><strong>pump.volume_Command(self, direction = &#8216;P&#8217;, vol = &#8216;0&#8217;, special=None)</strong></p>
 <p><em>Arguements</em>:</p>
 <div class="highlight-python"><div class="highlight"><pre>direction : string
 
@@ -154,7 +154,7 @@ as issue a special push / pull all action. In case the special action is given,
 the  &#8216;vol&#8217; argument is neglected</div></blockquote>
 <p><em>Examples</em>:</p>
 <div class="highlight-python"><div class="highlight"><pre>pump.volume_command(direction = &#39;D&#39;, vol = &#39;5&#39;) -&gt; Dispense 5 microlitres
-pump.volume_command(special = `push_all&#39;) -&gt; Dispense fluid volume
+pump.volume_command(special = &#39;push_all&#39;) -&gt; Dispense fluid volume
 </pre></div>
 </div>
 <p><strong>pump.send_Command(self, command, bits_on_return = 0)</strong></p>
@@ -171,8 +171,8 @@ Using this method you must have already defined the pump address to send to (Via
 the main window or the Editor tab) and you should issue neither
 the Run character [R] nor the terminating character</div></blockquote>
 <p><em>Examples</em>:</p>
-<div class="highlight-python"><div class="highlight"><pre>pump.send_Command(`A3000&#39;, 10) -&gt; Move the plunger to abs. position 3000, read back 10 bits
-pump.send_Command(`T&#39;) -&gt; Terminate plunger move in progress
+<div class="highlight-python"><div class="highlight"><pre>pump.send_Command(&#39;A3000&#39;, 10) -&gt; Move the plunger to abs. position 3000, read back 10 bits
+pump.send_Command(&#39;T&#39;) -&gt; Terminate plunger move in progress
 </pre></div>
 </div>
 <p><strong>pump.ser.write(comand)</strong></p>
@@ -187,7 +187,7 @@ User must issue the pump to which he is addressing to as well as the terminating
 It is advisable that the user should prefere higher level commands such as &#8216;send_Command&#8217;
 which doesn&#8217;t require the prefix &amp; suffix characters, and also check the availability of the pump</div></blockquote>
 <p><em>Examples</em>:</p>
-<div class="highlight-python"><div class="highlight"><pre>pump.ser.write(`/2ZR\r&#39;) -&gt; Initialize the pump with the address 1
+<div class="highlight-python"><div class="highlight"><pre>pump.ser.write(&#39;/2ZR\r&#39;) -&gt; Initialize the pump with the address 1
 </pre></div>
 </div>
 <div class="admonition note">

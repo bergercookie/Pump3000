@@ -23,7 +23,7 @@ of the methods of the Pump Class in the Editor tab as well.
 
 *Example*::
 
-    pump.connect_new(`/dev/tty.-SerialPort1-1') -> Configuring a serial connection on OSX
+    pump.connect_new('/dev/tty.-SerialPort1-1') -> Configuring a serial connection on OSX
 
 **pump.initialize_pump(self, output = 'right')**
 
@@ -41,7 +41,7 @@ of the methods of the Pump Class in the Editor tab as well.
 *Examples*::
     
     pump.initialize_pump() -> Initializing the pump with default output valve (right)
-    pump.initialize_pump(output = `left') -> Initializing the pump with output valve set to left
+    pump.initialize_pump(output = 'left') -> Initializing the pump with output valve set to left
 
 **pump.valve_command(self, position)**
 
@@ -49,9 +49,9 @@ of the methods of the Pump Class in the Editor tab as well.
     
     position: string
 
-        values: 'I' (Input)
-                'O' (Output)
-                'B' (Bypass)
+        values: 'in' (Input)
+                'out' (Output)
+                'bypass' (Bypass)
 
 *Description*
     
@@ -59,7 +59,7 @@ of the methods of the Pump Class in the Editor tab as well.
 
 *Examples*::
     
-    pump.valve_command(`B') -> Set the valve to Bypass position
+    pump.valve_command('bypass') -> Set the valve to Bypass position
 
 **pump.property_set(self, a_proprty, value)**
 
@@ -87,10 +87,10 @@ of the methods of the Pump Class in the Editor tab as well.
 
 *Examples*::
  
-    pump.property_set(`speed', `10') -> Set the plunger speed to 10
-    pump.property_set(`backlash', `15') -> set the backlash steps to 15
+    pump.property_set('speed', '10') -> Set the plunger speed to 10
+    pump.property_set('backlash', '15') -> set the backlash steps to 15
 
-**pump.volume_command(self, direction = `P', vol = `0', special=None)**
+**pump.volume_Command(self, direction = 'P', vol = '0', special=None)**
 
 
 *Arguements*::
@@ -116,7 +116,7 @@ of the methods of the Pump Class in the Editor tab as well.
 *Examples*::
 
     pump.volume_command(direction = 'D', vol = '5') -> Dispense 5 microlitres
-    pump.volume_command(special = `push_all') -> Dispense fluid volume
+    pump.volume_command(special = 'push_all') -> Dispense fluid volume
 
 **pump.send_Command(self, command, bits_on_return = 0)**
 
@@ -135,8 +135,8 @@ of the methods of the Pump Class in the Editor tab as well.
 
 *Examples*::
 
-    pump.send_Command(`A3000', 10) -> Move the plunger to abs. position 3000, read back 10 bits
-    pump.send_Command(`T') -> Terminate plunger move in progress
+    pump.send_Command('A3000', 10) -> Move the plunger to abs. position 3000, read back 10 bits
+    pump.send_Command('T') -> Terminate plunger move in progress
 
 
 **pump.ser.write(comand)**
@@ -154,7 +154,7 @@ of the methods of the Pump Class in the Editor tab as well.
 
 *Examples*::
 
-    pump.ser.write(`/2ZR\r') -> Initialize the pump with the address 1
+    pump.ser.write('/2ZR\r') -> Initialize the pump with the address 1
 
 .. note::
 

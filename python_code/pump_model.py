@@ -59,9 +59,10 @@ class Pump():
 
 
         # Hold local properties
+        # Fri Dec 19 00:52:40 EET 2014, nickkouk, the 1000ml is currently used
         self.own_status = {"plung_pos_mine": 0,\
                 "valve_pos": '0',\
-                "syringe_size": 50,\
+                "syringe_size": 1000,\
                 "steps_tot": 3000}
 
         self.correspondance = {"speed": ['S', 1, 40],\
@@ -94,10 +95,11 @@ class Pump():
                     bytesize = 8,\
                     timeout = self.timeout_time)
         except serial.SerialException:
+            # Adjustment for exe compilation, ftw!
             self.ser = sys.modules['serial.urlhandler.protocol_loop'].Serial('loop://',\
                 timeout = self.timeout_time)
         except:
-            print "pump_model>connect_new\n {}".format(sys.exc_info()[0])
+            print "pump_model>connect_new>except\n\t{}".format(sys.exc_info()[0])
 
         finally:
             self.initialize_pump()
@@ -155,7 +157,7 @@ class Pump():
         else:
             return "OUT OF BOUNDS"
                         
-    def volume_command(self, direction = 'P', vol = 0, special = None):
+    def volume_command(self, direction = 'P', vol = '0', special = None):
         """
         This is the volume command.
 
@@ -178,6 +180,8 @@ class Pump():
             elif special == 'pull_all':
                 self.send_Command('A3000')
                 self.own_status["plung_pos_mine"] = 3000
+            else:
+                print "pump_model>volume_command>if special::\n\t{}".format(sys.exc_info()[0])
 
         else:
             if not vol.isdigit():
@@ -195,7 +199,7 @@ class Pump():
                     self.own_status["plung_pos_mine"] -= steps
                     status = self.send_Command(direction + "%s" %steps, 10)
 
-            else:
+            elif direction == 'P':
                 if self.own_status["plung_pos_mine"] +\
                         steps > self.own_status["steps_tot"]:
                     valid = False
@@ -203,6 +207,9 @@ class Pump():
                 else: 
                     self.own_status["plung_pos_mine"] += steps
                     status = self.send_Command(direction + "%s" %steps, 10)
+
+            else:
+                print "pump_model>volume_command>elseelsespecial::\n\t{}".format(sys.exc_info()[0])
 
         return (valid, status)
             
@@ -235,7 +242,7 @@ class Pump():
             self.status["version"] = self.send_Command('?&', 10)[0][3:]
             self.status["checksum"] = self.send_Command('?#', 10)[0][3:]
         except TypeError:
-            print "pump_model>actual_update_method:\n{}".format(sys.exc_info()[0])
+            print "pump_model>actual_update_method>except::\n\t{}".format(sys.exc_info()[0])
 
         abs_pos = self.status["absolute_pos"][:-3]
         try:
@@ -246,8 +253,7 @@ class Pump():
                 print "Out of range value reported by pump!"
                 pass
         except ValueError:
-            #print sys.exc_info()[0]
-            print "pump_model>actual_update_method>exceptValueError:\n{}".format(sys.exc_info()[0])
+            print "pump_model>actual_update_method>exceptValueError::\n\t{}".format(sys.exc_info()[0])
 
         self.update_sema.release()
         print "EXITED THE SEMAPHORE"
@@ -293,7 +299,7 @@ class Pump():
             print "Answer Queue is empty!!"
         except:
             print "ERROR in SEND_COMMAND:"
-            print "pump_model>send_Command:\n{}".format(sys.exc_info()[0])
+            print "pump_model>send_Command::\n\t{}".format(sys.exc_info()[0])
             self.stop_thread()
         finally:
             self.answers_lock.release()

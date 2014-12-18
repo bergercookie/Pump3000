@@ -219,7 +219,7 @@ class NewDevDialog(QDialog, device_configuration.Ui_Dialog):
             self.window.command_label.setText(text)
             self.accept()
         except:
-            text = "classes_used>connect_with_port>Parameters weren't set correctly!\n{}".format(sys.exc_info())
+            text = "classes_used>connect_with_port>Parameters weren't set correctly!::\n\t{}".format(sys.exc_info())
             self.window.command_label.setText(text)
 
 class SyringePickDialog(QDialog, syringe_pick.Ui_Dialog):

@@ -317,8 +317,7 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
                     print "Command #{0}: {1}".format(i, script_commands[i])
                     eval(script_commands[i])
         except:
-            #print sys.exc_info()[0]
-            print "Pump3000>run_script>except:\n{}".format(sys.exc_info()[0])
+            print "Pump3000>run_script>except::\n\t{}".format(sys.exc_info()[0])
 
 
     def clear_editor(self):
