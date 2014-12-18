@@ -97,7 +97,7 @@ class Pump():
             self.ser = sys.modules['serial.urlhandler.protocol_loop'].Serial('loop://',\
                 timeout = self.timeout_time)
         except:
-            print sys.exc_info()[0]
+            print "pump_model>connect_new\n {}".format(sys.exc_info()[0])
 
         finally:
             self.initialize_pump()
@@ -137,7 +137,7 @@ class Pump():
             answer = self.send_Command('B', 10)
             self.own_status["valve_pos"] = 'B'
         else:
-            print "NO SUCH VALUE for position available"
+            print "pump_model>valve_command>NO SUCH VALUE for position available"
         return answer
 
     # Plunger Functions
@@ -174,7 +174,8 @@ class Pump():
             if special == 'push_all':
                 self.send_Command('A0')
                 self.own_status["plung_pos_mine"] = 0
-            else:
+            #else:
+            elif special == 'pull_all':
                 self.send_Command('A3000')
                 self.own_status["plung_pos_mine"] = 3000
 
@@ -234,7 +235,7 @@ class Pump():
             self.status["version"] = self.send_Command('?&', 10)[0][3:]
             self.status["checksum"] = self.send_Command('?#', 10)[0][3:]
         except TypeError:
-            print "In actual_update_method,\n{}".format(sys.exc_info())
+            print "pump_model>actual_update_method:\n{}".format(sys.exc_info()[0])
 
         abs_pos = self.status["absolute_pos"][:-3]
         try:
@@ -245,7 +246,8 @@ class Pump():
                 print "Out of range value reported by pump!"
                 pass
         except ValueError:
-            print sys.exc_info()[0]
+            #print sys.exc_info()[0]
+            print "pump_model>actual_update_method>exceptValueError:\n{}".format(sys.exc_info()[0])
 
         self.update_sema.release()
         print "EXITED THE SEMAPHORE"
@@ -291,7 +293,7 @@ class Pump():
             print "Answer Queue is empty!!"
         except:
             print "ERROR in SEND_COMMAND:"
-            print sys.exc_info()[0]
+            print "pump_model>send_Command:\n{}".format(sys.exc_info()[0])
             self.stop_thread()
         finally:
             self.answers_lock.release()

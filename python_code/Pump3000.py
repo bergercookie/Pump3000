@@ -314,10 +314,11 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
                     self.pump.send_Command(script_commands[i]) 
                 else:
                     # TODO The user currently may not issue common python commands yet
-                    print script_commands[i]
+                    print "Command #{0}: {1}".format(i, script_commands[i])
                     eval(script_commands[i])
         except:
-            print sys.exc_info()[0]
+            #print sys.exc_info()[0]
+            print "Pump3000>run_script>except:\n{}".format(sys.exc_info()[0])
 
 
     def clear_editor(self):
@@ -527,6 +528,8 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
     def volume_control(self):
         """function for calling the pump.volume_command method."""
 
+        # Thu Dec 18 17:28:35 EET 2014, nickkouk
+        # the volume is a text command
         volume = self.volume_prompt.text()
         if self.bypass_btn.isChecked():
             answer = "Bypass Mode is ON"
