@@ -96,7 +96,7 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
         self.tabWidget.setTabText(0, 'Controls')
         self.tabWidget.setTabText(1, 'Editor - {}'.format(self.editors_open))
 
-        # Reverting any changes not shown in the Window
+        # Setting a timer for reverting any changes not shown in the Window
         self.revertQtimer = QTimer(self)
         self.revertQtimer.setInterval(60000)
         self.revertQtimer.start()
@@ -104,11 +104,12 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
         # Initialize the port configuration
         self.newDev()
 
-        # Set up a timer for periodical refresh of the pump parameters
+        # Setting up a timer for periodical refresh of the pump parameters
         self.refresh_status = True
         self.refreshQtimer = QTimer(self)
         self.refreshQtimer.setInterval(60000)
         self.refreshQtimer.start()
+
 
         # Other dialogs instances
         self.reports_window = ReportsDialog(self.pump,\
@@ -218,6 +219,9 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
         self.connect(self.clear_editor_btn,\
                 SIGNAL("clicked()"),\
                 self.clear_editor)
+        self.connect(self.back_interactive_btn,\
+                SIGNAL("clicked()"),\
+                self.back_to_interactive)
 
         # Visualizing the pump 
         if sys.platform[:3] == 'win': #Running on windows, most probably executable
@@ -303,7 +307,6 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
         script_commands = text.split('\n')
         script_commands = filter(lambda x: x != '' and not x.startswith('#'), script_commands) #remove the empty lines & the # lines
         print "*****\nPump3000.py -> run_script: script_commands = {}\n*****".format(script_commands)
-        script_commands.append('pump.change_mode(interactive)') #change back to interactive mode
         try:
             self.pump.update_values()
             for i in range(len(script_commands)):
@@ -312,6 +315,8 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
                     print "self.%s" %script_commands[i]
                 elif script_commands[i][0] == '/':
                     self.pump.send_Command(script_commands[i]) 
+                elif script_commands[i][:4] == 'wait':
+                    self.pump.send_Command(script_commands[i])
                 else:
                     # TODO The user currently may not issue common python commands yet
                     print "Command #{0}: {1}".format(i, script_commands[i])
@@ -319,6 +324,10 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
         except:
             print "Pump3000>run_script>except::\n\t{}".format(sys.exc_info()[0])
 
+    def back_to_interactive(self):
+        self.pump.change_mode('interactive')
+        label = "Mode changed to {}".format(self.pump.exc_mode)
+        self.command_label_show(label)
 
     def clear_editor(self):
         self.textEdit.clear()
@@ -367,7 +376,7 @@ class MainWindow(QMainWindow, python_gui.Ui_MainWindow):
 
         self.refreshQtimer.stop()
         self.refresh_status = False
-        print "TIMER closed"
+        print "***Refresh timer closed***"
 
     # Enabling the volume button
     def enable_button(self):

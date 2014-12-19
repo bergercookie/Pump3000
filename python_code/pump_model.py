@@ -101,8 +101,8 @@ class Pump():
         except:
             print "pump_model>connect_new>except\n\t{}".format(sys.exc_info()[0])
 
-        finally:
-            self.initialize_pump()
+#        finally:
+            #self.initialize_pump()
 
 
     # Initialization Phase
@@ -200,6 +200,7 @@ class Pump():
                     status = self.send_Command(direction + "%s" %steps, 10)
 
             elif direction == 'P':
+                print 'kalimera ***'
                 if self.own_status["plung_pos_mine"] +\
                         steps > self.own_status["steps_tot"]:
                     valid = False
@@ -268,7 +269,7 @@ class Pump():
         self.stop_flag = True
         sys.exit(1)
 
-    def change_mode(mode):
+    def change_mode(self, mode):
         """ Function for changing the mode the commands are executed.
 
         Must be invoked at the end of the editor commands"""
@@ -284,6 +285,7 @@ class Pump():
         """
 
         full_command = self.addr + command + self.term
+        #print 'the full command {}'.format(full_command)
         try:
             self.answers_lock.acquire()
             self.questions_out.put(full_command)
@@ -349,6 +351,10 @@ class delivery_thread(threading.Thread):
                 time.sleep(0.1) 
                 answer = self.pump.ser.read(11)
             done = True
+            # Fri Dec 19 14:41:57 EET 2014, nickkouk
+            print "com_to_send = \n{0}, {1}, {2}".format(com_to_send, com_to_send[2:6], com_to_send[7:-2])
+            if 'wait' in com_to_send:
+                time.sleep(float(com_to_send[7:-3]))
         else:
             # interactive Mode
             if self.pump_busy(com_to_send, answer):
