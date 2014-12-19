@@ -1,3 +1,4 @@
+# python setup.py py2exe
 # We will be using py2exe to build the binaries.
 # You may use other tools, but I know this one.
 

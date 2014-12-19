@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '../ui_files/Main_window.ui'
 #
-# Created: Fri Dec 19 12:53:11 2014
+# Created: Fri Dec 19 19:55:20 2014
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -380,7 +380,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.quick_combobox.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

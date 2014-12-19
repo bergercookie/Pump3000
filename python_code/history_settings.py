@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '../ui_files/history_dialog.ui'
 #
-# Created: Fri Dec 19 12:53:11 2014
+# Created: Fri Dec 19 19:55:27 2014
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
