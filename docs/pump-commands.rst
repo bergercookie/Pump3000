@@ -109,7 +109,7 @@ of the methods of the Pump Class in the Editor tab as well.
 
 *Description*
     
-    Volume pushing / drawing mechanism. The user can issue a volume delivery as well
+    Volume Pickup (P) / Dispense (D) mechanism. The user can issue a volume delivery as well
     as issue a special push / pull all action. In case the special action is given, 
     the  'vol' argument is neglected
 
