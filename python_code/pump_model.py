@@ -101,8 +101,9 @@ class Pump():
         except:
             print "pump_model>connect_new>except\n\t{}".format(sys.exc_info()[0])
 
-#        finally:
-            #self.initialize_pump()
+        # 15012015 doen't initialize the pump??
+        finally:
+            self.initialize_pump()
 
 
     # Initialization Phase
@@ -113,6 +114,8 @@ class Pump():
             self.ser.open()
             print "Opened the Serial port {} successfully".format(self.ser.port)
         except:
+            print "pump_model>initialize_pump>except\n\t{}".format(sys.exc_info()[0])
+            
             pass
 
         # These commands should be sent when the pump first gets set
@@ -330,6 +333,10 @@ class delivery_thread(threading.Thread):
         while not self.pump.stop_flag:
             try:
                 com_to_send = self.forSending.get(timeout = 3)
+
+                # 15012015 NOT a stable solution, find why com_to_send = unicode
+                com_to_send = com_to_send.encode('ascii', 'ignore')
+                #print "pump_model>delivery_thread>run:\n\tcom_to_send = {}\n\ttype = {}".format(com_to_send, type(com_to_send))
                 self.pump.ser.write(com_to_send)
                 time.sleep(0.1)
                 answer = self.pump.ser.read(11)
